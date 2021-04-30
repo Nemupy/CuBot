@@ -15,6 +15,12 @@ async def on_ready():
     print('{0.user}がログインしました'.format(bot))
     count = len(bot.guilds)
     await bot.change_presence(activity=discord.Game(name="Cu!help | " + str(count) + "servers", type=2))
+    
+@bot.event
+async def on_command_error(ctx, error):
+    orig_error = getattr(error, "original", error)
+    error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
+    await ctx.send(error_msg)
 
 @bot.event
 async def on_member_join(member):
