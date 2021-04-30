@@ -511,6 +511,10 @@ async def totusi(ctx, kotoba="突然の死"):
     ue = "人"*(len(kotoba))
     sita = "^Y"*(len(kotoba))
     await ctx.reply("＿人"+ue+"人＿\n＞　"+kotoba+"　＜\n￣^"+sita+"^Y￣")
+    
+@bot.command()
+async def test(ctx):
+    await ctx.reply("ok")
 
 
 
