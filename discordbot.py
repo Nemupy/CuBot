@@ -356,7 +356,7 @@ async def type(ctx):
     if ctx == answer:
         await ctx.reply("すごい！")
     else:
-        await ctx.reply("え")
+        await ctx.reply("間違ってるよｗ")
 
 @bot.command()
 async def calcu(ctx, way = "加減乗除", left = "1", right = "1"):
