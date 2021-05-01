@@ -20,7 +20,9 @@ async def on_ready():
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
-    await ctx.send(error_msg)
+    embed = discord.Embed(title="DETAIL-embed", description="Embedパネルを作成します。", colour=0x3498db)
+    embed.add_field(name="エラー", value="予期せぬエラーが発生しました。\nこのエラーが多発する場合は公式サーバーまでお問い合わせください。\n```error_msg```", inline=True)
+    await ctx.reply(embed=embed)
 
 @bot.event
 async def on_member_join(member):
