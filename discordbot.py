@@ -326,7 +326,7 @@ async def cquiz(ctx):
             await ctx.reply("不正解！正解は" + str(answer) + "でした！")
 
 @bot.command()
-async def embed(ctx, title, text):
+async def embed(ctx, title = "タイトル", text = "テキスト"):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed=discord.Embed(title=title, description=text, colour=0x3498db)
