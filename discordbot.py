@@ -14,7 +14,7 @@ bot = commands.Bot(command_prefix = 'Cu!', help_command = None, intents = intent
 async def on_ready():
     print('{0.user}がログインしました'.format(bot))
     count = len(bot.guilds)
-    await bot.change_presence(activity=discord.Game(name="Cu!help | " + str(count) + "servers", type=2))
+    await bot.change_presence(activity=discord.Game(name="Cu!help | " + str(count) + "servers" | {len(client.members)}, type=2))
     
 @bot.event
 async def on_command_error(ctx, error):
