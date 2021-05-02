@@ -13,8 +13,11 @@ bot = commands.Bot(command_prefix = 'Cu!', help_command = None, intents = intent
 @bot.event
 async def on_ready():
     print('{0.user}がログインしました'.format(bot))
-    count = len(bot.guilds)
-    await bot.change_presence(activity=discord.Game(name="Cu!help | " + str(count) + "servers" | {len(client.members)}, type=2))
+    servers = len(bot.guilds)
+    members = 0
+    for guild in bot.guilds:
+        members += guild.member_count - 1
+    await bot.change_presence(activity=discord.Game(name="Cu!help | {str(servers)} | {str(members)}, type=2))
     
 @bot.event
 async def on_command_error(ctx, error):
@@ -103,7 +106,7 @@ async def list(ctx):
     embed.add_field(name=":robot: 》BOT", value="`help` `list` `prof` `ping`", inline=False)
     embed.add_field(name=" :tools: 》ツール", value="`timer` `gchat` `kick` `ban` `poll` `rect` `embed` `calcu`", inline=False)
     embed.add_field(name=":dividers: 》データ", value="`time` `detail`", inline=False)
-    embed.add_field(name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot`", inline=False)
+    embed.add_field(name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`", inline=False)
     embed.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     await ctx.reply(embed=embed)
 
@@ -323,7 +326,7 @@ async def cquiz(ctx):
             await ctx.reply("不正解！正解は" + str(answer) + "でした！")
 
 @bot.command()
-async def embed(ctx, title = "title", text = "text"):
+async def embed(ctx, title, text):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed=discord.Embed(title=title, description=text, colour=0x3498db)
@@ -479,6 +482,12 @@ async def detail(ctx, command = "コマンド名"):
     elif command == "slot":
         embed = discord.Embed(title="DETAIL-slot", description="スロットができます。", colour=0x3498db)
         embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/832000993205682206/unknown.png")
+        await ctx.reply(embed=embed)
+    elif command == "totusi":
+        embed = discord.Embed(title="DETAIL-totusi", description="突然の死AAを作成します。", colour=0x3498db)
+        embed.add_field(name="使い方", value="Cu!totusi [message]", inline=True)
+        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/838268795982053406/unknown.png")
+        embed.set_footer(text="半角テキスト、絵文字、空白等は対応していません。")
         await ctx.reply(embed=embed)
 
 @bot.command()
