@@ -17,7 +17,7 @@ async def on_ready():
     members = 0
     for guild in bot.guilds:
         members += guild.member_count - 1
-    await bot.change_presence(activity=discord.Activity(name="Cu!help | {str(servers)} | {str(members)}, type=))
+    await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(servers)} | {str(members)}, type=3))
     
 @bot.event
 async def on_command_error(ctx, error):
