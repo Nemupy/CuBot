@@ -524,4 +524,4 @@ async def test(ctx):
 
 
 
-bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.a9u_UoxR4rRYrw_Io-EFfc1CG4k")
+bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
