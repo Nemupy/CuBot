@@ -517,6 +517,19 @@ async def totusi(ctx, kotoba="突然の死"):
     ue = "人"*(len(kotoba))
     sita = "^Y"*(len(kotoba))
     await ctx.reply("＿人"+ue+"人＿\n＞　"+kotoba+"　＜\n￣^"+sita+"^Y￣")
+    
+@bot.command()
+async def invites(ctx, member : discord.Member = None):
+    if member == None:
+       user = ctx.author
+    else:
+       user = member
+    total_invites = 0
+    for i in await ctx.guild.invites():
+        if i.inviter == user:
+            total_invites += i.uses
+    embed = discord.Embed(title=f"招待リンクの使用数", description=f"{user.mention}さんは**{total_invites}人**のメンバーを招待しました！", color=0x3498db)
+    await ctx.reply(embed=embed)
 
 
 
