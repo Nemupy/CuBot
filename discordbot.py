@@ -359,19 +359,19 @@ async def type(ctx):
         await ctx.reply("間違ってるよｗ")
 
 @bot.command()
-async def calcu(ctx, way = "加減乗除", left = "1", right = "1"):
+async def calcu(ctx, left = "1", way ="+" , right = "1"):
     async with ctx.typing():
         await asyncio.sleep(0)
-    if way == "加":
+    if way == "+":
         answer1 = int(left) + int(right)
         await ctx.reply(answer1)
-    elif way == "減":
+    elif way == "-":
         answer2 = int(left) - int(right)
         await ctx.reply(answer2)
-    elif way == "乗":
+    elif way == "×":
         answer3 = int(left) * int(right)
         await ctx.reply(answer3)
-    elif way == "除":
+    elif way == "÷":
         answer4 = int(left) / int(right)
         await ctx.reply(answer4)
     else:
