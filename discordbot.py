@@ -111,7 +111,7 @@ async def list(ctx):
     embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498db)
     embed.add_field(name=":robot: 》BOT", value="`help` `list` `prof` `ping`", inline=False)
     embed.add_field(name=" :tools: 》ツール", value="`timer` `gchat` `kick` `ban` `poll` `rect` `embed` `calcu`", inline=False)
-    embed.add_field(name=":dividers: 》データ", value="`time` `detail`", inline=False)
+    embed.add_field(name=":dividers: 》データ", value="`time` `detail` `invite`", inline=False)
     embed.add_field(name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`", inline=False)
     embed.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     await ctx.reply(embed=embed)
@@ -457,6 +457,11 @@ async def detail(ctx, command = "コマンド名"):
         embed.add_field(name="使い方", value="Cu!detail [コマンド名]", inline=True)
         embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829295373410631721/unknown.png")
         await ctx.reply(embed=embed)
+    elif command == "invite":
+        embed = discord.Embed(title="DETAIL-invite", description="招待リンクの使用数を検出します。", colour=0x3498db)
+        embed.add_field(name="使い方", value="Cu!invite [ユーザー名]", inline=True)
+        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829295373410631721/unknown.png")
+        await ctx.reply(embed=embed)
     elif command == "fortune":
         embed = discord.Embed(title="DETAIL-fortune", description="おみくじが引けます。", colour=0x3498db)
         embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829296454110674954/unknown.png")
@@ -525,7 +530,7 @@ async def totusi(ctx, kotoba="突然の死"):
     await ctx.reply("＿人"+ue+"人＿\n＞　"+kotoba+"　＜\n￣^"+sita+"^Y￣")
     
 @bot.command()
-async def invites(ctx, member : discord.Member = None):
+async def invite(ctx, member : discord.Member = None):
     if member == None:
        user = ctx.author
     else:
@@ -536,7 +541,5 @@ async def invites(ctx, member : discord.Member = None):
             total_invites += i.uses
     embed = discord.Embed(title=f"招待リンクの使用数", description=f"{user.mention}さんは**{total_invites}人**のメンバーを招待しました！", color=0x3498db)
     await ctx.reply(embed=embed)
-
-loop.start()
 
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
