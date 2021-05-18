@@ -5,6 +5,7 @@ import datetime
 from time import sleep
 import asyncio
 import traceback
+from discord.ext import tasks
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
@@ -17,7 +18,13 @@ async def on_ready():
     members = 0
     for guild in bot.guilds:
         members += guild.member_count - 1
-    await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3))
+    
+@tasks.loop(seconds=5)
+async def loop():
+    await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(servers)}servers", type=3))
+    await asyncio.sleep(5)
+    await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(members)}users", type=3))
+loop.start()
     
 @bot.event
 async def on_command_error(ctx, error):
