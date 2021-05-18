@@ -24,7 +24,6 @@ async def loop():
     await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(servers)}servers", type=3))
     await asyncio.sleep(5)
     await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(members)}users", type=3))
-loop.start()
     
 @bot.event
 async def on_command_error(ctx, error):
@@ -538,6 +537,6 @@ async def invites(ctx, member : discord.Member = None):
     embed = discord.Embed(title=f"招待リンクの使用数", description=f"{user.mention}さんは**{total_invites}人**のメンバーを招待しました！", color=0x3498db)
     await ctx.reply(embed=embed)
 
-
+loop.start()
 
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
