@@ -53,20 +53,6 @@ async def on_member_remove(member):
 async def on_message(message):
     if message.author.bot:
         return
-    GLOBAL_CH_NAME = "cu-gchat"
-    GLOBAL_WEBHOOK_NAME = "cu-webhook"
-    if message.channel.name == GLOBAL_CH_NAME:
-        await message.delete()
-        channels = bot.get_all_channels()
-        global_channels = [ch for ch in channels if ch.name == GLOBAL_CH_NAME]
-        for channel in global_channels:
-            ch_webhooks = await channel.webhooks()
-            webhook = discord.utils.get(ch_webhooks, name=GLOBAL_WEBHOOK_NAME)
-            if webhook is None:
-                continue
-            await webhook.send(content=message.content,
-                               username=message.author.name,
-                               avatar_url=message.author.avatar_url_as(format="png"))
     elif message.type == discord.MessageType.new_member:
         await message.delete()
         return
@@ -110,7 +96,7 @@ async def list(ctx):
         await asyncio.sleep(0)
     embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498db)
     embed.add_field(name=":robot: 》BOT", value="`help` `list` `prof` `ping`", inline=False)
-    embed.add_field(name=" :tools: 》ツール", value="`timer` `gchat` `kick` `ban` `poll` `rect` `embed` `calcu`", inline=False)
+    embed.add_field(name=" :tools: 》ツール", value="`timer` `kick` `ban` `poll` `rect` `embed` `calcu`", inline=False)
     embed.add_field(name=":dividers: 》データ", value="`time` `detail` `invite`", inline=False)
     embed.add_field(name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`", inline=False)
     embed.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
@@ -139,24 +125,6 @@ async def time(ctx):
     now = datetime.datetime.now()
     date_and_time = now.strftime('%m月%d日 %H:%M')
     await ctx.reply(f"現在の時刻は{date_and_time}です！")
-
-@bot.command()
-async def gchat(ctx):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    if ctx.author.guild_permissions.administrator:
-        gchannel = discord.utils.get(ctx.guild.text_channels, name="cu-gchat")
-        if not gchannel:
-            category_id = ctx.channel.category_id
-            category = ctx.guild.get_channel(category_id)
-            new_channel = await category.create_text_channel(name="cu-gchat")
-            new_webhook = await new_channel.create_webhook(name="cu-webhook")
-            await ctx.reply(f"{new_channel.mention} グローバルチャンネルを作成しました！")
-            return new_channel,new_webhook
-        else:
-            await ctx.reply("既にグローバルチャットチャンネルが存在します！")
-    else:
-        await ctx.reply('このコマンドを実行できるのは管理者のみだよ！')
 
 @bot.command()
 async def timer(ctx, number):
@@ -409,11 +377,6 @@ async def detail(ctx, command = "コマンド名"):
         embed.add_field(name="使い方", value="Cu!timer [秒数]", inline=True)
         embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829292950793879552/unknown.png")
         await ctx.reply(embed=embed)
-    elif command == "gchat":
-        embed = discord.Embed(title="DETAIL-gchat", description="グローバルチャンネルを作成します。", colour=0x3498db)
-        embed.set_footer(text="このコマンドを実行できるのは管理者のみです。")
-        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829293135015182336/unknown.png")
-        await ctx.reply(embed=embed)
     elif command == "kick":
         embed = discord.Embed(title="DETAIL-kick", description="ユーザーをキックします。", colour=0x3498db)
         embed.add_field(name="使い方", value="Cu!kick [ユーザー名]", inline=True)
@@ -444,9 +407,8 @@ async def detail(ctx, command = "コマンド名"):
         await ctx.reply(embed=embed)
     elif command == "calcu":
         embed = discord.Embed(title="DETAIL-calcu", description="計算をします。", colour=0x3498db)
-        embed.add_field(name="使い方", value="Cu!calcu [算法] [数値1] [数値2]", inline=True)
-        embed.set_footer(text="算法は加減乗除から選びます。")
-        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829294506699784292/unknown.png")
+        embed.add_field(name="使い方", value="Cu!calcu [数値1] [算法] [数値2]", inline=True)
+        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/844209477657559060/unknown.png")
         await ctx.reply(embed=embed)
     elif command == "time":
         embed = discord.Embed(title="DETAIL-time", description="現在時刻を表示します。", colour=0x3498db)
@@ -458,9 +420,9 @@ async def detail(ctx, command = "コマンド名"):
         embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829295373410631721/unknown.png")
         await ctx.reply(embed=embed)
     elif command == "invite":
-        embed = discord.Embed(title="DETAIL-invite", description="招待リンクの使用数を検出します。", colour=0x3498db)
+        embed = discord.Embed(title="DETAIL-invite", description="招待リンクの総使用数を算出します。", colour=0x3498db)
         embed.add_field(name="使い方", value="Cu!invite [ユーザー名]", inline=True)
-        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829295373410631721/unknown.png")
+        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/844209266934939680/unknown.png")
         await ctx.reply(embed=embed)
     elif command == "fortune":
         embed = discord.Embed(title="DETAIL-fortune", description="おみくじが引けます。", colour=0x3498db)
@@ -525,12 +487,16 @@ async def slot(ctx):
 
 @bot.command()
 async def totusi(ctx, kotoba="突然の死"):
+    async with ctx.typing():
+        await asyncio.sleep(0)
     ue = "人"*(len(kotoba))
     sita = "^Y"*(len(kotoba))
     await ctx.reply("＿人"+ue+"人＿\n＞　"+kotoba+"　＜\n￣^"+sita+"^Y￣")
     
 @bot.command()
 async def invite(ctx, member : discord.Member = None):
+    async with ctx.typing():
+        await asyncio.sleep(0)
     if member == None:
        user = ctx.author
     else:
