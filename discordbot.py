@@ -14,13 +14,13 @@ bot = commands.Bot(command_prefix = 'Cu!', help_command = None, intents = intent
 @bot.event
 async def on_ready():
     print('{0.user}がログインしました'.format(bot))
+    
+@tasks.loop(seconds=5)
+async def loop():
     servers = len(bot.guilds)
     members = 0
     for guild in bot.guilds:
         members += guild.member_count - 1
-    
-@tasks.loop(seconds=5)
-async def loop():
     await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(servers)}servers", type=3))
     await asyncio.sleep(5)
     await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(members)}users", type=3))
