@@ -18,7 +18,7 @@ async def on_ready():
     members = 0
     for guild in bot.guilds:
         members += guild.member_count - 1
-    await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(servers)}servers　| {str(members)}users", type=3))
+    await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3))
     
 @bot.event
 async def on_command_error(ctx, error):
@@ -217,8 +217,7 @@ async def kick(ctx, member : discord.Member, reason=None):
     async with ctx.typing():
         await asyncio.sleep(0)
     if ctx.author.guild_permissions.administrator:
-        kick = discord.Embed(title='メンバーをキックしました', description=f'{ctx.author.mention}さんが{member.mention}さんをキックしました。',
-                             color=0x3498db)
+        kick = discord.Embed(title='メンバーをキックしました。', description=f'{ctx.author.mention}さんが{member.mention}さんをキックしました。', color=0x3498db)
         kick.set_thumbnail(url=member.avatar_url)
         await ctx.reply(embed=kick)
         await member.kick(reason=reason)
@@ -230,10 +229,9 @@ async def ban(ctx, member : discord.Member, reason=None):
     async with ctx.typing():
         await asyncio.sleep(0)
     if ctx.author.guild_permissions.administrator:
-        ban = discord.Embed(title='メンバーをBANしました', description=f'{ctx.author.mention}さんが{member.mention}さんをBANしました。',
-                            color=0x3498db)
-        ban.set_thumbnail(url=member.avatar_url)
-        await ctx.reply(embed=ban)
+        ban = discord.Embed(title='メンバーをBANしました。', description=f'{ctx.author.mention}さんが{member.mention}さんをBANしました。', color=0x3498db)
+        ban.set_thumbnail(url=user.avatar_url)
+        await ctx.reply(embed=unban)
         await member.ban(reason=reason)
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
@@ -242,6 +240,9 @@ async def ban(ctx, member : discord.Member, reason=None):
 async def unban(ctx, id: int):
     if ctx.author.guild_permissions.administrator:
         user = await bot.fetch_user(id)
+        unban = discord.Embed(title='メンバーのBANを解除しました', description=f'{ctx.author.mention}さんが{member.mention}さんのBANを解除しました。', color=0x3498db)
+        ban.set_thumbnail(url=member.avatar_url)
+        await ctx.reply(embed=ban)
         await ctx.guild.unban(user)
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
