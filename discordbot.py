@@ -239,6 +239,11 @@ async def ban(ctx, member : discord.Member, reason=None):
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
 
 @bot.command()
+async def unban(ctx, id: int):
+    user = await bot.fetch_user(id)
+    await ctx.guild.unban(user)
+
+@bot.command()
 async def ping(ctx):
     async with ctx.typing():
         await asyncio.sleep(0)
