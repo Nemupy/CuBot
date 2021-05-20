@@ -231,7 +231,7 @@ async def ban(ctx, member : discord.Member, reason=None):
     if ctx.author.guild_permissions.administrator:
         ban = discord.Embed(title='メンバーをBANしました。', description=f'{ctx.author.mention}さんが{member.mention}さんをBANしました。', color=0x3498db)
         ban.set_thumbnail(url=member.avatar_url)
-        await ctx.reply(embed=unban)
+        await ctx.reply(embed=ban)
         await member.ban(reason=reason)
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
@@ -242,7 +242,7 @@ async def unban(ctx, id: int):
         user = await bot.fetch_user(id)
         unban = discord.Embed(title='メンバーのBANを解除しました', description=f'{ctx.author.mention}さんが{user.mention}さんのBANを解除しました。', color=0x3498db)
         unban.set_thumbnail(url=user.avatar_url)
-        await ctx.reply(embed=ban)
+        await ctx.reply(embed=unban)
         await ctx.guild.unban(user)
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
