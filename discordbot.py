@@ -241,7 +241,7 @@ async def unban(ctx, id: int):
     if ctx.author.guild_permissions.administrator:
         user = await bot.fetch_user(id)
         unban = discord.Embed(title='メンバーのBANを解除しました', description=f'{ctx.author.mention}さんが{member.mention}さんのBANを解除しました。', color=0x3498db)
-        ban.set_thumbnail(url=member.avatar_url)
+        unban.set_thumbnail(url=member.avatar_url)
         await ctx.reply(embed=ban)
         await ctx.guild.unban(user)
     else:
