@@ -6,19 +6,30 @@ from time import sleep
 import asyncio
 import traceback
 from discord.ext import tasks
+import youtube_dl
+import pynacl
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents = intents)
+servers = len(bot.guilds)
+    members = 0
+    for guild in bot.guilds:
+        members += guild.member_count - 1
+status = 
 
 @bot.event
 async def on_ready():
     print('{0.user}がログインしました'.format(bot))
+    change_status.start()
+    
+@tasks.loop(seconds=5)
+async def change_status():
     servers = len(bot.guilds)
     members = 0
     for guild in bot.guilds:
         members += guild.member_count - 1
-    await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3))
+    await bot.changepresence(activity=discord.Activity(choice(([f"Cu!help | {str(servers)}servers", "f"Cu!help | {str(members)}users"])),type=3))
     
 @bot.event
 async def on_command_error(ctx, error):
