@@ -24,8 +24,9 @@ async def change_status():
     members = 0
     for guild in bot.guilds:
         members += guild.member_count - 1
-    await bot.changepresence(activity=discord.Activity(choice(([f"Cu!help | {str(servers)}servers", "f"Cu!help | {str(members)}users"])),type=3))
-    
+    await bot.change_presence(activity=discord.Activity(choice(([f"Cu!help | {str(servers)}servers", "f"Cu!help | {str(members)}users"])),type=3))                                           
+                                                                     
+                                                                 
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
