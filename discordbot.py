@@ -6,8 +6,6 @@ from time import sleep
 import asyncio
 import traceback
 from discord.ext import tasks
-import youtube_dl
-import pynacl
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
