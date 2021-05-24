@@ -512,5 +512,12 @@ async def invite(ctx, member : discord.Member = None):
             total_invites += i.uses
     embed = discord.Embed(title=f"招待リンクの使用数", description=f"{user.mention}さんは**{total_invites}人**のメンバーを招待しました！", color=0x3498db)
     await ctx.reply(embed=embed)
+    
+@bot.command()
+async def play(ctx):
+    if ctx.message.author.voice:
+        await ctx.reply("test")
+    else:
+        await ctx.send("test")
 
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
