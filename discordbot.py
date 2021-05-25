@@ -525,7 +525,7 @@ async def stop(ctx):
 
 @bot.command()
 async def slist(ctx):
-    if message.author.id == 798439010594717737:
+    if ctx.author.id == 798439010594717737:
         guild_list = [guild.name for guild in bot.guilds]
         await ctx.reply(guild_list)
 
