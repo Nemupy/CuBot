@@ -522,8 +522,12 @@ async def play(ctx):
 @bot.command()
 async def stop(ctx):
     await ctx.message.guild.voice_client.disconnect()
-    
-    
+
+@bot.command()
+async def slist(ctx):
+    if message.author.id == 798439010594717737:
+        guild_list = [guild.name for guild in bot.guilds]
+        await ctx.reply(guild_list)
 
 
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
