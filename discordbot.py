@@ -524,11 +524,15 @@ async def stop(ctx):
     await ctx.message.guild.voice_client.disconnect()
 
 @bot.command()
-async def slist(ctx):
+async def slist(ctx, a = None):
     if ctx.author.id == 798439010594717737:
-        guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.guilds)
-        embed = discord.Embed(title="サーバーリスト",description=guild_list)
-        await channel.send(embed=embed)
-
+        if a == id:
+            guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.guilds)
+            embed = discord.Embed(title="サーバーリスト",description=guild_list)
+            await ctx.reply(embed=embed)
+        else:
+            guild_list = "\n".join(f"{guild.name}" for guild in bot.guilds)
+            embed = discord.Embed(title="サーバーリスト",description=guild_list)
+            await ctx.reply(embed=embed)
 
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
