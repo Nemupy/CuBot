@@ -526,7 +526,7 @@ async def stop(ctx):
 @bot.command()
 async def slist(ctx, a = None):
     if ctx.author.id == 798439010594717737:
-        if a == id:
+        if a == "id":
             guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.guilds)
             embed = discord.Embed(title="サーバーリスト",description=guild_list, color=0x3498db)
             await ctx.reply(embed=embed)
