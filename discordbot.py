@@ -13,14 +13,11 @@ bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents =
 
 @bot.event
 async def on_ready():
-    a = guild.get_channel(847070931183861780)
-    await a.send(f"<@798439010594717737> ログインしました") 
     servers = len(bot.guilds)
     members = 0
     for guild in bot.guilds:
         members += guild.member_count - 1
-    await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3))                                          
-                                                                     
+    await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3))                                                                                           
                                                                  
 @bot.event
 async def on_command_error(ctx, error):
