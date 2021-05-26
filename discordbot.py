@@ -13,7 +13,8 @@ bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents =
 
 @bot.event
 async def on_ready():
-    print('{0.user}がログインしました'.format(bot))
+    a = 847070931183861780
+    await a.channel.send(f"<@798439010594717737> ログインしました") 
     servers = len(bot.guilds)
     members = 0
     for guild in bot.guilds:
