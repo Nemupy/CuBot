@@ -532,6 +532,6 @@ async def slist(ctx, a = None):
             guild_list = "\n".join(f"{guild.name}" for guild in bot.guilds)
             embed = discord.Embed(title="サーバーリスト",description=guild_list, color=0x3498db)
             await ctx.reply(embed=embed)
-            
+           
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
