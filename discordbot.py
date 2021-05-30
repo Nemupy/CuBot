@@ -605,16 +605,5 @@ async def pages(ctx):
         except asyncio.TimeoutError:
             break
             
-@bot.command()
-async def join(ctx):
-    await message.author.voice.channel.connect()
-    await message.channel.send("接続しました。")
-@bot.command()
-async def play(ctx):
-    if ctx.guild.voice_bot is None:
-        await ctx.send("接続していません。")
-        return
-    await ctx.guild.voice_client.play(discord.FFmpegPCMAudio("a.mp3"))
-            
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
