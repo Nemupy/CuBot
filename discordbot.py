@@ -557,7 +557,7 @@ async def play(ctx):
         voice_bot.play(ffmpeg_audio_source)
 
 #ボイスチャンネルから切断
-@client.command()
+@bot.command()
 async def leave(message):
     await message.guild.voice_client.disconnect()
     await message.channel.send("切断しました")
