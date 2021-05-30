@@ -564,8 +564,8 @@ async def pages(ctx):
                 await message.remove_reaction(reaction, user)
             else:
                 await message.remove_reaction(reaction, user)
-            elif str(reaction.emoji) == "⏹":
-                break
+        elif str(reaction.emoji) == "⏹":
+            break
             
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
