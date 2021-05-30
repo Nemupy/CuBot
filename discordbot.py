@@ -532,6 +532,35 @@ async def slist(ctx, a = None):
             guild_list = "\n".join(f"{guild.name}" for guild in bot.guilds)
             embed = discord.Embed(title="サーバーリスト",description=guild_list, color=0x3498db)
             await ctx.reply(embed=embed)
+            
+@bot.command()
+async def play(ctx):
+    if ctx.author.voice is None:
+        await ctx.send("いずれかのボイスチャンネルに接続してください")
+        return
+    else:
+        await ctx.author.voice.channel.connect()
+        voice_client = ctx.message.guild.voice_client
+        if not voice_client:
+            await ctx.send("ボイスチャンネルの接続に失敗しました")
+            return
+        if ctx.message.attachments:
+        await ctx.send("添付された曲を再生します")
+        await ctx.message.attachments[0].save("tmp.mp3")
+        music = "tmp.mp3"
+        ffmpeg_audio_source = discord.FFmpegPCMAudio(music)
+        voice_client.play(ffmpeg_audio_source)
+        return
+    else:
+        await ctx.send("ファイルを添付してください")
+        ffmpeg_audio_source = discord.FFmpegPCMAudio(music)
+        voice_bot.play(ffmpeg_audio_source)
+
+#ボイスチャンネルから切断
+@client.command()
+async def leave(message):
+    await message.guild.voice_client.disconnect()
+    await message.channel.send("切断しました")
            
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
