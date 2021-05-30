@@ -534,6 +534,17 @@ async def slist(ctx, a = None):
             await ctx.reply(embed=embed)
             
 
+@bot.command()
+async def pages(ctx):
+    contents = ["This is page 1!", "This is page 2!", "This is page 3!", "This is page 4!"]
+    pages = 4
+    cur_page = 1
+    message = await ctx.send(f"Page {cur_page}/{pages}:\n{contents[cur_page-1]}")
+    # getting the message object for editing and reacting
+
+    await message.add_reaction("◀️")
+    await message.add_reaction("▶️")
+
     def check(reaction, user):
         return user == ctx.author and str(reaction.emoji) in ["◀️", "▶️"]
         # This makes sure nobody except the command sender can interact with the "menu"
@@ -562,6 +573,7 @@ async def slist(ctx, a = None):
             await message.delete()
             break
             # ending the loop if user doesn't react after x seconds
+
            
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
