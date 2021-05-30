@@ -564,7 +564,7 @@ async def pages(ctx):
                 await message.remove_reaction(reaction, user)
             else:
                 await message.remove_reaction(reaction, user)
-        elif str(reaction.emoji) == "⏹":
+        except asyncio.TimeoutError:
             break
             
             
