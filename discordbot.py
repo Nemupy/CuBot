@@ -535,14 +535,14 @@ async def slist(ctx, a = None):
             
 @bot.command()
 async def pages(ctx):
-    botembed = discord.Embed(title="コマンドリスト-BOT",description="使用可能なコマンド一覧です♪")
+    botembed = discord.Embed(title="コマンドリスト-BOT",description="使用可能なコマンド一覧です♪", colour=0x3498db)
     botembed.add_field(name="フィールドの名前",value="フィールドの値")
-    toolembed = discord.Embed(title="コマンドリスト-ツール",description="使用可能なコマンド一覧です♪")
+    toolembed = discord.Embed(title="コマンドリスト-ツール",description="使用可能なコマンド一覧です♪", colour=0x3498db)
     toolembed.add_field(name="フィールドの名前",value="フィールドの値")
-    dateembed = discord.Embed(title="コマンドリスト-データ",description="使用可能なコマンド一覧です♪")
+    dateembed = discord.Embed(title="コマンドリスト-データ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
     dateembed.add_field(name="フィールドの名前",value="フィールドの値")
-    varietyembed = discord.Embed(title="コマンドリスト-バラエティ",description="使用可能なコマンド一覧です♪")
-    varietyembedembed.add_field(name="フィールドの名前",value="フィールドの値")
+    varietyembed = discord.Embed(title="コマンドリスト-バラエティ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
+    varietyembed.add_field(name="フィールドの名前",value="フィールドの値")
     contents = [botembed, toolembed, dateembed, varietyembed]
     pages = 4 
     cur_page = 1
