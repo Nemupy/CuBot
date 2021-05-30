@@ -88,8 +88,6 @@ async def dice(ctx):
 async def list(ctx, type=None):
     async with ctx.typing():
         await asyncio.sleep(0)
-    if type == "BOT":
-        
     embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498db)
     embed.add_field(name=":robot: 》BOT", value="`help` `list` `prof` `ping`", inline=False)
     embed.add_field(name=" :tools: 》ツール", value="`timer` `kick` `ban` `poll` `rect` `embed` `calcu`", inline=False)
