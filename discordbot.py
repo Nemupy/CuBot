@@ -544,7 +544,7 @@ async def pages(ctx):
     embed4 = discord.Embed(title="コマンドリスト-バラエティ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
     embed4.add_field(name="フィールドの名前",value="フィールドの値")
     cur_page = 1
-    message = await ctx.send(embed=embed+int(cur_page-1))
+    message = await ctx.send(embed=embed+cur_page-1)
     await message.add_reaction("◀️")
     await message.add_reaction("▶️")
     def check(reaction, user):
