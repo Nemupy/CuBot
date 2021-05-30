@@ -85,9 +85,11 @@ async def dice(ctx):
     await ctx.reply(embed=embed)
 
 @bot.command()
-async def list(ctx):
+async def list(ctx, type=None):
     async with ctx.typing():
         await asyncio.sleep(0)
+    if type == "BOT":
+        
     embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498db)
     embed.add_field(name=":robot: 》BOT", value="`help` `list` `prof` `ping`", inline=False)
     embed.add_field(name=" :tools: 》ツール", value="`timer` `kick` `ban` `poll` `rect` `embed` `calcu`", inline=False)
@@ -540,7 +542,6 @@ async def pages(ctx):
     pages = 4
     cur_page = 1
     message = await ctx.send(f"Page {cur_page}/{pages}:\n{contents[cur_page-1]}")
-    # getting the message object for editing and reacting
 
     await message.add_reaction("◀️")
     await message.add_reaction("▶️")
@@ -574,6 +575,6 @@ async def pages(ctx):
             break
             # ending the loop if user doesn't react after x seconds
 
-           
+          
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
