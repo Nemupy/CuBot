@@ -543,8 +543,9 @@ async def pages(ctx):
     embed3.add_field(name="フィールドの名前",value="フィールドの値")
     embed4 = discord.Embed(title="コマンドリスト-バラエティ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
     embed4.add_field(name="フィールドの名前",value="フィールドの値")
-    cur_page = 1
-    message = await ctx.send(embed=embed+cur_page-1)
+    pages = [embed1, embed2, embed3, embed4]
+    page = 0
+    message = await ctx.send(embed=pages[page])
     await message.add_reaction("◀️")
     await message.add_reaction("▶️")
     def check(reaction, user):
@@ -554,11 +555,11 @@ async def pages(ctx):
             reaction, user = await bot.wait_for("reaction_add", timeout=60, check=check)
             if str(reaction.emoji) == "▶️" and cur_page != pages:
                 cur_page += 1
-                await message.edit(embed=embed+cur_page-1)
+                await message.edit(embed=pages[page])
                 await message.remove_reaction(reaction, user)
             elif str(reaction.emoji) == "◀️" and cur_page > 1:
                 cur_page -= 1
-                await message.edit(embed=embed+cur_page-1)
+                await message.edit(embed=pages[page])
                 await message.remove_reaction(reaction, user)
             else:
                 await message.remove_reaction(reaction, user)
