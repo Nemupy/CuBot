@@ -606,6 +606,11 @@ async def pages(ctx):
             break
             
 @bot.command()
+async def join(ctx):
+    await message.author.voice.channel.connect()
+    await message.channel.send("接続しました。")
+@bot.command()
+async def play(ctx):
     if ctx.guild.voice_bot is None:
         await message.channel.send("接続していません。")
         return
