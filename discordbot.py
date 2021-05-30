@@ -554,11 +554,11 @@ async def pages(ctx):
         try:
             reaction, user = await bot.wait_for("reaction_add", timeout=60, check=check)
             if str(reaction.emoji) == "▶️" and page < 4:
-                cur_page += 1
+                page += 1
                 await message.edit(embed=pages[page])
                 await message.remove_reaction(reaction, user)
             elif str(reaction.emoji) == "◀️" and page > 1:
-                cur_page -= 1
+                page -= 1
                 await message.edit(embed=pages[page])
                 await message.remove_reaction(reaction, user)
             else:
