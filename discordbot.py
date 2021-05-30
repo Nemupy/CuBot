@@ -90,11 +90,49 @@ async def list(ctx, type=None):
         await asyncio.sleep(0)
     embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498db)
     embed.add_field(name=":robot: 》BOT", value="`help` `list` `prof` `ping`", inline=False)
-    embed.add_field(name=" :tools: 》ツール", value="`timer` `kick` `ban` `poll` `rect` `embed` `calcu`", inline=False)
+    embed.add_field(name=":tools: 》ツール", value="`timer` `kick` `ban` `poll` `rect` `embed` `calcu`", inline=False)
     embed.add_field(name=":dividers: 》データ", value="`time` `detail` `invite`", inline=False)
     embed.add_field(name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`", inline=False)
     embed.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
-    await ctx.reply(embed=embed)
+    embed1 = discord.Embed(title="コマンドリスト-BOT",description="使用可能なコマンド一覧です♪", colour=0x3498db)
+    embed1.add_field(name=":robot: 》BOT",value=f"help：困ったときはを表示します。\nlist：コマンドリストを表示します。\nprof：CuBOTのプロフィールを表示します。\nping：CuBOTのping値を表示します。")
+    embed1.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
+    embed2 = discord.Embed(title="コマンドリスト-ツール",description="使用可能なコマンド一覧です♪", colour=0x3498db)
+    embed2.add_field(name=":tools: 》ツール",value="timer：タイマーをセットします。\nkick：ユーザーをキックします。\nban：ユーザーをBANします。\npoll：投票パネルを作成します。\nrect：募集パネルを作成します。\nembed：Embedパネルを作成します。\ncalcu：計算をします。")
+    embed2.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
+    embed3 = discord.Embed(title="コマンドリスト-データ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
+    embed3.add_field(name=":dividers: 》データ",value=f"time：現在時刻を表示します。\ndetail：各コマンドの詳細を表示します。\ninvite：招待リンクの総使用数を算出します。")
+    embed3.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
+    embed4 = discord.Embed(title="コマンドリスト-バラエティ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
+    embed4.add_field(name=":video_game: 》バラエティ",value=f"fortune：おみくじが引けます。\nrps：じゃんけんができます。\ndice：サイコロを振れます。\nrps：ダジャレが聞けます。\ncquiz：暗算クイズができます。\ncoin：コイントスができます。\nslot：スロットができます。\ntotusi：突然の死AAを作成します。")
+    embed4.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
+    pages = [embed, embed1, embed2, embed3, embed4]
+    page = 0
+    message = await ctx.send(embed=pages[page])
+    await message.add_reaction("◀️")
+    await message.add_reaction("⏹")
+    await message.add_reaction("▶️")
+    def check(reaction, user):
+        return user == ctx.author and str(reaction.emoji) in ["◀️", "▶️"]
+    while True:
+        try:
+            reaction, user = await bot.wait_for("reaction_add", timeout=60, check=check)
+            if str(reaction.emoji) == "▶️" and page != 4:
+                page += 1
+                await message.edit(embed=pages[page])
+                await message.remove_reaction(reaction, user)
+            elif str(reaction.emoji) == "⏹":
+                await message.clear_reactions()
+            elif str(reaction.emoji) == "◀️" and page > 0:
+                page -= 1
+                await message.edit(embed=pages[page])
+                await message.remove_reaction(reaction, user)
+            else:
+                await message.remove_reaction(reaction, user)
+        except asyncio.TimeoutError:
+            await message.edit(embed=embed)
+            await message.clear_reactions()
+            break
 
 @bot.command()
 async def prof(ctx):
