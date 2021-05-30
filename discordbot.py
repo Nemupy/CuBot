@@ -573,7 +573,6 @@ async def pages(ctx):
         except asyncio.TimeoutError:
             await message.delete()
             break
-            # ending the loop if user doesn't react after x seconds
 
           
             
