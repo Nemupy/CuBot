@@ -547,6 +547,7 @@ async def pages(ctx):
     page = 0
     message = await ctx.send(embed=pages[page])
     await message.add_reaction("◀️")
+    await message.add_reaction("⏹")
     await message.add_reaction("▶️")
     def check(reaction, user):
         return user == ctx.author and str(reaction.emoji) in ["◀️", "▶️"]
@@ -557,15 +558,14 @@ async def pages(ctx):
                 page += 1
                 await message.edit(embed=pages[page])
                 await message.remove_reaction(reaction, user)
-            elif str(reaction.emoji) == "◀️" and page > 1:
+            elif str(reaction.emoji) == "⏹":
+                break
+            elif str(reaction.emoji) == "◀️" and page > 0:
                 page -= 1
                 await message.edit(embed=pages[page])
                 await message.remove_reaction(reaction, user)
             else:
                 await message.remove_reaction(reaction, user)
-        except asyncio.TimeoutError:
-            await message.delete()
-            break
             
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
