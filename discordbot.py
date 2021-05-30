@@ -122,7 +122,7 @@ async def list(ctx, type=None):
                 await message.edit(embed=pages[page])
                 await message.remove_reaction(reaction, user)
             elif str(reaction.emoji) == "⏹":
-                await message.clear_reactions()
+                await message.remove.rection()
             elif str(reaction.emoji) == "◀️" and page > 0:
                 page -= 1
                 await message.edit(embed=pages[page])
