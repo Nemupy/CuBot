@@ -254,7 +254,13 @@ async def mute(ctx, member: discord.Member):
     async with ctx.typing():
         await asyncio.sleep(0)
     if ctx.author.guild_permissions.administrator:
-        await member.edit(mute = True)
+        guild = ctx.guild
+        mutedRole = discord.utils.get(guild.roles, name="Muted")
+        if not mutedRole:
+            mutedRole = await guild.create_role(name="Muted")
+            for channel in guild.channels:
+            await channel.set_permissions(mutedRole, speak=False, send_messages=False, read_message_history=True, read_messages=False)
+        await member.add_roles(mutedRole, reason=reason)
         embed=discord.Embed(title="メンバーをミュートしました。", description=f'{ctx.author.mention}さんが{member.mention}さんをミュートしました。', color=0x3498db)
         await ctx.send(embed=embed)
     else:
