@@ -248,6 +248,17 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                 else:
                     pass
         await msg.remove_reaction(str(reaction.emoji), user)
+        
+@bot.command()
+async def mute(ctx, member: discord.Member):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    if ctx.author.guild_permissions.administrator:
+        await member.edit(mute = True)
+        embed=discord.Embed(title="メンバーをミュートしました。", description=f'{ctx.author.mention}さんが{member.mention}さんをミュートしました。', color=0x3498db)
+        await ctx.send(embed=embed)
+    else:
+        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
 
 @bot.command()
 async def kick(ctx, member : discord.Member, reason=None):
