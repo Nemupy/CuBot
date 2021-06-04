@@ -573,10 +573,16 @@ async def slist(ctx, a = None):
             
 @bot.command()
 async def log(ctx):
-    bot.logdata = ""
     for d in data:
         log += d + '\n'
     with StringIO(log) as bs:
         await ctx.reply(file=discord.File(bs, 'log.txt'))
+        
+@bot.command()
+async def search(ctx, *, word: str):
+    messages = await ctx.channel.history(limit=200).flatten()
+    for msg in messages:
+        if word in msg.content:
+            await ctx.reply(msg.jump_url)
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
