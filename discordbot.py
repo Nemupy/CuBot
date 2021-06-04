@@ -572,37 +572,12 @@ async def slist(ctx, a = None):
             await ctx.reply(embed=embed)
             
 @bot.command()
-async def pages(ctx):
-    embed1 = discord.Embed(title="コマンドリスト-BOT",description="使用可能なコマンド一覧です♪", colour=0x3498db)
-    embed1.add_field(name="フィールドの名前",value="フィールドの値")
-    embed2 = discord.Embed(title="コマンドリスト-ツール",description="使用可能なコマンド一覧です♪", colour=0x3498db)
-    embed2.add_field(name="フィールドの名前",value="フィールドの値")
-    embed3 = discord.Embed(title="コマンドリスト-データ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
-    embed3.add_field(name="フィールドの名前",value="フィールドの値")
-    embed4 = discord.Embed(title="コマンドリスト-バラエティ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
-    embed4.add_field(name="フィールドの名前",value="フィールドの値")
-    pages = [embed1, embed2, embed3, embed4]
-    page = 0
-    message = await ctx.send(embed=pages[page])
-    await message.add_reaction("◀️")
-    await message.add_reaction("⏹")
-    await message.add_reaction("▶️")
-    def check(reaction, user):
-        return user == ctx.author and str(reaction.emoji) in ["◀️", "▶️"]
-    while True:
-        try:
-            reaction, user = await bot.wait_for("reaction_add", timeout=60, check=check)
-            if str(reaction.emoji) == "▶️" and page != 3:
-                page += 1
-                await message.edit(embed=pages[page])
-                await message.remove_reaction(reaction, user)
-            elif str(reaction.emoji) == "◀️" and page > 0:
-                page -= 1
-                await message.edit(embed=pages[page])
-                await message.remove_reaction(reaction, user)
-            else:
-                await message.remove_reaction(reaction, user)
-        except asyncio.TimeoutError:
-            break
+async def log(ctx):
+    log = ''
+    for d in data:
+        log += d + '\n'
+
+    with StringIO(log) as bs:
+        await ctx.reply(file=discord.File(bs, 'log.txt'))
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
