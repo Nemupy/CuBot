@@ -573,7 +573,7 @@ async def slist(ctx, a = None):
             
 @bot.command()
 async def log(ctx):
-    data = ''
+    bot.logdata = ""
     for d in data:
         log += d + '\n'
     with StringIO(log) as bs:
