@@ -573,10 +573,9 @@ async def slist(ctx, a = None):
             
 @bot.command()
 async def log(ctx):
-    log = ''
+    logdata = ''
     for d in data:
         log += d + '\n'
-
     with StringIO(log) as bs:
         await ctx.reply(file=discord.File(bs, 'log.txt'))
             
