@@ -583,5 +583,7 @@ async def clear(ctx, num):
     if ctx.author.guild_permissions.administrator:
         async for message in ctx.channel.history(limit=int(num)+1):
             await message.delete(delay=1.2)
+    else:
+        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
