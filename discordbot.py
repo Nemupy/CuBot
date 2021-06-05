@@ -580,7 +580,8 @@ async def log(ctx):
         
 @bot.command()
 async def clear(ctx, num):
-    async for message in ctx.channel.history(limit=int(num)+1):
-        await message.delete(delay=1.2)
+    if ctx.author.guild_permissions.administrator:
+        async for message in ctx.channel.history(limit=int(num)+1):
+            await message.delete(delay=1.2)
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
