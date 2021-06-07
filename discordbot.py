@@ -570,13 +570,6 @@ async def slist(ctx, a = None):
             guild_list = "\n".join(f"{guild.name}" for guild in bot.guilds)
             embed = discord.Embed(title="サーバーリスト",description=guild_list, color=0x3498db)
             await ctx.reply(embed=embed)
-            
-@bot.command()
-async def log(ctx):
-    for d in data:
-        log += d + '\n'
-    with StringIO(log) as bs:
-        await ctx.reply(file=discord.File(bs, 'log.txt'))
         
 @bot.command()
 async def clear(ctx, num):
