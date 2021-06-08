@@ -570,7 +570,7 @@ async def slist(ctx, a = None):
             guild_list = "\n".join(f"{guild.name}" for guild in bot.guilds)
             embed = discord.Embed(title="サーバーリスト",description=guild_list, color=0x3498db)
             await ctx.reply(embed=embed)
-        
+
 @bot.command()
 async def clear(ctx, num):
     if ctx.author.guild_permissions.administrator:
