@@ -579,5 +579,19 @@ async def clear(ctx, num):
             await ctx.send("実行しました！")
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
+        
+@bot.command()
+async def mute(ctx, member : discord.Member, reason=None):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    if ctx.author.guild_permissions.administrator:
+        mute = discord.Embed(title='メンバーをミュートしました。', description=f'{ctx.author.mention}さんが{member.mention}さんをミュートしました。', color=0x3498db)
+        mute.set_thumbnail(url=member.avatar_url)
+        await ctx.reply(embed=mute)
+        guild = ctx.guild
+        for channel in guild.channels:
+            await channel.set_permissions(mutedRole, speak=False, send_messages=False, read_message_history=True, read_messages=False)
+    else:
+        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
