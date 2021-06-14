@@ -593,5 +593,17 @@ async def mute(ctx, member : discord.Member, reason=None):
             await channel.set_permissions(mutedRole, speak=False, send_messages=False, read_message_history=True, read_messages=False)
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
+        
+@bot.command()
+async def ulist(ctx, a = None):
+    if ctx.author.id == 798439010594717737:
+        if a == "id":
+            guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.users)
+            embed = discord.Embed(title="ユーザーリスト",description=guild_list, color=0x3498db)
+            await ctx.reply(embed=embed)
+        else:
+            guild_list = "\n".join(f"{guild.name}" for guild in bot.users)
+            embed = discord.Embed(title="ユーザーリスト",description=guild_list, color=0x3498db)
+            await ctx.reply(embed=embed)
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
