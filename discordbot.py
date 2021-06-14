@@ -598,11 +598,11 @@ async def mute(ctx, member : discord.Member, reason=None):
 async def ulist(ctx, a = None):
     if ctx.author.id == 798439010594717737:
         if a == "id":
-            guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.users)
+            guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.members)
             embed = discord.Embed(title="ユーザーリスト",description=guild_list, color=0x3498db)
             await ctx.reply(embed=embed)
         else:
-            guild_list = "\n".join(f"{guild.name}" for guild in bot.users)
+            guild_list = "\n".join(f"{guild.name}" for guild in bot.members)
             embed = discord.Embed(title="ユーザーリスト",description=guild_list, color=0x3498db)
             await ctx.reply(embed=embed)
             
