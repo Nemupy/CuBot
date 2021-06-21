@@ -95,22 +95,21 @@ async def list(ctx, type=None):
     embed.add_field(name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`", inline=False)
     embed.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     embed1 = discord.Embed(title="コマンドリスト-BOT",description="使用可能なコマンド一覧です♪", colour=0x3498db)
-    embed1.add_field(name=":robot: 》BOT",value=f"help：困ったときはを表示します。\nlist：コマンドリストを表示します。\nprof：CuBOTのプロフィールを表示します。\nping：CuBOTのping値を表示します。")
+    embed1.add_field(name=":robot: 》BOT",value=f"`help`：困ったときはを表示します。\n`list`：コマンドリストを表示します。\n`prof`：CuBOTのプロフィールを表示します。\n`ping`：CuBOTのping値を表示します。")
     embed1.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     embed2 = discord.Embed(title="コマンドリスト-ツール",description="使用可能なコマンド一覧です♪", colour=0x3498db)
-    embed2.add_field(name=":tools: 》ツール",value="timer：タイマーをセットします。\nkick：ユーザーをキックします。\nban：ユーザーをBANします。\npoll：投票パネルを作成します。\nrect：募集パネルを作成します。\nembed：Embedパネルを作成します。\ncalcu：計算をします。")
+    embed2.add_field(name=":tools: 》ツール",value="`timer`：タイマーをセットします。\n`kick`：ユーザーをキックします。\n`ban`：ユーザーをBANします。\n`poll`：投票パネルを作成します。\n`rect`：募集パネルを作成します。\n`embed`：Embedパネルを作成します。\n`calcu`：計算をします。")
     embed2.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     embed3 = discord.Embed(title="コマンドリスト-データ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
-    embed3.add_field(name=":dividers: 》データ",value=f"time：現在時刻を表示します。\ndetail：各コマンドの詳細を表示します。\ninvite：招待リンクの総使用数を算出します。")
+    embed3.add_field(name=":dividers: 》データ",value=f"`time`：現在時刻を表示します。\n`detail`：各コマンドの詳細を表示します。\n`invite`：招待リンクの総使用数を算出します。")
     embed3.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     embed4 = discord.Embed(title="コマンドリスト-バラエティ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
-    embed4.add_field(name=":video_game: 》バラエティ",value=f"fortune：おみくじが引けます。\nrps：じゃんけんができます。\ndice：サイコロを振れます。\nrps：ダジャレが聞けます。\ncquiz：暗算クイズができます。\ncoin：コイントスができます。\nslot：スロットができます。\ntotusi：突然の死AAを作成します。")
+    embed4.add_field(name=":video_game: 》バラエティ",value=f"`fortune`：おみくじが引けます。\n`rps`：じゃんけんができます。\n`dice`：サイコロを振れます。\n`pun`：ダジャレが聞けます。\n`cquiz`：暗算クイズができます。\n`coin`：コイントスができます。\n`slot`：スロットができます。\n`totusi`：突然の死AAを作成します。")
     embed4.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     pages = [embed, embed1, embed2, embed3, embed4]
     page = 0
     message = await ctx.send(embed=pages[page])
     await message.add_reaction("◀️")
-    await message.add_reaction("⏹")
     await message.add_reaction("▶️")
     def check(reaction, user):
         return user == ctx.author and str(reaction.emoji) in ["◀️", "▶️"]
@@ -121,8 +120,6 @@ async def list(ctx, type=None):
                 page += 1
                 await message.edit(embed=pages[page])
                 await message.remove_reaction(reaction, user)
-            elif str(reaction.emoji) == "⏹":
-                await message.remove.rection()
             elif str(reaction.emoji) == "◀️" and page > 0:
                 page -= 1
                 await message.edit(embed=pages[page])
