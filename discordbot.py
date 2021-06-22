@@ -605,27 +605,21 @@ async def ulist(ctx, a = None):
             
 @bot.command()
 async def serverinfo(ctx):
-  name = str(ctx.guild.name)
-  description = str(ctx.guild.description)
+    name = str(ctx.guild.name)
+    description = str(ctx.guild.description)
 
-  owner = str(ctx.guild.owner)
-  id = str(ctx.guild.id)
-  region = str(ctx.guild.region)
-  memberCount = str(ctx.guild.member_count)
-
-  icon = str(ctx.guild.icon_url)
-   
-  embed = discord.Embed(
-      title=name + " Server Information",
-      description=description,
-      color=discord.Color.blue()
-    )
-  embed.set_thumbnail(url=icon)
-  embed.add_field(name="Owner", value=owner, inline=True)
-  embed.add_field(name="Server ID", value=id, inline=True)
-  embed.add_field(name="Region", value=region, inline=True)
-  embed.add_field(name="Member Count", value=memberCount, inline=True)
-
-  await ctx.send(embed=embed)
+    owner = str(ctx.guild.owner.id)
+    sid = str(ctx.guild.id)
+    region = str(ctx.guild.region)
+    memberCount = str(ctx.guild.member_count)
+    icon = str(ctx.guild.icon_url)
+    embed = discord.Embed(title="サーバー情報",description="サーバーの詳細情報です♪",color=0x3498db)
+    embed.set_thumbnail(url=icon)
+    embed.add_field(name="サーバー名", value=name,inline=False)
+    embed.add_field(name="サーバーID", value=sid,inline=False)
+    embed.add_field(name="オーナー", value=f"<@{owner}>", inline=False)
+    embed.add_field(name="地域", value=region, inline=False)
+    embed.add_field(name="メンバー数", value=memberCount, inline=False)
+    await ctx.send(embed=embed)
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
