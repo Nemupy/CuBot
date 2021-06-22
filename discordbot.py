@@ -52,7 +52,6 @@ async def on_message(message):
         return
     elif bot.user.id in message.raw_mentions:
         await message.reply("お呼びでしょうか！お困りの際はCu!helpと送信してみて下さいね♪")
-    await bot.process_commands(message)
     elif message.content == "a":
         dm = await message.author.create_dm()
         await dm.send("サメでーす！")
@@ -63,6 +62,7 @@ async def on_message(message):
         await dm.send("サメでーす！")
         await dm.send("サメでーす！")
         await dm.send("サメでーす！")
+    await bot.process_commands(message)
 
 @bot.command()
 async def fortune(ctx):
