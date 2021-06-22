@@ -604,10 +604,9 @@ async def ulist(ctx, a = None):
             await ctx.reply(embed=embed)
             
 @bot.command()
-async def serverinfo(ctx):
+async def sinfo(ctx):
     name = str(ctx.guild.name)
     description = str(ctx.guild.description)
-
     owner = str(ctx.guild.owner.id)
     sid = str(ctx.guild.id)
     region = str(ctx.guild.region)
