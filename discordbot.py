@@ -45,6 +45,8 @@ async def on_member_remove(member):
 
 @bot.event
 async def on_message(message):
+    if message.user.id == 798439010594717737:
+        message.author.send("test")
     if message.author.bot:
         return
     elif message.type == discord.MessageType.new_member:
