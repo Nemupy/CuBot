@@ -620,5 +620,23 @@ async def sinfo(ctx):
     embed.add_field(name="地域", value=region, inline=False)
     embed.add_field(name="メンバー数", value=memberCount, inline=False)
     await ctx.send(embed=embed)
+    
+@bot.command()
+async def sinfo(ctx):
+    name = str(ctx.guild.name)
+    description = str(ctx.guild.description)
+    owner = str(ctx.guild.owner.id)
+    sid = str(ctx.guild.id)
+    region = str(ctx.guild.region)
+    memberCount = str(ctx.guild.member_count)
+    icon = str(ctx.guild.icon_url)
+    embed = discord.Embed(title="サーバー情報",description="サーバーの詳細情報です♪",color=0x3498db)
+    embed.set_thumbnail(url=icon)
+    embed.add_field(name="📋 》一般", value=f"`サーバー名`：{name}\n`サーバーID`：{sid}\n`オーナー`：<@{owner}>\n`地域`：{region}",inline=False)
+    embed.add_field(name="👤 》メンバー", value=f"`メンバー数`：{memberCount}\n``)
+    embed.add_field(name='Number of roles', value=str(role_count), inline=False)
+    embed.add_field(name='Number Of Members', value=ctx.guild.member_count, inline=False)
+    embed.add_field(name='Bots:', value=(', '.join(list_of_bots)))
+    await ctx.send(embed=embed)
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
