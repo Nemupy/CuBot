@@ -623,6 +623,7 @@ async def sinfo1(ctx):
     
 @bot.command()
 async def sinfo(ctx):
+    guild = message.guild 
     name = str(ctx.guild.name)
     sid = str(ctx.guild.id)
     owner = str(ctx.guild.owner.id)
