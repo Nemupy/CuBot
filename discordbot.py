@@ -631,11 +631,12 @@ async def sinfo(ctx):
     sid = str(ctx.guild.id)
     region = str(ctx.guild.region)
     memberCount = str(ctx.guild.member_count)
+    botcount=str(ctx.guild.bot_count)
     icon = str(ctx.guild.icon_url)
     embed = discord.Embed(title="サーバー情報",description="サーバーの詳細情報です♪",color=0x3498db)
     embed.set_thumbnail(url=icon)
     embed.add_field(name="📋 》一般", value=f"`サーバー名`：{name}\n`サーバーID`：{sid}\n`オーナー`：<@{owner}>\n`地域`：{region}",inline=False)
-    embed.add_field(name="👤 》メンバー", value=f"`メンバー数`：{memberCount}\n``")
+    embed.add_field(name="👤 》メンバー", value=f"`メンバー数`：{memberCount}\n`BOT数`：{}")
     await ctx.send(embed=embed)
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
