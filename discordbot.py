@@ -635,7 +635,7 @@ async def sinfo(ctx):
     tchannels = len(ctx.guild.text_channels)
     vchannels = len(ctx.guild.voice_channels)
     categories = len(ctx.guild.categories)
-    channels = text_channels + voice_channels
+    channels = tchannels + vchannels
     icon = str(ctx.guild.icon_url)
     embed = discord.Embed(title="サーバー情報",description="サーバーの詳細情報です♪",color=0x3498db)
     embed.set_thumbnail(url=icon)
