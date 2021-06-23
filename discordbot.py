@@ -51,7 +51,7 @@ async def on_message(message):
         await message.delete()
         return
     elif bot.user.id in message.raw_mentions:
-        await message.reply("お呼びでしょうか！お困りの際はCu!helpと送信してみて下さいね♪")
+        await message.reply("お呼びでしょうか！お困りの際は`Cu!help`と送信してみて下さいね♪")
     await bot.process_commands(message)
 
 @bot.command()
@@ -624,18 +624,18 @@ async def sinfo1(ctx):
 @bot.command()
 async def sinfo(ctx):
     name = str(ctx.guild.name)
-    description = str(ctx.guild.description)
-    role_count = len(ctx.guild.roles)
-    owner = str(ctx.guild.owner.id)
     sid = str(ctx.guild.id)
+    owner = str(ctx.guild.owner.id)
+    description = str(ctx.guild.description)
     region = str(ctx.guild.region)
-    memberCount = str(ctx.guild.member_count)
-    botcount=str(ctx.guild.bot_count)
+    mcount = str(ctx.guild.member_count)
+    ucount = str(sum(1 for member in guild.members if not member.bot))
+    bcount = str(sum(1 for member in guild.members if member.bot))
     icon = str(ctx.guild.icon_url)
     embed = discord.Embed(title="サーバー情報",description="サーバーの詳細情報です♪",color=0x3498db)
     embed.set_thumbnail(url=icon)
     embed.add_field(name="📋 》一般", value=f"`サーバー名`：{name}\n`サーバーID`：{sid}\n`オーナー`：<@{owner}>\n`地域`：{region}",inline=False)
-    embed.add_field(name="👤 》メンバー", value=f"`メンバー数`：{memberCount}\n`BOT数`：{botcount}")
+    embed.add_field(name="👤 》メンバー", value=f"`メンバー数`：{mcount}\n`ユーザー数`：{botcount}")
     await ctx.send(embed=embed)
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
