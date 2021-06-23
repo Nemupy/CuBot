@@ -625,6 +625,8 @@ async def sinfo(ctx):
 async def sinfo(ctx):
     name = str(ctx.guild.name)
     description = str(ctx.guild.description)
+    role_count = len(ctx.guild.roles)
+    list_of_bots = [bot.mention for bot in ctx.guild.members if bot.bot]
     owner = str(ctx.guild.owner.id)
     sid = str(ctx.guild.id)
     region = str(ctx.guild.region)
