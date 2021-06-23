@@ -632,11 +632,16 @@ async def sinfo(ctx):
     mcount = str(ctx.guild.member_count)
     ucount = str(sum(1 for member in guild.members if not member.bot))
     bcount = str(sum(1 for member in guild.members if member.bot))
+    tchannels = len(ctx.guild.text_channels)
+    vchannels = len(ctx.guild.voice_channels)
+    categories = len(ctx.guild.categories)
+    channels = text_channels + voice_channels
     icon = str(ctx.guild.icon_url)
     embed = discord.Embed(title="サーバー情報",description="サーバーの詳細情報です♪",color=0x3498db)
     embed.set_thumbnail(url=icon)
     embed.add_field(name="📋 》一般", value=f"`サーバー名`：{name}\n`サーバーID`：{sid}\n`オーナー`：<@{owner}>\n`地域`：{region}",inline=False)
-    embed.add_field(name="👤 》メンバー", value=f"`メンバー数`：{mcount}\n`ユーザー数`：{ucount}\n`BOT数`：{bcount}")
+    embed.add_field(name="👤 》メンバー", value=f"`メンバー数`：{mcount}\n`ユーザー数`：{ucount}\n`BOT数`：{bcount}",inline=False)
+    embed.add_field(name="💬 》チャンネル", value=f"`チャンネル数`：{channels}\n`テキストチャンネル数`：{tchannels}\n`ボイスチャンネル数`：{vchannels}\n`カテゴリー数`：{categories}",inline=False)
     await ctx.send(embed=embed)
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
