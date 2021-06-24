@@ -630,7 +630,7 @@ async def sinfo(ctx):
 async def rinfo(ctx, role):
     roleObj = discord.utils.get(ctx.message.server.roles, name=role)
     if roleObj is None:
-            await bot.say("`{}` is not a valid role".format(role))
+            await ctx.send("`{}` is not a valid role".format(role))
             return
         count = len([member for member in ctx.message.server.members if discord.utils.get(member.roles, name=roleObj.name)])
         perms = roleObj.permissions
@@ -665,6 +665,6 @@ async def rinfo(ctx, role):
         em.add_field(name="Can use voice activity", value=perms.use_voice_activation)
         em.add_field(name="Can manage webhooks", value=perms.manage_webhooks)
         em.add_field(name="Can add reactions", value=perms.add_reactions)
-        await self.bot.say(embed=em)
+        await ctx.reply(embed=em)
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
