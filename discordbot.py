@@ -629,9 +629,11 @@ async def sinfo(ctx):
     await ctx.send(embed=embed)
 
 @bot.command()
-async def uinfo627(ctx, member : discord.Member = ctx.author):
+async def uinfo627(ctx, member : discord.Member):
     async with ctx.typing():
         await asyncio.sleep(0)
+    if user is None:
+        member = ctx.author 
     date_format = "%a, %d %b %Y %I:%M %p"
     embed = discord.Embed(color=0xdfa3ff, description=member.mention)
     embed.set_author(name=str(member), icon_url=member.avatar_url)
