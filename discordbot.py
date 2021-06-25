@@ -648,6 +648,6 @@ async def uinfo627(ctx, member : discord.Member):
     perm_string = ', '.join([str(p[0]).replace("_", " ").title() for p in member.guild_permissions if p[1]])
     embed.add_field(name="Guild permissions", value=perm_string, inline=False)
     embed.set_footer(text='ID: ' + str(member.id))
-    await ctx.send(embed=embed)
+    return await ctx.send(embed=embed)
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
