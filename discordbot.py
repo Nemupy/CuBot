@@ -139,7 +139,7 @@ async def prof(ctx):
     embed.add_field(name="🤔》Cuとは", value="日本生まれ日本育ちのDiscordBOTです！\n日々勉強に励み成長中！", inline=False)
     embed.add_field(name="🔧》開発者", value="<@798439010594717737> [Twitter](https://twitter.com/Nemu627)", inline=False)
     embed.add_field(name="🖼》アイコン", value="Shano様 [Twitter](https://twitter.com/ShanoPirika)", inline=False)
-    embed.add_field(name="✅》公式", value="`公式サーバー`：[ClickHere](https://discord.gg/RFPQmRnv2j)\n`公式ツイッター`：[ClickHere](https://twitter.com/CubotOfficial)", inline=)
+    embed.add_field(name="✅》公式", value=f"`公式サーバー`：[ClickHere](https://discord.gg/RFPQmRnv2j)\n`公式ツイッター`：[ClickHere](https://twitter.com/CubotOfficial)", inline=)
     embed.set_footer(text="CuBOT豆知識："+mame)
     await ctx.reply(embed=embed)
 
