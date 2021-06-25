@@ -129,7 +129,19 @@ async def list(ctx, type=None):
             await message.clear_reactions()
             break
 
-
+@bot.command()
+async def prof(ctx):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    mame = random.choice(("イメージキャラクターの本名は「金同 鈴樺」です！", "CuBOTは皆様のDiscordライフをより明るくしようと誕生しました！", "CuBOTはCuと書いてきゅーと発音します！"))
+    embed = discord.Embed(title="CuBOTプロフィール", description="CuBOTの自己紹介ページです♪",color=0x3498db)
+    embed.set_thumbnail(url="https://pbs.twimg.com/media/EfWoupuUYAAwuTv?format=jpg&name=large")
+    embed.add_field(name="🤔》Cuとは", value="日本生まれ日本育ちのDiscordBOTです！\n日々勉強に励み成長中！", inline=False)
+    embed.add_field(name="🔧》開発者", value="<@798439010594717737> [Twitter](https://twitter.com/Nemu627)", inline=False)
+    embed.add_field(name="🖼》アイコン", value="Shano様 [Twitter](https://twitter.com/ShanoPirika)", inline=False)
+    embed.add_field(name="✅》公式", value=f"`公式サーバー`：[ClickHere](https://discord.gg/RFPQmRnv2j)\n`公式ツイッター`：[ClickHere](https://twitter.com/CubotOfficial)", inline=False)
+    embed.set_footer(text="CuBOT豆知識："+mame)
+    await ctx.reply(embed=embed)
 
 @bot.command()
 async def time(ctx):
