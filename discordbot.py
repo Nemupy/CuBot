@@ -68,10 +68,8 @@ async def help(ctx):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed = discord.Embed(title="困ったときは", description="お困りですか？BOTの使い方など全力でサポートいたします！",color=0x3498db)
-    embed.add_field(name="コマンドリスト", value="Cu!list", inline=True)
-    embed.add_field(name="各コマンドの詳細", value="Cu!detail [コマンド名]", inline=True)
-    embed.add_field(name="公式サーバー", value="[ClickHere](https://discord.gg/RFPQmRnv2j)")
-    embed.add_field(name="開発者", value="音夢?!#1808", inline=True)
+    embed.add_field(name="🤖》コマンド", value="`コマンドリスト`：Cu!list\n`各コマンドの詳細`：Cu!detail [コマンド名]", inline=False)
+    embed.add_field(name="✅》公式アカウント", value="`公式サーバー`：[ClickHere](https://discord.gg/RFPQmRnv2j)\n`開発者`：<@798439010594717737>", inline=False)
     embed.set_footer(text="その他不具合があれば公式サーバーまでご気軽にお声掛けください♪")
     await ctx.reply(embed=embed)
 
