@@ -637,5 +637,15 @@ async def sinfo(ctx):
     embed.add_field(name="👤 》メンバー", value=f"`メンバー数`：{mcount}\n`ユーザー数`：{ucount}\n`BOT数`：{bcount}",inline=False)
     embed.add_field(name="💬 》チャンネル", value=f"`チャンネル数`：{channels}\n`テキストチャンネル数`：{tchannels}\n`ボイスチャンネル数`：{vchannels}\n`カテゴリー数`：{categories}",inline=False)
     await ctx.send(embed=embed)
+    
+@bot.command()
+async def clear(ctx, num):
+    if ctx.author.guild_permissions.administrator:
+        async for message in ctx.channel.history(limit=int(num)+1):
+            msg = await client.get_message(content = "草")
+            await msg.delete(delay=1.2)
+            await ctx.send("実行しました！")
+    else:
+        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
             
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
