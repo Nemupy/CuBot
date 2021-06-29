@@ -392,11 +392,12 @@ async def detail(ctx, command = "コマンド名"):
         await asyncio.sleep(0)
     if command == "help":
         embed = discord.Embed(title="DETAIL-help", description="困ったときはを表示します。", colour=0x3498db)
-        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829291787381637130/unknown.png")
+        embed.set_image(url="https://media.discordapp.net/attachments/859408401419599882/859409365140635688/unknown.png")
         await ctx.reply(embed=embed)
     elif command == "list":
         embed = discord.Embed(title="DETAIL-list", description="コマンドリストを表示します。", colour=0x3498db)
-        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829292096007438346/unknown.png")
+        embed.set_footer(text="リアクションページを使用できます。")
+        embed.set_image(url="https://media.discordapp.net/attachments/859408401419599882/859409537252327434/unknown.png")
         await ctx.reply(embed=embed)
     elif command == "prof":
         embed = discord.Embed(title="DETAIL-prof", description="CuBOTのプロフィールを表示します。", colour=0x3498db)
