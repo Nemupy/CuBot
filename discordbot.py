@@ -583,7 +583,7 @@ async def mute(ctx, member : discord.Member):
         await ctx.reply(embed=mute)
         guild = ctx.guild
         for channel in guild.channels:
-            await channel.set_permissions(member, speak=False, send_messages=False, read_message_history=True, read_messages=False)
+            await channel.set_permissions(member, send_messages=False, read_message_history=False, read_messages=False)
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
         
@@ -597,7 +597,7 @@ async def unmute(ctx, member : discord.Member):
         await ctx.reply(embed=mute)
         guild = ctx.guild
         for channel in guild.channels:
-            await channel.delete_permissions(member, speak=False, send_messages=False, read_message_history=True, read_messages=False)
+            await channel.delete_permissions(member, send_messages=True, read_message_history=True, read_messages=True)
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
         
