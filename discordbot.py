@@ -88,7 +88,7 @@ async def list(ctx, type=None):
         await asyncio.sleep(0)
     embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498db)
     embed.add_field(name=":robot: 》BOT", value="`help` `list` `prof` `ping`", inline=False)
-    embed.add_field(name=":tools: 》ツール", value="`timer` `kick` `ban` `poll` `rect` `embed` `calcu`", inline=False)
+    embed.add_field(name=":tools: 》ツール", value="`kick` `ban` `unban` `mute` `unmute` `timer` `poll` `rect` `embed` `calcu`", inline=False)
     embed.add_field(name=":dividers: 》データ", value="`time` `detail` `invite`", inline=False)
     embed.add_field(name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`", inline=False)
     embed.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
@@ -96,7 +96,7 @@ async def list(ctx, type=None):
     embed1.add_field(name=":robot: 》BOT",value=f"`help`：困ったときはを表示します。\n`list`：コマンドリストを表示します。\n`prof`：CuBOTのプロフィールを表示します。\n`ping`：CuBOTのping値を表示します。")
     embed1.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     embed2 = discord.Embed(title="コマンドリスト-ツール",description="使用可能なコマンド一覧です♪", colour=0x3498db)
-    embed2.add_field(name=":tools: 》ツール",value="`timer`：タイマーをセットします。\n`kick`：ユーザーをキックします。\n`ban`：ユーザーをBANします。\n`poll`：投票パネルを作成します。\n`rect`：募集パネルを作成します。\n`embed`：Embedパネルを作成します。\n`calcu`：計算をします。")
+    embed2.add_field(name=":tools: 》ツール",value="`timer`：タイマーをセットします。\n`kick`：ユーザーをキックします。\n`ban`：ユーザーをBANします。\n`ban`：ユーザーのBANを解除します。\n`mute`：ユーザーをミュートします。\n`unmute`：ユーザーのミュートを解除します。\n`poll`：投票パネルを作成します。\n`rect`：募集パネルを作成します。\n`embed`：Embedパネルを作成します。\n`calcu`：計算をします。")
     embed2.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     embed3 = discord.Embed(title="コマンドリスト-データ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
     embed3.add_field(name=":dividers: 》データ",value=f"`time`：現在時刻を表示します。\n`detail`：各コマンドの詳細を表示します。\n`invite`：招待リンクの総使用数を算出します。")
@@ -106,7 +106,7 @@ async def list(ctx, type=None):
     embed4.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     pages = [embed, embed1, embed2, embed3, embed4]
     page = 0
-    message = await ctx.send(embed=pages[page])
+    message = await ctx.reply(embed=pages[page])
     await message.add_reaction("◀️")
     await message.add_reaction("▶️")
     def check(reaction, user):
@@ -406,11 +406,6 @@ async def detail(ctx, command = "コマンド名"):
         embed = discord.Embed(title="DETAIL-ping", description="CuBOTのping値を表示します。", colour=0x3498db)
         embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829292685457621032/unknown.png")
         await ctx.reply(embed=embed)
-    elif command == "timer":
-        embed = discord.Embed(title="DETAIL-timer", description="タイマーをセットします。", colour=0x3498db)
-        embed.add_field(name="使い方", value="Cu!timer [秒数]", inline=True)
-        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829292950793879552/unknown.png")
-        await ctx.reply(embed=embed)
     elif command == "kick":
         embed = discord.Embed(title="DETAIL-kick", description="ユーザーをキックします。", colour=0x3498db)
         embed.add_field(name="使い方", value="Cu!kick [ユーザー名]", inline=True)
@@ -421,7 +416,18 @@ async def detail(ctx, command = "コマンド名"):
         embed = discord.Embed(title="DETAIL-ban", description="ユーザーをBANします。", colour=0x3498db)
         embed.add_field(name="使い方", value="Cu!ban [ユーザー名]", inline=True)
         embed.set_footer(text="このコマンドを実行できるのは管理者のみです。")
-        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829293782284894258/unknown.png")
+        embed.set_image(url="https://images-ext-2.discordapp.net/external/9S1B_5tzfHj-E7W1P92sT9uoMJgLyCIPoKUEWM2J338/https/media.discordapp.net/attachments/826804140398215218/829293782284894258/unknown.png")
+        await ctx.reply(embed=embed)
+    elif command == "unban":
+        embed = discord.Embed(title="DETAIL-unban", description="ユーザーのBANを解除します。", colour=0x3498db)
+        embed.add_field(name="使い方", value="Cu!unban [ユーザーID]", inline=True)
+        embed.set_footer(text="このコマンドを実行できるのは管理者のみです。")
+        embed.set_image(url="https://media.discordapp.net/attachments/826803343669854229/859407084339986452/unknown.png")
+        await ctx.reply(embed=embed)
+    elif command == "timer":
+        embed = discord.Embed(title="DETAIL-timer", description="タイマーをセットします。", colour=0x3498db)
+        embed.add_field(name="使い方", value="Cu!timer [秒数]", inline=True)
+        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829292950793879552/unknown.png")
         await ctx.reply(embed=embed)
     elif command == "poll":
         embed = discord.Embed(title="DETAIL-poll", description="投票パネルを作成します。", colour=0x3498db)
