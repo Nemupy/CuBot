@@ -642,7 +642,7 @@ async def sinfo(ctx):
 async def clear(ctx, num):
     if ctx.author.guild_permissions.administrator:
         async for message in ctx.channel.history(limit=int(num)+1):
-            msg = await client.get_message(content = "草")
+            msg = await bot.get_message(content = "草")
             await msg.delete(delay=1.2)
             await ctx.send("実行しました！")
     else:
