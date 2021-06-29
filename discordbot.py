@@ -597,7 +597,7 @@ async def unmute(ctx, member : discord.Member):
         await ctx.reply(embed=mute)
         guild = ctx.guild
         for channel in guild.channels:
-            await channel.delete_permissions(member, send_messages=None, read_message_history=None, read_messages=None)
+            await channel.set_permissions(member, send_messages=None, read_message_history=None, read_messages=None)
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
         
