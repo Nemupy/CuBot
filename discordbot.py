@@ -583,7 +583,7 @@ async def mute(ctx, member : discord.Member, reason=None):
         await ctx.reply(embed=mute)
         guild = ctx.guild
         for channel in guild.channels:
-            await channel.set_permissions(mutedRole, speak=False, send_messages=False, read_message_history=True, read_messages=False)
+            await channel.set_permissions(member, speak=False, send_messages=False, read_message_history=True, read_messages=False)
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
         
