@@ -577,7 +577,7 @@ async def detailsisaku(ctx, type=None):
     while True:
         try:
             reaction, user = await bot.wait_for("reaction_add", timeout=60, check=check)
-            if str(reaction.emoji) == "▶️" and page != 4:
+            if str(reaction.emoji) == "▶️" and page != 22:
                 page += 1
                 await message.edit(embed=pages[page])
                 await message.remove_reaction(reaction, user)
