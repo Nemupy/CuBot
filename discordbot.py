@@ -62,7 +62,7 @@ async def fortune(ctx):
     taiki.set_thumbnail(url=ctx.author.avatar_url)
     unsei = random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶"))
     luckycmd = random.choice(("fortune","rps","dice","pun","cquiz","coin","slot","totusi"))
-    akekka = discord.Embed(title="おみくじ", description=f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{unsei}\n`ラッキーコマンド`：{luckycmd}", color=0x3498db)
+    akekka = discord.Embed(title="おみくじ", description=f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{unsei}\n`ラッキーコマンド`：Cu!{luckycmd}", color=0x3498db)
     akekka.set_thumbnail(url=ctx.author.avatar_url)
     message = await ctx.reply(embed=taiki)
     await message.add_reaction("🎫")
