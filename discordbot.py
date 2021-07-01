@@ -73,7 +73,7 @@ async def fortune(ctx):
                 fortune.title = f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{kekka}\n`ラッキーコマンド`：{luckycmd}"
                 await message.clear_reactions()
         except asyncio.TimeoutError:
-            await message.edit(embed=embed)
+            await message.edit(embed=fortune)
             await message.clear_reactions()
             break
 
