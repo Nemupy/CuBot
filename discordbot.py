@@ -58,10 +58,24 @@ async def on_message(message):
 async def fortune(ctx):
     async with ctx.typing():
         await asyncio.sleep(0)
-    embed = discord.Embed(title="おみくじ", description=f"{ctx.author.mention}さんの今日の運勢は！", color=0x3498db)
-    embed.add_field(name="[運勢] ", value=random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶")), inline=False)
-    embed.set_thumbnail(url=ctx.author.avatar_url)
-    await ctx.reply(embed=embed)
+    fortune = discord.Embed(title="おみくじ", description=f"チケットをクリックしておみくじを引きましょう！", color=0x3498db)
+    fortune.set_thumbnail(url=ctx.author.avatar_url)
+    message = await ctx.reply(embed=embed)
+    await message.add_reaction("🎫")
+    def check(reaction, user):
+        return user == ctx.author and str(reaction.emoji) in ["🎫"]
+    while True:
+        try:
+            reaction, user = await bot.wait_for("reaction_add", timeout=60, check=check)
+            if str(reaction.emoji) == "🎫":
+                kekka = random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶"))
+                luckycmd = random.choice(("fortune","rps","dice","pun","cquiz","coin","slot","totusi"))
+                fortune.title = f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{kekka}\n`ラッキーコマンド`：{luckycmd}"
+                await message.clear_reactions()
+        except asyncio.TimeoutError:
+            await message.edit(embed=embed)
+            await message.clear_reactions()
+            break
 
 @bot.command()
 async def help(ctx):
@@ -737,4 +751,4 @@ async def sinfo(ctx):
     embed.add_field(name="💬 》チャンネル", value=f"`チャンネル数`：{channels}\n`テキストチャンネル数`：{tchannels}\n`ボイスチャンネル数`：{vchannels}\n`カテゴリー数`：{categories}",inline=False)
     await ctx.send(embed=embed)
           
-bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
+bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
