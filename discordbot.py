@@ -736,5 +736,5 @@ async def sinfo(ctx):
     embed.add_field(name="👤 》メンバー", value=f"`メンバー数`：{mcount}\n`ユーザー数`：{ucount}\n`BOT数`：{bcount}",inline=False)
     embed.add_field(name="💬 》チャンネル", value=f"`チャンネル数`：{channels}\n`テキストチャンネル数`：{tchannels}\n`ボイスチャンネル数`：{vchannels}\n`カテゴリー数`：{categories}",inline=False)
     await ctx.send(embed=embed)
-           
+          
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.r_h2j1FQ4XZAsV3ptNnux7eMtGQ")
