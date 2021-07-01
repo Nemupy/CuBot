@@ -70,7 +70,7 @@ async def fortune(ctx):
             if str(reaction.emoji) == "🎫":
                 kekka = random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶"))
                 luckycmd = random.choice(("fortune","rps","dice","pun","cquiz","coin","slot","totusi"))
-                aaafortune.description = f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{kekka}\n`ラッキーコマンド`：{luckycmd}"
+                await message.edit(aaafortune.description = f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{kekka}\n`ラッキーコマンド`：{luckycmd}")
                 await message.clear_reactions()
         except asyncio.TimeoutError:
             await message.clear_reactions()
