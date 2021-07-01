@@ -58,9 +58,9 @@ async def on_message(message):
 async def fortune(ctx):
     async with ctx.typing():
         await asyncio.sleep(0)
-    fortune = discord.Embed(title="おみくじ", description=f"チケットをクリックしておみくじを引きましょう！", color=0x3498db)
-    fortune.set_thumbnail(url=ctx.author.avatar_url)
-    message = await ctx.reply(embed=fortune)
+    aaafortune = discord.Embed(title="おみくじ", description=f"チケットをクリックしておみくじを引きましょう！", color=0x3498db)
+    aaafortune.set_thumbnail(url=ctx.author.avatar_url)
+    message = await ctx.reply(embed=aaafortune)
     await message.add_reaction("🎫")
     def check(reaction, user):
         return user == ctx.author and str(reaction.emoji) in ["🎫"]
@@ -70,10 +70,9 @@ async def fortune(ctx):
             if str(reaction.emoji) == "🎫":
                 kekka = random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶"))
                 luckycmd = random.choice(("fortune","rps","dice","pun","cquiz","coin","slot","totusi"))
-                fortune.title = f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{kekka}\n`ラッキーコマンド`：{luckycmd}"
+                aaafortune.title = f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{kekka}\n`ラッキーコマンド`：{luckycmd}"
                 await message.clear_reactions()
         except asyncio.TimeoutError:
-            await message.edit(embed=fortune)
             await message.clear_reactions()
             break
 
