@@ -60,7 +60,7 @@ async def fortune(ctx):
         await asyncio.sleep(0)
     fortune = discord.Embed(title="おみくじ", description=f"チケットをクリックしておみくじを引きましょう！", color=0x3498db)
     fortune.set_thumbnail(url=ctx.author.avatar_url)
-    message = await ctx.reply(embed=embed)
+    message = await ctx.reply(embed=fortune)
     await message.add_reaction("🎫")
     def check(reaction, user):
         return user == ctx.author and str(reaction.emoji) in ["🎫"]
