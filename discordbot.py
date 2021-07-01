@@ -60,11 +60,11 @@ async def fortune(ctx):
         await asyncio.sleep(0)
     taiki = discord.Embed(title="おみくじ", description=f"チケットをクリックしておみくじを引きましょう！", color=0x3498db)
     taiki.set_thumbnail(url=ctx.author.avatar_url)
-    kekka = random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶"))
+    unsei = random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶"))
     luckycmd = random.choice(("fortune","rps","dice","pun","cquiz","coin","slot","totusi"))
-    kekka = discord.Embed(title="おみくじ", description=f"{ctx.author.mention}さんの今日の運勢は！", color=0x3498db)
+    kekka = discord.Embed(title="おみくじ", description=f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{unsei}\n`ラッキーコマンド`：{luckycmd}", color=0x3498db)
     kekka.set_thumbnail(url=ctx.author.avatar_url)
-    message = await ctx.reply(embed=aaafortune)
+    message = await ctx.reply(embed=taiki)
     await message.add_reaction("🎫")
     def check(reaction, user):
         return user == ctx.author and str(reaction.emoji) in ["🎫"]
@@ -74,7 +74,7 @@ async def fortune(ctx):
             if str(reaction.emoji) == "🎫":
                 kekka = random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶"))
                 luckycmd = random.choice(("fortune","rps","dice","pun","cquiz","coin","slot","totusi"))
-                await message.edit(embed=")
+                await message.edit(embed=kekka)
                 await message.clear_reactions()
         except asyncio.TimeoutError:
             await message.clear_reactions()
