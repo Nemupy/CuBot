@@ -753,8 +753,13 @@ async def sinfo(ctx):
     await ctx.send(embed=embed)
     
 @bot.command()
-async def kusa(ctx):
-    if message.content == "草":
-        await message.delete()
+async def kusa(ctx, num):
+    if ctx.author.guild_permissions.administrator:
+        async for message in ctx.channel.history(limit=int(num)+1):
+            if message.content == "草"
+            await message.delete(delay=1.2)
+            await ctx.send("実行しました！")
+    else:
+        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
           
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
