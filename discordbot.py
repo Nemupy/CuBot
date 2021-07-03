@@ -758,7 +758,7 @@ async def ac(ctx, num):
          async for message in ctx.channel.history(limit=int(num)+1):
             if message.content == "草":
                 await message.delete(delay=1.2)
-            await ctx.send("草刈りぶううううううううううんｗ")
+         await ctx.send("草刈りぶううううううううううんｗ")
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
          
