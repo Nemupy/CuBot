@@ -756,9 +756,9 @@ async def sinfo(ctx):
 async def kusa(ctx, num):
     if ctx.author.guild_permissions.administrator:
         async for message in ctx.channel.history(limit=int(num)+1):
-            if message.content == "草"
-            await message.delete(delay=1.2)
-            await ctx.send("実行しました！")
+            if message.content == "草":
+                await message.delete(delay=1.2)
+                await ctx.send("実行しました！")
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
           
