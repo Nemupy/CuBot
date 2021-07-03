@@ -753,7 +753,7 @@ async def sinfo(ctx):
     await ctx.send(embed=embed)
     
 @bot.command()
-async def ac(ctx, num):
+async def kusa(ctx, num):
     if ctx.author.guild_permissions.administrator:
          async for message in ctx.channel.history(limit=int(num)+1):
             if message.content == "草":
