@@ -10,7 +10,6 @@ from discord.ext import tasks
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents = intents)
-allowed_mentions=discord.AllowedMentions(replied_user=False)
 
 @bot.event
 async def on_ready():
@@ -25,7 +24,7 @@ async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     embed = discord.Embed(title="エラー", description="予期せぬエラーが発生しました。\nこのエラーが多発する場合は公式サーバーまでお問い合わせください。\n```"+error_msg+"```", colour=0x3498db)
-    await ctx.reply(embed=embed)
+    await ctx.reply(embed=embed, mention_author=False)
 
 @bot.event
 async def on_member_join(member):
@@ -52,32 +51,10 @@ async def on_message(message):
         await message.delete()
         return
     elif bot.user.id in message.raw_mentions:
-        await message.reply("お呼びでしょうか！お困りの際は`Cu!help`と送信してみて下さいね♪")
+        await message.reply("お呼びでしょうか！お困りの際は`Cu!help`と送信してみて下さいね♪", mention_author=False)
     await bot.process_commands(message)
-
-@bot.command()
-async def fortune(ctx):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    taiki = discord.Embed(title="おみくじ", description=f"チケットをクリックしておみくじを引きましょう！", color=0x3498db)
-    taiki.set_thumbnail(url=ctx.author.avatar_url)
-    unsei = random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶"))
-    luckycmd = random.choice(("fortune","rps","dice","pun","cquiz","coin","slot","totusi"))
-    akekka = discord.Embed(title="おみくじ", description=f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{unsei}\n`ラッキーコマンド`：Cu!{luckycmd}", color=0x3498db)
-    akekka.set_thumbnail(url=ctx.author.avatar_url)
-    message = await ctx.reply(embed=taiki)
-    await message.add_reaction("🎫")
-    def check(reaction, user):
-        return user == ctx.author and str(reaction.emoji) in ["🎫"]
-    while True:
-        try:
-            reaction, user = await bot.wait_for("reaction_add", timeout=60, check=check)
-            if str(reaction.emoji) == "🎫":
-                await message.edit(embed=akekka)
-                await message.clear_reactions()
-        except asyncio.TimeoutError:
-            await message.clear_reactions()
-            break
+    
+#-----«コマンド-BOT»-------------------------
 
 @bot.command()
 async def help(ctx):
@@ -87,17 +64,8 @@ async def help(ctx):
     embed.add_field(name="🤖》コマンド", value="`コマンドリスト`：Cu!list\n`各コマンドの詳細`：Cu!detail [コマンド名]", inline=False)
     embed.add_field(name="✅》公式アカウント", value="`公式サーバー`：[ClickHere](https://discord.gg/RFPQmRnv2j)\n`開発者`：<@798439010594717737>", inline=False)
     embed.set_footer(text="その他不具合があれば公式サーバーまでご気軽にお声掛けください♪")
-    await ctx.reply(embed=embed)
-
-@bot.command()
-async def dice(ctx):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    dice = random.randint(1, 6)
-    embed = discord.Embed(title="サイコロ", description="[出目] "+ str(dice), colour=0x3498db)
-    embed.set_thumbnail(url="https://smilescience.up.seesaa.net/image/E382B5E382A4E382B3E383ADE381AEE79BAEE5B08F_" + str(dice) + "-thumbnail2.png")
-    await ctx.reply(embed=embed)
-
+    await ctx.reply(embed=embed, mention_author=False)
+    
 @bot.command()
 async def list(ctx, type=None):
     async with ctx.typing():
@@ -122,7 +90,7 @@ async def list(ctx, type=None):
     embed4.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     pages = [embed, embed1, embed2, embed3, embed4]
     page = 0
-    message = await ctx.reply(embed=pages[page])
+    message = await ctx.reply(embed=pages[page], mention_author=False)
     await message.add_reaction("◀️")
     await message.add_reaction("▶️")
     def check(reaction, user):
@@ -144,7 +112,7 @@ async def list(ctx, type=None):
             await message.edit(embed=embed)
             await message.clear_reactions()
             break
-
+            
 @bot.command()
 async def prof(ctx):
     async with ctx.typing():
@@ -157,16 +125,80 @@ async def prof(ctx):
     embed.add_field(name="🖼》アイコン", value="Shano様 [Twitter](https://twitter.com/ShanoPirika)", inline=False)
     embed.add_field(name="✅》公式", value=f"`公式サーバー`：[ClickHere](https://discord.gg/RFPQmRnv2j)\n`公式ツイッター`：[ClickHere](https://twitter.com/CubotOfficial)", inline=False)
     embed.set_footer(text="CuBOT豆知識："+mame)
-    await ctx.reply(embed=embed)
-
+    await ctx.reply(embed=embed, mention_author=False)
+    
 @bot.command()
-async def time(ctx):
+async def ping(ctx):
     async with ctx.typing():
         await asyncio.sleep(0)
-    now = datetime.datetime.now()
-    date_and_time = now.strftime('%m月%d日 %H:%M')
-    await ctx.reply(f"現在の時刻は{date_and_time}です！")
+    embed=discord.Embed(title="PING", description=f"ただいまのping値は**{round(bot.latency *1000)}**msです！", color=0x3498db)
+    await ctx.reply(embed=embed, mention_author=False)
+    
+#-----«コマンド-ツール»-------------------------
 
+@bot.command()
+async def kick(ctx, member : discord.Member, reason=None):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    if ctx.author.guild_permissions.administrator:
+        kick = discord.Embed(title='メンバーをキックしました。', description=f'{ctx.author.mention}さんが{member.mention}さんをキックしました。', color=0x3498db)
+        kick.set_thumbnail(url=member.avatar_url)
+        await ctx.reply(embed=kick)
+        await member.kick(reason=reason)
+    else:
+        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
+
+@bot.command()
+async def ban(ctx, member : discord.Member, reason=None):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    if ctx.author.guild_permissions.administrator:
+        ban = discord.Embed(title='メンバーをBANしました。', description=f'{ctx.author.mention}さんが{member.mention}さんをBANしました。', color=0x3498db)
+        ban.set_thumbnail(url=member.avatar_url)
+        await ctx.reply(embed=ban)
+        await member.ban(reason=reason)
+    else:
+        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
+
+@bot.command()
+async def unban(ctx, id: int):
+    if ctx.author.guild_permissions.administrator:
+        user = await bot.fetch_user(id)
+        unban = discord.Embed(title='メンバーのBANを解除しました', description=f'{ctx.author.mention}さんが{user.mention}さんのBANを解除しました。', color=0x3498db)
+        unban.set_thumbnail(url=user.avatar_url)
+        await ctx.reply(embed=unban)
+        await ctx.guild.unban(user)
+    else:
+        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
+        
+@bot.command()
+async def mute(ctx, member : discord.Member):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    if ctx.author.guild_permissions.administrator:
+        mute = discord.Embed(title='メンバーをミュートしました。', description=f'{ctx.author.mention}さんが{member.mention}さんをミュートしました。', color=0x3498db)
+        mute.set_thumbnail(url=member.avatar_url)
+        await ctx.reply(embed=mute)
+        guild = ctx.guild
+        for channel in guild.channels:
+            await channel.set_permissions(member, send_messages=False)
+    else:
+        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
+        
+@bot.command()
+async def unmute(ctx, member : discord.Member):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    if ctx.author.guild_permissions.administrator:
+        mute = discord.Embed(title='メンバーのミュートを解除しました。', description=f'{ctx.author.mention}さんが{member.mention}さんのミュートを解除しました。', color=0x3498db)
+        mute.set_thumbnail(url=member.avatar_url)
+        await ctx.reply(embed=mute)
+        guild = ctx.guild
+        for channel in guild.channels:
+            await channel.set_permissions(member, overwrite=None)
+    else:
+        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
+        
 @bot.command()
 async def timer(ctx, number):
     async with ctx.typing():
@@ -174,41 +206,23 @@ async def timer(ctx, number):
     await ctx.reply(str(number)+"秒後にタイマーをセットしました！")
     sleep(int(number))
     await ctx.reply("ピピピピッ♪タイマーが終了しました！")
-
+    
 @bot.command()
-async def rps(ctx):
+async def poll(ctx, about = "question", *args):
     async with ctx.typing():
         await asyncio.sleep(0)
-    global result, judge
-    await ctx.reply("最初はぐー！じゃんけん・・・")
-    jkbot = random.choice(("ぐー", "ちょき", "ぱー"))
-    draw = "引き分けだよ！運命かなぁ・・・！"
-    wn = "負けちゃった～・・・。君強いね～！"
-    lst = "やったー！勝てた～♪"
-    def jankencheck(m):
-        return (m.author == ctx.author) and (m.content in ['ぐー', 'ちょき', 'ぱー'])
-    reply = await bot.wait_for("message", check=jankencheck)
-    if reply.content == jkbot:
-        judge = draw
+    emojis = ["1⃣","2⃣","3⃣","4⃣"]
+    cnt = len(args)
+    message = discord.Embed(title=":bar_chart: "+about,colour=0x3498db)
+    if cnt <= len(emojis):
+        for a in range(cnt):
+            message.add_field(name=f'{emojis[a]}{args[a]}', value="** **", inline=False)
+        msg = await ctx.reply(embed=message)
+        for i in range(cnt):
+            await msg.add_reaction(emojis[i])
     else:
-        if reply.content == "ぐー":
-            if jkbot == "ちょき":
-                judge = wn
-            else:
-                judge = lst
-        elif reply.content == "ちょき":
-            if jkbot == "ぱー":
-                judge = wn
-            else:
-                judge = lst
-        else:
-            if jkbot == "ぐー":
-                judge = wn
-            else:
-                judge = lst
-    await ctx.reply(jkbot)
-    await ctx.reply(judge)
-
+        await ctx.send("回答項目は４つまでしか作れないの。ごめんね・・・。")
+        
 @bot.command()
 async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
     async with ctx.typing():
@@ -257,94 +271,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                 else:
                     pass
         await msg.remove_reaction(str(reaction.emoji), user)
-
-@bot.command()
-async def kick(ctx, member : discord.Member, reason=None):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    if ctx.author.guild_permissions.administrator:
-        kick = discord.Embed(title='メンバーをキックしました。', description=f'{ctx.author.mention}さんが{member.mention}さんをキックしました。', color=0x3498db)
-        kick.set_thumbnail(url=member.avatar_url)
-        await ctx.reply(embed=kick)
-        await member.kick(reason=reason)
-    else:
-        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
-
-@bot.command()
-async def ban(ctx, member : discord.Member, reason=None):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    if ctx.author.guild_permissions.administrator:
-        ban = discord.Embed(title='メンバーをBANしました。', description=f'{ctx.author.mention}さんが{member.mention}さんをBANしました。', color=0x3498db)
-        ban.set_thumbnail(url=member.avatar_url)
-        await ctx.reply(embed=ban)
-        await member.ban(reason=reason)
-    else:
-        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
-
-@bot.command()
-async def unban(ctx, id: int):
-    if ctx.author.guild_permissions.administrator:
-        user = await bot.fetch_user(id)
-        unban = discord.Embed(title='メンバーのBANを解除しました', description=f'{ctx.author.mention}さんが{user.mention}さんのBANを解除しました。', color=0x3498db)
-        unban.set_thumbnail(url=user.avatar_url)
-        await ctx.reply(embed=unban)
-        await ctx.guild.unban(user)
-    else:
-        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
-
-@bot.command()
-async def ping(ctx):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    embed=discord.Embed(title="PING", description=f"ただいまのping値は**{round(bot.latency *1000)}**msです！", color=0x3498db)
-    await ctx.reply(embed=embed)
-
-@bot.command()
-async def poll(ctx, about = "question", *args):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    emojis = ["1⃣","2⃣","3⃣","4⃣"]
-    cnt = len(args)
-    message = discord.Embed(title=":bar_chart: "+about,colour=0x3498db)
-    if cnt <= len(emojis):
-        for a in range(cnt):
-            message.add_field(name=f'{emojis[a]}{args[a]}', value="** **", inline=False)
-        msg = await ctx.reply(embed=message)
-        for i in range(cnt):
-            await msg.add_reaction(emojis[i])
-    else:
-        await ctx.send("回答項目は４つまでしか作れないの。ごめんね・・・。")
-
-@bot.command()
-async def pun(ctx):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    pun = random.choice(("ですます口調で済ます区長", "象さんが増産", "大根持って大混乱", "ジャムおじさんがジャムを持参", "忍者は何人じゃ", "家康の家安い", "占いの本は売らない", "戦車を洗車する",
-                         "鶏肉は太りにくい", "明治のイメージ", "分かり易い和歌", "嫁の字が読めない", "校長先生絶好調", "モノレールにも乗れーる", "カツラが滑落", "カツオに活を入れる",
-                         "汗かいて焦った", "高3が降参"))
-    await ctx.reply(pun+"！なんつって～笑")
-
-@bot.command()
-async def cquiz(ctx):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    n1 = random.randint(0,300)
-    n2 = random.randint(0,300)
-    answer = n1+n2
-    await ctx.reply(str(n1) + "+" + str(n2) + " = ?")
-    def answercheck(m):
-        return m.author == ctx.message.author and m.channel == ctx.message.channel and m.content.isdigit()
-    try:
-        waitresp = await bot.wait_for('message', timeout=30, check=answercheck)
-    except asyncio.TimeoutError:
-        await ctx.reply("時間切れ！正解は " + str(answer) + "でした！")
-    else:
-        if waitresp.content == str(answer):
-            await ctx.reply("正解です！お見事！")
-        else:
-            await ctx.reply("不正解！正解は" + str(answer) + "でした！")
-
+        
 @bot.command()
 async def embed(ctx, title = "タイトル", text = "テキスト"):
     async with ctx.typing():
@@ -352,36 +279,7 @@ async def embed(ctx, title = "タイトル", text = "テキスト"):
     embed=discord.Embed(title=title, description=text, colour=0x3498db)
     embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url_as(format="png"))
     await ctx.reply(embed=embed)
-
-@bot.command()
-async def type(ctx):
-    answer = random.choice(("アルミ缶の上にあるミカン", "	最上級のおもてなし", "	フットワークなら誰にも負けない！", "俺の酒が飲めないって言うのか！", "行列のできるラーメン屋", "満月輝く秋の夜空",
-                          "君の涙、ずっと忘れない", "反省だけならサルでも出来る", "給食デザート争奪戦", "興味のある分野にだけ強い", "晴れた青空、輝く星空", "春の授業は睡眠学習", "ロイヤルストレートフラッシュ",
-                          "クリスマスまでに彼氏が欲しい", "ノルマンディ上陸作戦", "サイン、コサイン、タンジェント", "一日の始まりは挨拶から", "お客さん、看板ですよ", "目玉焼きには何をかける？",
-                          "遠慮しないでたくさん食べてね", "君の瞳にチェックメイト", "新婚旅行は熱海です", "文化祭実行委員会", "	もう一度チャンスをください", "バレンタインデーは乙女の味方", "赤ちゃんから目が離せない",
-                          "それでも地球は回っている", "超豪華賞品が当たります！", "絶体絶命の大ピンチ", "今週の日曜日、ヒマ？", "春の新色新発売", "桜前線北上中", "自己紹介をしてください", "スリジャヤワルダナプラコッテ",
-                          "今日どこで待ち合わせする？", "痛かったら右手を上げてください", "嘘ついたら針千本飲ーます", "おじいさんは山へ柴刈りに", "おばあさんは川へ洗濯に", "雨だ！洗濯物しまって！", "金の斧ですか銀の斧ですか",
-                          "口先だけじゃ信用されないよ", "食べてすぐ寝たら牛になりました", "添付ファイルが付いてないよ", "東京特許許可局", "隣の客はよく柿食う客だ", "桃がドンブラコと流れてきました",
-                          "本当に終了していいですか？", "壁に耳あり障子に目あり", "おやつは戸棚に入っています", "コーヒー？それとも紅茶？", "赤巻紙青巻紙黄巻紙", "バナナはおやつに入りますか？",
-                          "昨日のことは覚えていません", "タンスの角に小指をぶつけた", "キャビアはチョウザメの卵", "心頭滅却すれば火もまた涼し", "太陽系第三惑星地球", "マサチューセッツ工科大学",
-                          "再セットアップの必要性", "六法全書を丸暗記", "今まで本当にお世話になりました", "財布、携帯、鍵、定期", "最優秀新人賞", "最高経営責任者", "新東京国際空港",
-                          "水酸化ナトリウム水溶液", "赤パジャマ青パジャマ黄パジャマ", "解答欄に記入しなさい", "働かざるもの食うべからず", "第一志望は譲れない！", "大学入試センター試験",
-                          "あらかじめご了承ください", "逆転サヨナラ満塁ホームラン", "いつまでもあると思うな親と金", "死して屍ひろうものなし", "子供の頃からの夢でした", "ゴロゴロするのも予定のうち",
-                          "超高級リゾートホテル", "そこをまっすぐ行ってください", "基本的人権の尊重", "ボランティアさん大募集！", "生まれ変わった僕を見てください", "アメリカ連邦捜査局", "戦闘を開始してください",
-                          "あすの天気予報は雨です", "一世一代の大勝負", "どうしようもないほどの悲しみ", "テスト期間まであと一週間", "誕生日プレゼント、何がいい？", "ゲルマン民族の大移動",
-                          "交通ルールを守りましょう", "あの夕日に向かってダッシュだ", "珍しく真剣な顔してるね", "このあとすぐ！チャンネルはそのまま", "ハイドロプレーニング現象", "もうかりまっか？ぼちぼちでんな",
-                          "またのお越しをお待ちしております", "駆け込み乗車はおやめください", "時間が経つのは早いもので", "新規オープン、今なら半額", "ラーメンのスープ、全部飲む？", "昨日の疲れがまだとれない",
-                          "口先だけで、中身がない", "もう一度お掛け直し下さい", "携帯の電源をお切り下さい", "嘘つきは泥棒の始まり", "趣味はお茶とお花とお琴です", "コンピュータ実習室", "一週間着信なし",
-                          "この一瞬に全てをかける", "夏休みの宿題は多すぎる", "ここから一歩も通さない！", "豆腐の角に頭をぶつける", "納豆の糸と格闘中", "期間限定特選スイーツ", "天は人の上に人を作らず",
-                          "抹茶白玉クリームあんみつ"))
-    embed=discord.Embed(title=answer, colour=0xe91e63)
-    await ctx.reply(embed=embed)
-    await bot.wait_for(ctx)
-    if ctx == answer:
-        await ctx.reply("すごい！")
-    else:
-        await ctx.reply("間違ってるよｗ")
-
+    
 @bot.command()
 async def calcu(ctx, left = "1", way ="+" , right = "1"):
     async with ctx.typing():
@@ -401,7 +299,17 @@ async def calcu(ctx, left = "1", way ="+" , right = "1"):
     else:
         answer1 = int(left) + int(right)
         await ctx.reply(answer1)
+        
+#-----«コマンド-データ»-------------------------
 
+@bot.command()
+async def time(ctx):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    now = datetime.datetime.now()
+    date_and_time = now.strftime('%m月%d日 %H:%M')
+    await ctx.reply(f"現在の時刻は{date_and_time}です！")
+    
 @bot.command()
 async def detail(ctx, command = "コマンド名"):
     async with ctx.typing():
@@ -515,6 +423,155 @@ async def detail(ctx, command = "コマンド名"):
         embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/838268795982053406/unknown.png")
         embed.set_footer(text="半角テキスト、絵文字、空白等は対応していません。")
         await ctx.reply(embed=embed)
+        
+@bot.command()
+async def invite(ctx, member : discord.Member = None):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    if member == None:
+       user = ctx.author
+    else:
+       user = member
+    total_invites = 0
+    for i in await ctx.guild.invites():
+        if i.inviter == user:
+            total_invites += i.uses
+    embed = discord.Embed(title=f"招待リンクの使用数", description=f"{user.mention}さんは**{total_invites}人**のメンバーを招待しました！", color=0x3498db)
+    await ctx.reply(embed=embed)
+    
+#-----«コマンド-バラエティ»-------------------------
+
+@bot.command()
+async def fortune(ctx):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    taiki = discord.Embed(title="おみくじ", description=f"チケットをクリックしておみくじを引きましょう！", color=0x3498db)
+    taiki.set_thumbnail(url=ctx.author.avatar_url)
+    unsei = random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶"))
+    luckycmd = random.choice(("fortune","rps","dice","pun","cquiz","coin","slot","totusi"))
+    akekka = discord.Embed(title="おみくじ", description=f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{unsei}\n`ラッキーコマンド`：Cu!{luckycmd}", color=0x3498db)
+    akekka.set_thumbnail(url=ctx.author.avatar_url)
+    message = await ctx.reply(embed=taiki)
+    await message.add_reaction("🎫")
+    def check(reaction, user):
+        return user == ctx.author and str(reaction.emoji) in ["🎫"]
+    while True:
+        try:
+            reaction, user = await bot.wait_for("reaction_add", timeout=60, check=check)
+            if str(reaction.emoji) == "🎫":
+                await message.edit(embed=akekka)
+                await message.clear_reactions()
+        except asyncio.TimeoutError:
+            await message.clear_reactions()
+            break
+            
+@bot.command()
+async def rps(ctx):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    global result, judge
+    await ctx.reply("最初はぐー！じゃんけん・・・")
+    jkbot = random.choice(("ぐー", "ちょき", "ぱー"))
+    draw = "引き分けだよ！運命かなぁ・・・！"
+    wn = "負けちゃった～・・・。君強いね～！"
+    lst = "やったー！勝てた～♪"
+    def jankencheck(m):
+        return (m.author == ctx.author) and (m.content in ['ぐー', 'ちょき', 'ぱー'])
+    reply = await bot.wait_for("message", check=jankencheck)
+    if reply.content == jkbot:
+        judge = draw
+    else:
+        if reply.content == "ぐー":
+            if jkbot == "ちょき":
+                judge = wn
+            else:
+                judge = lst
+        elif reply.content == "ちょき":
+            if jkbot == "ぱー":
+                judge = wn
+            else:
+                judge = lst
+        else:
+            if jkbot == "ぐー":
+                judge = wn
+            else:
+                judge = lst
+    await ctx.reply(jkbot)
+    await ctx.reply(judge)
+
+@bot.command()
+async def dice(ctx):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    dice = random.randint(1, 6)
+    embed = discord.Embed(title="サイコロ", description="[出目] "+ str(dice), colour=0x3498db)
+    embed.set_thumbnail(url="https://smilescience.up.seesaa.net/image/E382B5E382A4E382B3E383ADE381AEE79BAEE5B08F_" + str(dice) + "-thumbnail2.png")
+    await ctx.reply(embed=embed)
+
+@bot.command()
+async def pun(ctx):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    pun = random.choice(("ですます口調で済ます区長", "象さんが増産", "大根持って大混乱", "ジャムおじさんがジャムを持参", "忍者は何人じゃ", "家康の家安い", "占いの本は売らない", "戦車を洗車する",
+                         "鶏肉は太りにくい", "明治のイメージ", "分かり易い和歌", "嫁の字が読めない", "校長先生絶好調", "モノレールにも乗れーる", "カツラが滑落", "カツオに活を入れる",
+                         "汗かいて焦った", "高3が降参"))
+    await ctx.reply(pun+"！なんつって～笑")
+
+@bot.command()
+async def cquiz(ctx):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    n1 = random.randint(0,300)
+    n2 = random.randint(0,300)
+    answer = n1+n2
+    await ctx.reply(str(n1) + "+" + str(n2) + " = ?")
+    def answercheck(m):
+        return m.author == ctx.message.author and m.channel == ctx.message.channel and m.content.isdigit()
+    try:
+        waitresp = await bot.wait_for('message', timeout=30, check=answercheck)
+    except asyncio.TimeoutError:
+        await ctx.reply("時間切れ！正解は " + str(answer) + "でした！")
+    else:
+        if waitresp.content == str(answer):
+            await ctx.reply("正解です！お見事！")
+        else:
+            await ctx.reply("不正解！正解は" + str(answer) + "でした！")
+            
+@bot.command()
+async def coin(ctx):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    surface = random.choice(("表", "裏"))
+    if surface == "表":
+        embed = discord.Embed(title="コイントス", description="**表**が出ました！", color=0x3498db)
+        embed.set_thumbnail(url="https://media.discordapp.net/attachments/830673701564317727/830771939831971860/FavgDW3fhU7oNzgJY98FDvBsv4f8DMemdePw7rqgAAAAASUVORK5CYII.png")
+        await ctx.reply(embed=embed)
+    else:
+        embed = discord.Embed(title="コイントス", description="**裏**が出ました！", color=0x3498db)
+        embed.set_thumbnail(url="https://media.discordapp.net/attachments/830673701564317727/830763529005957130/toAAAAASUVORK5CYII.png")
+        await ctx.reply(embed=embed)
+
+@bot.command()
+async def slot(ctx):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    A = random.choice((":one:",":two:",":three:"))
+    B = random.choice((":one:",":two:",":three:"))
+    C = random.choice((":one:",":two:",":three:"))
+    embed = discord.Embed(title="スロット", description="| " + A + " | " + B + " | " + C + " |", color=0x3498db)
+    await ctx.reply(embed=embed)
+    if A == B == C:
+        await ctx.reply("当選おめでとう！")\
+
+@bot.command()
+async def totusi(ctx, kotoba="突然の死"):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    ue = "人"*(len(kotoba))
+    sita = "^Y"*(len(kotoba))
+    await ctx.reply("＿人"+ue+"人＿\n＞　"+kotoba+"　＜\n￣^"+sita+"^Y￣")
+    
+#-----«コマンド-試作品»-------------------------
 
 @bot.command()
 async def detailsisaku(ctx, type=None):
@@ -607,65 +664,6 @@ async def detailsisaku(ctx, type=None):
             await message.edit(embed=embed)
             await message.clear_reactions()
             break
-       
-@bot.command()
-async def coin(ctx):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    surface = random.choice(("表", "裏"))
-    if surface == "表":
-        embed = discord.Embed(title="コイントス", description="**表**が出ました！", color=0x3498db)
-        embed.set_thumbnail(url="https://media.discordapp.net/attachments/830673701564317727/830771939831971860/FavgDW3fhU7oNzgJY98FDvBsv4f8DMemdePw7rqgAAAAASUVORK5CYII.png")
-        await ctx.reply(embed=embed)
-    else:
-        embed = discord.Embed(title="コイントス", description="**裏**が出ました！", color=0x3498db)
-        embed.set_thumbnail(url="https://media.discordapp.net/attachments/830673701564317727/830763529005957130/toAAAAASUVORK5CYII.png")
-        await ctx.reply(embed=embed)
-
-@bot.command()
-async def slot(ctx):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    A = random.choice((":one:",":two:",":three:"))
-    B = random.choice((":one:",":two:",":three:"))
-    C = random.choice((":one:",":two:",":three:"))
-    embed = discord.Embed(title="スロット", description="| " + A + " | " + B + " | " + C + " |", color=0x3498db)
-    await ctx.reply(embed=embed)
-    if A == B == C:
-        await ctx.reply("当選おめでとう！")\
-
-@bot.command()
-async def totusi(ctx, kotoba="突然の死"):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    ue = "人"*(len(kotoba))
-    sita = "^Y"*(len(kotoba))
-    await ctx.reply("＿人"+ue+"人＿\n＞　"+kotoba+"　＜\n￣^"+sita+"^Y￣")
-    
-@bot.command()
-async def invite(ctx, member : discord.Member = None):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    if member == None:
-       user = ctx.author
-    else:
-       user = member
-    total_invites = 0
-    for i in await ctx.guild.invites():
-        if i.inviter == user:
-            total_invites += i.uses
-    embed = discord.Embed(title=f"招待リンクの使用数", description=f"{user.mention}さんは**{total_invites}人**のメンバーを招待しました！", color=0x3498db)
-    await ctx.reply(embed=embed)
-    
-@bot.command()
-async def play(ctx):
-    if ctx.message.author.voice:
-        await ctx.reply("test")
-    else:
-        await ctx.send("test")
-@bot.command()
-async def stop(ctx):
-    await ctx.message.guild.voice_client.disconnect()
 
 @bot.command()
 async def slist(ctx, a = None):
@@ -687,46 +685,6 @@ async def clear(ctx, num):
             await ctx.send("実行しました！")
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
-        
-@bot.command()
-async def mute(ctx, member : discord.Member):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    if ctx.author.guild_permissions.administrator:
-        mute = discord.Embed(title='メンバーをミュートしました。', description=f'{ctx.author.mention}さんが{member.mention}さんをミュートしました。', color=0x3498db)
-        mute.set_thumbnail(url=member.avatar_url)
-        await ctx.reply(embed=mute)
-        guild = ctx.guild
-        for channel in guild.channels:
-            await channel.set_permissions(member, send_messages=False)
-    else:
-        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
-        
-@bot.command()
-async def unmute(ctx, member : discord.Member):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    if ctx.author.guild_permissions.administrator:
-        mute = discord.Embed(title='メンバーのミュートを解除しました。', description=f'{ctx.author.mention}さんが{member.mention}さんのミュートを解除しました。', color=0x3498db)
-        mute.set_thumbnail(url=member.avatar_url)
-        await ctx.reply(embed=mute)
-        guild = ctx.guild
-        for channel in guild.channels:
-            await channel.set_permissions(member, overwrite=None)
-    else:
-        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
-        
-@bot.command()
-async def ulist(ctx, a = None):
-    if ctx.author.id == 798439010594717737:
-        if a == "id":
-            guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.users)
-            embed = discord.Embed(title="ユーザーリスト",description=guild_list, color=0x3498db)
-            await ctx.reply(embed=embed)
-        else:
-            guild_list = "\n".join(f"{guild.name}" for guild in bot.users)
-            embed = discord.Embed(title="ユーザーリスト",description=guild_list, color=0x3498db)
-            await ctx.reply(embed=embed)
     
 @bot.command()
 async def sinfo(ctx):
@@ -762,12 +720,5 @@ async def kusa(ctx, num):
          await ctx.send("草刈りぶううううううううううんｗ")
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
-        
-#---«試作»----------------------------------------------------------------
-        
-
-
-
-#---«試作»----------------------------------------------------------------
     
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
