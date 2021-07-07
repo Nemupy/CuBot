@@ -10,6 +10,7 @@ from discord.ext import tasks
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents = intents)
+allowed_mentions=discord.AllowedMentions(replied_user=False)
 
 @bot.event
 async def on_ready():
