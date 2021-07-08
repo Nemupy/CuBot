@@ -6,6 +6,7 @@ from time import sleep
 import asyncio
 import traceback
 from discord.ext import tasks
+from mcstatus import MinecraftServer
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
