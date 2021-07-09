@@ -55,6 +55,16 @@ async def on_message(message):
         await message.reply("お呼びでしょうか！お困りの際は`Cu!help`と送信してみて下さいね♪", mention_author=False)
     await bot.process_commands(message)
     
+@bot.command()
+async def mcserver(ctx, ip):
+    server = MinecraftServer.lookup(ip)
+    status = server.status()
+    embed = discord.Embed(title="Minecraftサーバーステータス情報",description=f"`応答速度`：{status.latency}ms\n`バージョン`：{status.version.name}\n`オンライン人数`：{status.players.online} / {status.players.max}", color=0x3498db)
+    embed.add_field(name=":right_arrow:応答速度", value=f"{status.latency}ms")
+    embed.add_field(name=":right_arrow:バージョン", value=f"{status.version.name}")
+    embed.add_field(name="オンライン人数", value=f"{status.players.online} / {status.players.max}")
+    await ctx.send(embed=embed)
+    
 #-----«コマンド-BOT»-------------------------
 
 @bot.command()
@@ -721,15 +731,5 @@ async def kusa(ctx, num):
          await ctx.send("草刈りぶううううううううううんｗ")
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
-        
-@bot.command()
-async def mcserver(ctx, ip):
-    server = MinecraftServer.lookup(ip)
-    status = server.status()
-    embed = discord.Embed(title="Minecraftサーバーステータス情報",description=f"`応答速度`：{status.latency}ms\n`バージョン`：{status.version.name}\n`オンライン人数`：{status.players.online} / {status.players.max}", color=0x3498db)
-    embed.add_field(name=":right_arrow:応答速度", value=f"{status.latency}ms")
-    embed.add_field(name=":right_arrow:バージョン", value=f"{status.version.name}")
-    embed.add_field(name="オンライン人数", value=f"{status.players.online} / {status.players.max}")
-    await ctx.send(embed=embed)
     
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
