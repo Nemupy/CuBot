@@ -730,7 +730,6 @@ async def mcserver(ctx, ip):
     embed.add_field(name=":right_arrow:応答速度", value=f"{status.latency}ms")
     embed.add_field(name=":right_arrow:バージョン", value=f"{status.version.name}")
     embed.add_field(name="オンライン人数", value=f"{status.players.online} / {status.players.max}")
-    query = server.query()
     await ctx.send(embed=embed)
     
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
