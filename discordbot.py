@@ -54,7 +54,7 @@ async def on_message(message):
     elif bot.user.id in message.raw_mentions:
         await message.reply("お呼びでしょうか！お困りの際は`Cu!help`と送信してみて下さいね♪", mention_author=False)
     await bot.process_commands(message)
-    
+   
 @bot.command()
 async def mcserver(ctx, ip):
     server = MinecraftServer.lookup(ip)
