@@ -60,8 +60,8 @@ async def mcserver(ctx, ip):
     server = MinecraftServer.lookup(ip)
     status = server.status()
     embed = discord.Embed(title="Minecraftサーバーステータス情報",description=f"`応答速度`：{status.latency}ms\n`バージョン`：{status.version.name}\n`オンライン人数`：{status.players.online} / {status.players.max}", color=0x3498db)
-    embed.add_field(name=":right_arrow:応答速度", value=f"{status.latency}ms")
-    embed.add_field(name=":right_arrow:バージョン", value=f"{status.version.name}")
+    embed.add_field(name="応答速度", value=f"{status.latency}ms")
+    embed.add_field(name="バージョン", value=f"{status.version.name}")
     embed.add_field(name="オンライン人数", value=f"{status.players.online} / {status.players.max}")
     await ctx.send(embed=embed)
     
