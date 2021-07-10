@@ -12,6 +12,7 @@ from googletrans import Translator
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents = intents)
+translator = Translator()
 
 @bot.event
 async def on_ready():
