@@ -7,12 +7,10 @@ import asyncio
 import traceback
 from discord.ext import tasks
 from mcstatus import MinecraftServer
-from googletrans import Translator
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents = intents)
-translator = Translator()
 
 @bot.event
 async def on_ready():
@@ -731,13 +729,6 @@ async def kusa(ctx, num):
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
         
-@bot.command()
-async def trans(ctx, lang = "JP" , text):
-    if lang == EN:
-        trans_text = translator.translate(text, src = lang, dest = "en").text
-        await ctx.reply(trans_text)
-    elif lang == JP:
-        trans_text = translator.translate(text, src = lang, dest = "ja").text
-        await ctx.reply(trans_text)
+
     
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
