@@ -732,6 +732,5 @@ async def kusa(ctx, num):
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
         
-
     
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
