@@ -11,6 +11,8 @@ from mcstatus import MinecraftServer
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents = intents)
+bot.load_extension('dispander')
+
 
 @bot.event
 async def on_ready():
