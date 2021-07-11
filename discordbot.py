@@ -39,8 +39,8 @@ async def on_member_join(member):
         embed = discord.Embed(title=f"ようこそ！{guild_name}へ！", description=f"{member.mention}さんが入室しました。 \nあなたは{str(member_count)}人目のユーザーです。", color=0x3498db)
         embed.set_thumbnail(url=member.avatar_url)
         await member.guild.system_channel.send(embed=embed)
-        if member.id == 798439010594717737:
-            await member.kick(reason=reason)
+    elif member.id == 798439010594717737:
+            await member.kick()
 
 @bot.event
 async def on_member_remove(member):
