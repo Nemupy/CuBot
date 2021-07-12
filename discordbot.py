@@ -574,15 +574,7 @@ async def slot(ctx):
     embed = discord.Embed(title="スロット", description="| " + A + " | " + B + " | " + C + " |", color=0x3498db)
     await ctx.reply(embed=embed)
     if A == B == C:
-        await ctx.reply("当選おめでとう！")\
-
-@bot.command()
-async def totusi(ctx, kotoba="突然の死"):
-    async with ctx.typing():
-        await asyncio.sleep(0)
-    ue = "人"*(len(kotoba))
-    sita = "^Y"*(len(kotoba))
-    await ctx.reply("＿人"+ue+"人＿\n＞　"+kotoba+"　＜\n￣^"+sita+"^Y￣")
+        await ctx.reply("当選おめでとう！")
     
 #-----«コマンド-試作品»-------------------------
 
