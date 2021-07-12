@@ -11,7 +11,7 @@ import dispander
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
-bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents = intents)
+bot = commands.Bot(command_prefix =["Cu?","cu?"], help_command = None, intents = intents)
 bot.load_extension('dispander')
 
 
@@ -569,6 +569,14 @@ async def slot(ctx):
     await ctx.reply(embed=embed)
     if A == B == C:
         await ctx.reply("当選おめでとう！")
+      
+@bot.command()
+async def totusi(ctx, *, arg="突然の死"):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    ue = "人"*(len(arg))
+    sita = "^Y"*(len(arg))
+    await ctx.reply("＿人"+ue+"人＿\n＞　"+kotoba+"　＜\n￣^Y"+sita+"^Y￣")
     
 #-----«コマンド-試作品»-------------------------
 
