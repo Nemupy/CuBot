@@ -576,7 +576,7 @@ async def totusi(ctx, *, arg="突然の死"):
         await asyncio.sleep(0)
     ue = "人"*(len(arg))
     sita = "^Y"*(len(arg))
-    await ctx.reply("＿人"+ue+"人＿\n＞　"+kotoba+"　＜\n￣^Y"+sita+"^Y￣")
+    await ctx.reply("＿人"+ue+"人＿\n＞　"+arg+"　＜\n￣^Y"+sita+"^Y￣")
     
 #-----«コマンド-試作品»-------------------------
 
