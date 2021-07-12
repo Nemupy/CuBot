@@ -430,12 +430,6 @@ async def detail(ctx, command = "コマンド名"):
         embed = discord.Embed(title="DETAIL-slot", description="スロットができます。", colour=0x3498db)
         embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/832000993205682206/unknown.png")
         await ctx.reply(embed=embed)
-    elif command == "totusi":
-        embed = discord.Embed(title="DETAIL-totusi", description="突然の死AAを作成します。", colour=0x3498db)
-        embed.add_field(name="使い方", value="Cu!totusi [message]", inline=True)
-        embed.set_image(url="https://media.discordapp.net/attachments/826804140398215218/838268795982053406/unknown.png")
-        embed.set_footer(text="半角テキスト、絵文字、空白等は対応していません。")
-        await ctx.reply(embed=embed)
         
 @bot.command()
 async def invite(ctx, member : discord.Member = None):
