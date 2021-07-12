@@ -99,7 +99,7 @@ async def list(ctx, type=None):
     embed3.add_field(name=":dividers: 》データ",value=f"`time`：現在時刻を表示します。\n`detail`：各コマンドの詳細を表示します。\n`invite`：招待リンクの総使用数を算出します。")
     embed3.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     embed4 = discord.Embed(title="コマンドリスト-バラエティ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
-    embed4.add_field(name=":video_game: 》バラエティ",value=f"`fortune`：おみくじが引けます。\n`rps`：じゃんけんができます。\n`dice`：サイコロを振れます。\n`pun`：ダジャレが聞けます。\n`cquiz`：暗算クイズができます。\n`coin`：コイントスができます。\n`slot`：スロットができます。\n`totusi`：突然の死AAを作成します。")
+    embed4.add_field(name=":video_game: 》バラエティ",value=f"`fortune`：おみくじが引けます。\n`rps`：じゃんけんができます。\n`dice`：サイコロを振れます。\n`pun`：ダジャレが聞けます。\n`cquiz`：暗算クイズができます。\n`coin`：コイントスができます。\n`slot`：スロットができます。")
     embed4.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     pages = [embed, embed1, embed2, embed3, embed4]
     page = 0
