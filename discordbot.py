@@ -98,7 +98,7 @@ async def list(ctx, type=None):
     embed3.add_field(name=":dividers: 》データ",value=f"`time`：現在時刻を表示します。\n`detail`：各コマンドの詳細を表示します。\n`invite`：招待リンクの総使用数を算出します。")
     embed3.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     embed4 = discord.Embed(title="コマンドリスト-バラエティ",description="使用可能なコマンド一覧です♪", colour=0x3498db)
-    embed4.add_field(name=":video_game: 》バラエティ",value=f"`fortune`：おみくじが引けます。\n`rps`：じゃんけんができます。\n`dice`：サイコロを振れます。\n`pun`：ダジャレが聞けます。\n`cquiz`：暗算クイズができます。\n`coin`：コイントスができます。\n`slot`：スロットができます。")
+    embed4.add_field(name=":video_game: 》バラエティ",value=f"`fortune`：おみくじが引けます。\n`rps`：じゃんけんができます。\n`dice`：サイコロを振れます。\n`pun`：ダジャレが聞けます。\n`cquiz`：暗算クイズができます。\n`coin`：コイントスができます。\n`slot`：スロットができます。\n`totusi`：突然の死AAを作成します。")
     embed4.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
     pages = [embed, embed1, embed2, embed3, embed4]
     page = 0
@@ -580,7 +580,7 @@ async def totusi(ctx, *, arg="突然の死"):
 #-----«コマンド-試作品»-------------------------
 
 @bot.command()
-async def detailsisaku(ctx, type=None):
+async def detailsisaku(ctx, dtype=None):
     async with ctx.typing():
         await asyncio.sleep(0)
     dhelp = discord.Embed(title="DETAIL-help", description="困ったときはを表示します。", colour=0x3498db)
@@ -604,6 +604,14 @@ async def detailsisaku(ctx, type=None):
     dunban.add_field(name="使い方", value="Cu!unban [ユーザーID]", inline=True)
     dunban.set_footer(text="このコマンドを実行できるのは管理者のみです。")
     dunban.set_image(url="https://media.discordapp.net/attachments/826803343669854229/859407084339986452/unknown.png")
+    dmute = discord.Embed(title="DETAIL-mute", description="ユーザーをミュートします。", colour=0x3498db)
+    dmute.add_field(name="使い方", value="Cu!mute [ユーザー名]", inline=True)
+    dmute.set_footer(text="このコマンドを実行できるのは管理者のみです。")
+    dmute.set_image(url="https://images-ext-2.discordapp.net/external/9S1B_5tzfHj-E7W1P92sT9uoMJgLyCIPoKUEWM2J338/https/media.discordapp.net/attachments/826804140398215218/829293782284894258/unknown.png")
+    dunmute = discord.Embed(title="DETAIL-unmute", description="ユーザーのミュートを解除します。", colour=0x3498db)
+    dunmute.add_field(name="使い方", value="Cu!unmute [ユーザー名]", inline=True)
+    dunmute.set_footer(text="このコマンドを実行できるのは管理者のみです。")
+    dunmute.set_image(url="https://media.discordapp.net/attachments/826803343669854229/859407084339986452/unknown.png")
     dtimer = discord.Embed(title="DETAIL-timer", description="タイマーをセットします。", colour=0x3498db)
     dtimer.add_field(name="使い方", value="Cu!timer [秒数]", inline=True)
     dtimer.set_image(url="https://media.discordapp.net/attachments/826804140398215218/829292950793879552/unknown.png")
@@ -646,8 +654,8 @@ async def detailsisaku(ctx, type=None):
     dtotusi.add_field(name="使い方", value="Cu!totusi [message]", inline=True)
     dtotusi.set_image(url="https://media.discordapp.net/attachments/826804140398215218/838268795982053406/unknown.png")
     dtotusi.set_footer(text="半角テキスト、絵文字、空白等は対応していません。")
-    pages = [dhelp, dlist, dprof, dping, dkick, dban, dunban, dtimer, dpoll, drect, dembed, dcalcu, dtime, ddetail, dinvite, dfortune, drps, ddice, dpun, dcquiz, dcoin, dslot, dtotusi]
-    page = 0
+    pages = [dhelp, dlist, dprof, dping, dkick, dban, dunban, dmute, dunmute, dtimer, dpoll, drect, dembed, dcalcu, dtime, ddetail, dinvite, dfortune, drps, ddice, dpun, dcquiz, dcoin, dslot, dtotusi]
+    page = [0, d(dtype)]
     message = await ctx.reply(embed=pages[page])
     await message.add_reaction("◀️")
     await message.add_reaction("▶️")
