@@ -655,7 +655,7 @@ async def detailsisaku(ctx, dtype=None):
     dtotusi.set_image(url="https://media.discordapp.net/attachments/826804140398215218/838268795982053406/unknown.png")
     dtotusi.set_footer(text="半角テキスト、絵文字、空白等は対応していません。")
     pages = [dhelp, dlist, dprof, dping, dkick, dban, dunban, dmute, dunmute, dtimer, dpoll, drect, dembed, dcalcu, dtime, ddetail, dinvite, dfortune, drps, ddice, dpun, dcquiz, dcoin, dslot, dtotusi]
-    page = [0, d(dtype)]
+    page = 0
     message = await ctx.reply(embed=pages[page])
     await message.add_reaction("◀️")
     await message.add_reaction("▶️")
