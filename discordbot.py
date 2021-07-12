@@ -11,7 +11,7 @@ import dispander
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
-bot = commands.Bot(command_prefix =["Cu?","cu?"], help_command = None, intents = intents, allowed_mentions=discord.AllowedMentions(replied_user=False, everyone=False))
+bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents = intents, allowed_mentions=discord.AllowedMentions(replied_user=False, everyone=False))
 bot.load_extension('dispander')
 
 @bot.event
@@ -20,7 +20,7 @@ async def on_ready():
     members = 0
     for guild in bot.guilds:
         members += guild.member_count - 1
-    await bot.change_presence(activity=discord.Activity(name=f"ただいまメンテナンス中！ | {str(servers)}servers | {str(members)}users", type=3))                                                                                           
+    await bot.change_presence(activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3))                                                                                           
                                                                  
 @bot.event
 async def on_command_error(ctx, error):
@@ -734,6 +734,5 @@ async def kusa(ctx, num):
          await ctx.send("草刈りぶううううううううううんｗ")
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
-        
     
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
