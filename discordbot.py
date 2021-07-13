@@ -739,7 +739,7 @@ async def kusa(ctx, num):
 async def tanzaku(ctx, text="みんなが幸せでいられますように"):
     async with ctx.typing():
         await asyncio.sleep(0)
-    tan = list(text)
+    tan(text)
     for kobetu in tan:
         zaku = f"┃{kobetu}┃\n"
         naiyou = zaku*len(text)
