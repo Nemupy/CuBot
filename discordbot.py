@@ -734,5 +734,14 @@ async def kusa(ctx, num):
          await ctx.send("草刈りぶううううううううううんｗ")
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
+        
+@bot.command()
+async def tanzaku(ctx, text="みんなが幸せでいられますように"):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    tan = list(text)
+    zaku = f"┃{tan[len(text)]}┃\n"
+    sita = "^Y"*(len(arg))
+    await ctx.reply(f"┏┷┓\n{zaku}┗━☆彡)
     
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
