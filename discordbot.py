@@ -79,7 +79,7 @@ async def help(ctx):
     await ctx.reply(embed=embed, mention_author=False)
     
 @bot.command()
-async def list(ctx, type=None):
+async def clist(ctx, type=None):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498db)
