@@ -743,7 +743,6 @@ async def tanzaku(ctx, aadtext="みんなが幸せでいられますように"):
     for kobetu in tantan:
         zaku = f"┃{kobetu}┃\n"
         naiyou = zaku*(len(aadtext))
-        break
-        await ctx.reply(f"┏┷┓\n{naiyou}┗━☆彡")
+        break await ctx.reply(f"┏┷┓\n{naiyou}┗━☆彡")
     
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
