@@ -739,11 +739,6 @@ async def kusa(ctx, num):
 async def tanzaku(ctx, text="みんなが幸せでいられますように"):
     async with ctx.typing():
         await asyncio.sleep(0)
-    tantan = list(text)
-    for kobetu in tantan:
-        akobetu = kobetu
-        zaku = f"┃{akobetu}┃\n"
-        naiyou = zaku*(len(text))
-    await ctx.reply(f"┏┷┓\n{naiyou}┗━☆彡")
+    await ctx.reply(f"えだまめ歌え(今日のところは諦めます)")
     
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
