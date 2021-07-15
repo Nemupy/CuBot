@@ -701,9 +701,10 @@ async def clear(ctx, num):
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
     
 @bot.command()
-async def sinfo(ctx, guild = ctx.guild):
+async def sinfo(ctx):
     async with ctx.typing():
         await asyncio.sleep(0)
+    guild = ctx.guild
     name = str(ctx.guild.name)
     sid = str(ctx.guild.id)
     owner = str(ctx.guild.owner.id)
