@@ -746,8 +746,8 @@ async def event(ctx, server):
     if server == jp:
         jpse = discord.Embed(title="キーワード",description="JP:registered:のキーワードは「き」です！")
         jpse.set_thumbnail(url="https://media.discordapp.net/attachments/855770786337783818/865920217754107924/21nHBeO4r9L.png")
-        await webhook.send(embed=embed,username=ctx.author.name,avatar_url=ctx.author.avatar_url_as(format="png"))
-        await webhook.send(embed=jpse,username=ctx.author.name,avatar_url=ctx.author.avatar_url_as(format="png"))
+        await ctx.send(embed=embed)
+        await ctx.send(embed=jpse)
     elif server == mse:
         jpse = discord.Embed(title="キーワード",description="のキーワードは「き」です！")
         jpse.set_thumbnail(url="https://media.discordapp.net/attachments/855770786337783818/865920217754107924/21nHBeO4r9L.png")
