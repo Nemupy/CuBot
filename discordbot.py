@@ -734,5 +734,24 @@ async def kusa(ctx, num):
          await ctx.send("草刈りぶううううううううううんｗ")
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
+
+@bot.command()
+async def event(ctx, server):
+    embed=discord.Embed(title="__**:speech_balloon: コミュニティーサーバーワードラリー :speech_balloon:**__")
+    embed.set_image(url="https://media.discordapp.net/attachments/857208424813821972/865907074596601866/267_20210717194523.png?width=1025&height=342")
+    embed.add_field(name="**┉≪イベント概要≫┉┉┉┉┉┉┉┉┉┉┉┉┉**",value=f"> ６つのサーバーで開催される大規模イベント！\n> 各サーバーでキーワードを集めて言葉を完成させよう！\n> サーバーごとに報酬をゲット！是非クリアしよう！",inline=False)
+    embed.add_field(name="**┉≪イベント参加方法≫┉┉┉┉┉┉┉┉┉**",value=f"> ①各サーバーにある特設チャンネルを探そう！\n> ②キーワードを並べてワードを完成させよう！\n> ③ワードが完成したら特設チャンネルで回答しよう！",inline=False)
+    embed.add_field(name="**┉≪開催サーバー一覧≫┉┉┉┉┉┉┉┉┉**",value=f"JP:registered:》[招待リンク](https://discord.gg/nFENmEjZbM)\nMSE:leaves:マメな運営を》[招待リンク](https://discord.gg/4JCwBfVPd8)\nAceの鯖 Series5》[招待リンク](https://discord.gg/w6N2BfRqbp)\n新都市:night_with_stars:》[招待リンク](https://discord.gg/DHKct22Pn8)\n雑談者のつどい ~Zatsudan Jp~》[招待リンク](https://discord.gg/hXChaB4KKe)\n:guard: Toy Box :postal_horn:》[招待リンク](https://discord.gg/EhZvckqUDg)",inline=False)
+    embed.add_field(name="**┉≪イベントに使用するBOT≫┉┉┉┉**",value=f"> 当イベントはBOTを用いて運営しています。\n> 不具合が発生しましたら@音夢?!#7777までご連絡ください。",inline=False)
+    if server == jp:
+        jpse = discord.Embed(title="キーワード",description="JP:registered:のキーワードは「き」です！")
+        jpse.set_thumbnail(url="https://media.discordapp.net/attachments/855770786337783818/865920217754107924/21nHBeO4r9L.png")
+        await webhook.send(embed=embed,username=ctx.author.name,avatar_url=ctx.author.avatar_url_as(format="png"))
+        await webhook.send(embed=jpse,username=ctx.author.name,avatar_url=ctx.author.avatar_url_as(format="png"))
+    elif server == mse:
+        jpse = discord.Embed(title="キーワード",description="のキーワードは「き」です！")
+        jpse.set_thumbnail(url="https://media.discordapp.net/attachments/855770786337783818/865920217754107924/21nHBeO4r9L.png")
+        await webhook.send(embed=embed,username=ctx.author.name,avatar_url=ctx.author.avatar_url_as(format="png"))
+        await webhook.send(embed=jpse,username=ctx.author.name,avatar_url=ctx.author.avatar_url_as(format="png"))
     
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
