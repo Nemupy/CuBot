@@ -749,9 +749,29 @@ async def event(ctx, server):
         await ctx.send(embed=embed)
         await ctx.send(embed=jpse)
     elif server == "mse":
-        jpse = discord.Embed(title="キーワード",description="のキーワードは「き」です！")
-        jpse.set_thumbnail(url="https://media.discordapp.net/attachments/855770786337783818/865920217754107924/21nHBeO4r9L.png")
-        await webhook.send(embed=embed,username=ctx.author.name,avatar_url=ctx.author.avatar_url_as(format="png"))
-        await webhook.send(embed=jpse,username=ctx.author.name,avatar_url=ctx.author.avatar_url_as(format="png"))
+        msese = discord.Embed(title="キーワード",description="MSE:leaves:マメな運営をのキーワードは「ん」です！")
+        msese.set_thumbnail(url="https://media.discordapp.net/attachments/855770786337783818/866244706907586570/mojipara_9331-hs-3l.png")
+        await ctx.send(embed=embed)
+        await ctx.send(embed=msese)
+    elif server == "ace":
+        acese = discord.Embed(title="キーワード",description="Aceの鯖 Series5のキーワードは「ぎ」です！")
+        acese.set_thumbnail(url="https://media.discordapp.net/attachments/855770786337783818/866245321403400212/images.png")
+        await ctx.send(embed=embed)
+        await ctx.send(embed=acese)
+    elif server == "新都市":
+        sinse = discord.Embed(title="キーワード",description="新都市:night_with_stars:のキーワードは「ょ」です！")
+        sinse.set_thumbnail(url="https://media.discordapp.net/attachments/855770786337783818/865920814108246086/xEUIIIYQQQgghhIDzA3BGFFDc73PiAAAAAElFTkSuQmCC.png")
+        await ctx.send(embed=embed)
+        await ctx.send(embed=sinse)
+    elif server == "雑談者のつどい":
+        zatuse = discord.Embed(title="キーワード",description="雑談者のつどい ~Zatsudan Jp~のキーワードは「ば」です！")
+        zatuse.set_thumbnail(url="https://media.discordapp.net/attachments/855770786337783818/866246788688248852/images.png")
+        await ctx.send(embed=embed)
+        await ctx.send(embed=zatuse)
+    elif server == "toy-box":
+        toyse = discord.Embed(title="キーワード",description=":guard: Toy Box :postal_horn:のキーワードは「ち」です！")
+        toyse.set_thumbnail(url="https://media.discordapp.net/attachments/855770786337783818/866247285146386433/images.png")
+        await ctx.send(embed=embed)
+        await ctx.send(embed=toyse)
     
 bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
