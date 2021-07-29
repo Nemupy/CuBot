@@ -16,28 +16,6 @@ bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents =
 bot.load_extension('dispander')
 token = os.environ['token']
 
-youtube_dl.utils.bug_reports_message = lambda: ''
-
-ytdl_format_options = {
-    'format': 'bestaudio/best',
-    'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
-    'restrictfilenames': True,
-    'noplaylist': True,
-    'nocheckcertificate': True,
-    'ignoreerrors': False,
-    'logtostderr': False,
-    'quiet': True,
-    'no_warnings': True,
-    'default_search': 'auto',
-    'source_address': '0.0.0.0'
-}
-
-ffmpeg_options = {
-    'options': '-vn'
-}
-
-ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-
 @bot.event
 async def on_ready():
     servers = len(bot.guilds)
@@ -620,13 +598,6 @@ async def leave(ctx):
         return
     await vc.disconnect()
     await ctx.send("ボイスチャンネルから切断しました。")
-    
-@bot.command()
-async def play(ctx, *, url):
-    async with ctx.typing():
-        player = await YTDLSource.from_url(url, loop=self.bot.loop)
-        ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
-    await ctx.send('Now playing: {}'.format(player.title))
     
 #-----«コマンド-試作品»-------------------------
 
