@@ -8,11 +8,13 @@ import traceback
 from discord.ext import tasks
 from mcstatus import MinecraftServer
 import dispander
+import os
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents = intents, allowed_mentions=discord.AllowedMentions(replied_user=False, everyone=False))
 bot.load_extension('dispander')
+token = os.environ['token']
 
 @bot.event
 async def on_ready():
@@ -774,4 +776,4 @@ async def event(ctx, server):
         await ctx.send(embed=embed)
         await ctx.send(embed=toyse)
     
-bot.run("ODI2MjI4NzU2NjU3MDc4Mjcy.YGJbfg.FbQl5OYlKyWLA4uZnWvW9IdF3iE")
+bot.run(token)
