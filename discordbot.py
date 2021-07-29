@@ -599,7 +599,6 @@ async def leave(ctx):
     if not vc:
         await ctx.send("ボイスチャンネルに参加していないよ！")
         return
-
     await vc.disconnect()
     await ctx.send("ボイスチャンネルから切断しました。")
     
