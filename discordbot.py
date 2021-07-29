@@ -101,8 +101,8 @@ async def mcserver(ctx, ip):
 # -----«コマンド-BOT»-------------------------
 
 
-@bot.command()
-async def help(ctx):
+@bot.command("help")
+async def help_command(ctx):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed = discord.Embed(title="困ったときは", description="お困りですか？BOTの使い方など全力でサポートいたします！", color=0x3498DB)
@@ -119,8 +119,8 @@ async def help(ctx):
     await ctx.reply(embed=embed, mention_author=False)
 
 
-@bot.command()
-async def list(ctx, type=None):
+@bot.command("list")
+async def command_list(ctx, type=None):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498DB)
