@@ -16,6 +16,9 @@ bot = commands.Bot(command_prefix =["Cu!","cu!"], help_command = None, intents =
 bot.load_extension('dispander')
 token = os.environ['token']
 
+if not discord.opus.is_loaded():
+    discord.opus.load_opus("heroku-buildpack-libopus")
+
 @bot.event
 async def on_ready():
     servers = len(bot.guilds)
