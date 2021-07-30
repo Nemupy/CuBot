@@ -777,13 +777,29 @@ async def slot(ctx):
 async def totusi(ctx, *, arg="突然の死"):
     async with ctx.typing():
         await asyncio.sleep(0)
-    ue = "人" * (len(arg))
-    sita = "^Y" * (len(arg))
+    ue = "人" * len(arg)
+    sita = "^Y" * len(arg)
     await ctx.reply("＿人" + ue + "人＿\n＞　" + arg + "　＜\n￣^Y" + sita + "^Y￣")
+    
+#-----«コマンド-音楽»-------------------------
+@bot.command()
+async def join(ctx):
+    vc = ctx.author.voice
 
+    if (not vc) or (not vc.channel):
+        await ctx.send("ボイスチャンネルに参加してからコマンドを実行してね！")
+        return
+    channel = vc.channel
+    await channel.connect()
 
-# -----«コマンド-試作品»-------------------------
-
+@bot.command()
+async def leave(ctx):
+    vc = ctx.message.guild.voice_client
+    if not vc:
+        await ctx.send("ボイスチャンネルに参加していないよ！")
+        return
+    await vc.disconnect()
+    await ctx.send("ボイスチャンネルから切断しました。")
 
 @bot.command()
 async def detailsisaku(ctx, dtype=None):
