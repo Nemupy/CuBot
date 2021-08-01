@@ -795,5 +795,5 @@ async def event(ctx, server):
         toyse.set_thumbnail(url="https://media.discordapp.net/attachments/855770786337783818/866247285146386433/images.png")
         await ctx.send(embed=embed)
         await ctx.send(embed=toyse)
-    
+   
 bot.run(token)
