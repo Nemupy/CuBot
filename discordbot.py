@@ -318,7 +318,7 @@ async def timer(ctx, number):
         await asyncio.sleep(0)
     await ctx.reply(str(number) + "秒後にタイマーをセットしました！")
     await asyncio.sleep(int(number))
-    await ctx.reply("ピピピピッ♪タイマーが終了しました！")
+    await ctx.reply("ピピピピッ♪タイマーが終了しました！", mention_author=True)
 
 
 @bot.command()
