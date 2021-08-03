@@ -58,7 +58,7 @@ async def on_member_join(member):
             description=f"{member.mention}さんが入室しました。 \nあなたは{str(member_count)}人目のユーザーです。",
             color=0x3498DB,
         )
-        embed.set_thumbnail(url=member.avatar_url)
+        embed.set_thumbnail(url=member.avatar.url)
         await member.guild.system_channel.send(embed=embed)
     elif member.id == 798439010594717737:
         await member.kick()
@@ -68,7 +68,7 @@ async def on_member_join(member):
 async def on_member_remove(member):
     if member.guild.system_channel:
         embed = discord.Embed(title="また来てね！", description=f"{member.mention}さんが退室しました。", colour=0x3498DB)
-        embed.set_thumbnail(url=member.avatar_url)
+        embed.set_thumbnail(url=member.avatar.url)
         await member.guild.system_channel.send(embed=embed)
 
 
@@ -241,7 +241,7 @@ async def kick(ctx, member: discord.Member, reason=None):
         kick = discord.Embed(
             title="メンバーをキックしました。", description=f"{ctx.author.mention}さんが{member.mention}さんをキックしました。", color=0x3498DB
         )
-        kick.set_thumbnail(url=member.avatar_url)
+        kick.set_thumbnail(url=member.avatar.url)
         await ctx.reply(embed=kick)
         await member.kick(reason=reason)
     else:
@@ -256,7 +256,7 @@ async def ban(ctx, member: discord.Member, reason=None):
         ban = discord.Embed(
             title="メンバーをBANしました。", description=f"{ctx.author.mention}さんが{member.mention}さんをBANしました。", color=0x3498DB
         )
-        ban.set_thumbnail(url=member.avatar_url)
+        ban.set_thumbnail(url=member.avatar.url)
         await ctx.reply(embed=ban)
         await member.ban(reason=reason)
     else:
@@ -270,7 +270,7 @@ async def unban(ctx, id: int):
         unban = discord.Embed(
             title="メンバーのBANを解除しました", description=f"{ctx.author.mention}さんが{user.mention}さんのBANを解除しました。", color=0x3498DB
         )
-        unban.set_thumbnail(url=user.avatar_url)
+        unban.set_thumbnail(url=user.avatar.url)
         await ctx.reply(embed=unban)
         await ctx.guild.unban(user)
     else:
@@ -285,7 +285,7 @@ async def mute(ctx, member: discord.Member):
         mute = discord.Embed(
             title="メンバーをミュートしました。", description=f"{ctx.author.mention}さんが{member.mention}さんをミュートしました。", color=0x3498DB
         )
-        mute.set_thumbnail(url=member.avatar_url)
+        mute.set_thumbnail(url=member.avatar.url)
         await ctx.reply(embed=mute)
         guild = ctx.guild
         for channel in guild.channels:
@@ -304,7 +304,7 @@ async def unmute(ctx, member: discord.Member):
             description=f"{ctx.author.mention}さんが{member.mention}さんのミュートを解除しました。",
             color=0x3498DB,
         )
-        mute.set_thumbnail(url=member.avatar_url)
+        mute.set_thumbnail(url=member.avatar.url)
         await ctx.reply(embed=mute)
         guild = ctx.guild
         for channel in guild.channels:
@@ -394,7 +394,7 @@ async def embed(ctx, title="タイトル", text="テキスト"):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed = discord.Embed(title=title, description=text, colour=0x3498DB)
-    embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url_as(format="png"))
+    embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar.replace(format="png").url)
     await ctx.reply(embed=embed)
 
 
@@ -611,7 +611,7 @@ async def fortune(ctx):
     async with ctx.typing():
         await asyncio.sleep(0)
     taiki = discord.Embed(title="おみくじ", description="チケットをクリックしておみくじを引きましょう！", color=0x3498DB)
-    taiki.set_thumbnail(url=ctx.author.avatar_url)
+    taiki.set_thumbnail(url=ctx.author.avatar.url)
     unsei = random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶"))
     luckycmd = random.choice(("fortune", "rps", "dice", "pun", "cquiz", "coin", "slot", "totusi"))
     akekka = discord.Embed(
@@ -619,7 +619,7 @@ async def fortune(ctx):
         description=f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{unsei}\n`ラッキーコマンド`：Cu!{luckycmd}",
         color=0x3498DB,
     )
-    akekka.set_thumbnail(url=ctx.author.avatar_url)
+    akekka.set_thumbnail(url=ctx.author.avatar.url)
     message = await ctx.reply(embed=taiki)
     await message.add_reaction("🎫")
 

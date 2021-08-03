@@ -1,4 +1,5 @@
-discord.py[voice]>=1.7.3
+discord.py @ git+https://github.com/rapptz/discord.py@c1c64575985de28aa1d373e14a313e54c7786baf
+PyNaCl
 mcstatus
 googletrans
 dispander
