@@ -780,8 +780,9 @@ async def totusi(ctx, *, arg="突然の死"):
     ue = "人" * len(arg)
     sita = "^Y" * len(arg)
     await ctx.reply("＿人" + ue + "人＿\n＞　" + arg + "　＜\n￣^Y" + sita + "^Y￣")
-    
-#-----«コマンド-音楽»-------------------------
+
+
+# -----«コマンド-音楽»-------------------------
 @bot.command()
 async def join(ctx):
     vc = ctx.author.voice
@@ -792,6 +793,7 @@ async def join(ctx):
     channel = vc.channel
     await channel.connect()
 
+
 @bot.command()
 async def leave(ctx):
     vc = ctx.message.guild.voice_client
@@ -800,6 +802,7 @@ async def leave(ctx):
         return
     await vc.disconnect()
     await ctx.send("ボイスチャンネルから切断しました。")
+
 
 @bot.command()
 async def detailsisaku(ctx, dtype=None):
