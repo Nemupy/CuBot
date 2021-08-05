@@ -1089,5 +1089,4 @@ async def event(ctx, server):
         await ctx.send(embed=embed)
         await ctx.send(embed=toyse)
 
-
 bot.run(token)
