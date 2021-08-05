@@ -5,6 +5,7 @@ import datetime
 from time import sleep
 import asyncio
 import traceback
+import sys
 
 # from discord.ext import tasks
 from mcstatus import MinecraftServer
@@ -22,6 +23,9 @@ bot = commands.Bot(
 )
 bot.load_extension("dispander")
 token = os.environ["token"]
+
+def restart_bot(): 
+  os.execv(sys.executable, ['python'] + sys.argv)
 
 
 @bot.event
@@ -780,8 +784,28 @@ async def totusi(ctx, *, arg="突然の死"):
     ue = "人" * len(arg)
     sita = "^Y" * len(arg)
     await ctx.reply("＿人" + ue + "人＿\n＞　" + arg + "　＜\n￣^Y" + sita + "^Y￣")
-    
-#-----«コマンド-音楽»-------------------------
+
+#-----«コマンド-管理»-------------------------
+@bot.command()
+async def slist(ctx, a=None):
+    if ctx.author.id == 798439010594717737:
+        if a == "id":
+            guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.guilds)
+            embed = discord.Embed(title="サーバーリスト", description=guild_list, color=0x3498DB)
+            await ctx.reply(embed=embed)
+        else:
+            guild_list = "\n".join(f"{guild.name}" for guild in bot.guilds)
+            embed = discord.Embed(title="サーバーリスト", description=guild_list, color=0x3498DB)
+            await ctx.reply(embed=embed)
+            
+            
+@bot.command()
+async def restart(ctx):
+    if ctx.author.id == 798439010594717737:
+        await ctx.reply("再起動を実行中です・・・")
+        restart_bot()
+        
+#-----«コマンド-試作»-------------------------
 @bot.command()
 async def join(ctx):
     vc = ctx.author.voice
@@ -934,19 +958,6 @@ async def detailsisaku(ctx, dtype=None):
             await message.edit(embed=embed)
             await message.clear_reactions()
             break
-
-
-@bot.command()
-async def slist(ctx, a=None):
-    if ctx.author.id == 798439010594717737:
-        if a == "id":
-            guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.guilds)
-            embed = discord.Embed(title="サーバーリスト", description=guild_list, color=0x3498DB)
-            await ctx.reply(embed=embed)
-        else:
-            guild_list = "\n".join(f"{guild.name}" for guild in bot.guilds)
-            embed = discord.Embed(title="サーバーリスト", description=guild_list, color=0x3498DB)
-            await ctx.reply(embed=embed)
 
 
 @bot.command()
