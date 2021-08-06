@@ -151,7 +151,7 @@ async def command_list(ctx, type=None):
         value="`timer`：タイマーをセットします。\n"
         "`kick`：ユーザーをキックします。\n"
         "`ban`：ユーザーをBANします。\n"
-        "`ban`：ユーザーのBANを解除します。\n"
+        "`unban`：ユーザーのBANを解除します。\n"
         "`mute`：ユーザーをミュートします。\n"
         "`unmute`：ユーザーのミュートを解除します。\n"
         "`poll`：投票パネルを作成します。\n"
