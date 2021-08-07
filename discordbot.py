@@ -1033,7 +1033,7 @@ async def event(ctx, server):
         name="**┉≪開催サーバー一覧≫┉┉┉┉┉┉┉┉┉**",
         value="JP:registered:》[招待リンク](https://discord.gg/nFENmEjZbM)\n"
         "MSE:leaves:マメな運営を》[招待リンク](https://discord.gg/4JCwBfVPd8)\n"
-        "Aceの鯖 Series5》[招待リンク](https://discord.gg/w6N2BfRqbp)\n"
+        "Aceの鯖 Series6》[招待リンク](https://discord.gg/w6N2BfRqbp)\n"
         "新都市:night_with_stars:》[招待リンク](https://discord.gg/DHKct22Pn8)\n"
         "雑談者のつどい ~Zatsudan Jp~》[招待リンク](https://discord.gg/hXChaB4KKe)\n"
         ":guard: Toy Box :postal_horn:》[招待リンク](https://discord.gg/EhZvckqUDg)",
