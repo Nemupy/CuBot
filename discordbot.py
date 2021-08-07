@@ -1017,8 +1017,7 @@ async def kusa(ctx, num):
 async def event(ctx, server):
     embed = discord.Embed(title="__**:speech_balloon: コミュニティーサーバーワードラリー :speech_balloon:**__")
     embed.set_image(
-        url="https://media.discordapp.net/attachments/857208424813821972/865907074596601866/"
-        "267_20210717194523.png?width=1025&height=342"
+        url="https://media.discordapp.net/attachments/855770599917748247/873391958830243910/267_20210807112643.png?width=1025&height=342"
     )
     embed.add_field(
         name="**┉≪イベント概要≫┉┉┉┉┉┉┉┉┉┉┉┉┉**",
