@@ -322,7 +322,7 @@ async def timer(ctx, number):
     async with ctx.typing():
         await asyncio.sleep(0)
     await ctx.reply(str(number) + "秒後にタイマーをセットしました！")
-    sleep(int(number))
+    await asyncio.sleep(int(number))
     await ctx.reply("ピピピピッ♪タイマーが終了しました！")
 
 
