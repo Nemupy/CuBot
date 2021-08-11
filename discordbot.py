@@ -5,6 +5,7 @@ import datetime
 from time import sleep
 import asyncio
 import traceback
+import sys
 
 # from discord.ext import tasks
 from mcstatus import MinecraftServer
@@ -22,6 +23,9 @@ bot = commands.Bot(
 )
 bot.load_extension("dispander")
 token = os.environ["token"]
+
+def restart_bot(): 
+  os.execv(sys.executable, ['python'] + sys.argv)
 
 
 @bot.event
@@ -147,7 +151,7 @@ async def command_list(ctx, type=None):
         value="`timer`：タイマーをセットします。\n"
         "`kick`：ユーザーをキックします。\n"
         "`ban`：ユーザーをBANします。\n"
-        "`ban`：ユーザーのBANを解除します。\n"
+        "`unban`：ユーザーのBANを解除します。\n"
         "`mute`：ユーザーをミュートします。\n"
         "`unmute`：ユーザーのミュートを解除します。\n"
         "`poll`：投票パネルを作成します。\n"
@@ -781,8 +785,27 @@ async def totusi(ctx, *, arg="突然の死"):
     sita = "^Y" * len(arg)
     await ctx.reply("＿人" + ue + "人＿\n＞　" + arg + "　＜\n￣^Y" + sita + "^Y￣")
 
-
-# -----«コマンド-音楽»-------------------------
+#-----«コマンド-管理»-------------------------
+@bot.command()
+async def slist(ctx, a=None):
+    if ctx.author.id == 798439010594717737:
+        if a == "id":
+            guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.guilds)
+            embed = discord.Embed(title="サーバーリスト", description=guild_list, color=0x3498DB)
+            await ctx.reply(embed=embed)
+        else:
+            guild_list = "\n".join(f"{guild.name}" for guild in bot.guilds)
+            embed = discord.Embed(title="サーバーリスト", description=guild_list, color=0x3498DB)
+            await ctx.reply(embed=embed)
+            
+            
+@bot.command()
+async def restart(ctx):
+    if ctx.author.id == 798439010594717737:
+        await ctx.reply("再起動を実行中です・・・")
+        restart_bot()
+        
+#-----«コマンド-試作»-------------------------
 @bot.command()
 async def join(ctx):
     vc = ctx.author.voice
@@ -940,19 +963,6 @@ async def detailsisaku(ctx, dtype=None):
 
 
 @bot.command()
-async def slist(ctx, a=None):
-    if ctx.author.id == 798439010594717737:
-        if a == "id":
-            guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.guilds)
-            embed = discord.Embed(title="サーバーリスト", description=guild_list, color=0x3498DB)
-            await ctx.reply(embed=embed)
-        else:
-            guild_list = "\n".join(f"{guild.name}" for guild in bot.guilds)
-            embed = discord.Embed(title="サーバーリスト", description=guild_list, color=0x3498DB)
-            await ctx.reply(embed=embed)
-
-
-@bot.command()
 async def clear(ctx, num):
     if ctx.author.guild_permissions.administrator:
         async for message in ctx.channel.history(limit=int(num) + 1):
@@ -1009,8 +1019,7 @@ async def kusa(ctx, num):
 async def event(ctx, server):
     embed = discord.Embed(title="__**:speech_balloon: コミュニティーサーバーワードラリー :speech_balloon:**__")
     embed.set_image(
-        url="https://media.discordapp.net/attachments/857208424813821972/865907074596601866/"
-        "267_20210717194523.png?width=1025&height=342"
+        url="https://media.discordapp.net/attachments/855770599917748247/873391958830243910/267_20210807112643.png?width=1025&height=342"
     )
     embed.add_field(
         name="**┉≪イベント概要≫┉┉┉┉┉┉┉┉┉┉┉┉┉**",
@@ -1019,14 +1028,14 @@ async def event(ctx, server):
     )
     embed.add_field(
         name="**┉≪イベント参加方法≫┉┉┉┉┉┉┉┉┉**",
-        value="> ①各サーバーにある特設チャンネルを探そう！\n> ②キーワードを並べてワードを完成させよう！\n> ③ワードが完成したら特設チャンネルで回答しよう！",
+        value="> ①各サーバーにある特設チャンネルを探そう！\n> ②キーワードを並べてワードを完成させよう！\n> ③ワードが完成したら特設チャンネルで回答しよう！\n> ※回答は１４日から可能になります",
         inline=False,
     )
     embed.add_field(
         name="**┉≪開催サーバー一覧≫┉┉┉┉┉┉┉┉┉**",
         value="JP:registered:》[招待リンク](https://discord.gg/nFENmEjZbM)\n"
         "MSE:leaves:マメな運営を》[招待リンク](https://discord.gg/4JCwBfVPd8)\n"
-        "Aceの鯖 Series5》[招待リンク](https://discord.gg/w6N2BfRqbp)\n"
+        "Aceの鯖 Series6》[招待リンク](https://discord.gg/w6N2BfRqbp)\n"
         "新都市:night_with_stars:》[招待リンク](https://discord.gg/DHKct22Pn8)\n"
         "雑談者のつどい ~Zatsudan Jp~》[招待リンク](https://discord.gg/hXChaB4KKe)\n"
         ":guard: Toy Box :postal_horn:》[招待リンク](https://discord.gg/EhZvckqUDg)",
@@ -1080,6 +1089,5 @@ async def event(ctx, server):
         )
         await ctx.send(embed=embed)
         await ctx.send(embed=toyse)
-
 
 bot.run(token)
