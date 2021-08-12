@@ -816,6 +816,7 @@ async def join(ctx):
     channel = vc.channel
     await channel.connect()
 
+
 @bot.command()
 async def leave(ctx):
     vc = ctx.message.guild.voice_client
@@ -824,6 +825,7 @@ async def leave(ctx):
         return
     await vc.disconnect()
     await ctx.send("ボイスチャンネルから切断しました。")
+
 
 @bot.command()
 async def detailsisaku(ctx, dtype=None):
