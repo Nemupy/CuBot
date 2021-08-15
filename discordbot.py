@@ -1088,5 +1088,15 @@ async def event(ctx, server):
         )
         await ctx.send(embed=embed)
         await ctx.send(embed=toyse)
+        
+@bot.command()
+async def bowner(ctx,app:discord.AppInfo):
+    if app.bot==True:
+        try:
+            await bot.say(f"Bot owner is: {app.owner}")
+        except Exception as e:
+            await bot.say(e)
+    else:
+        await bot.say("Not a bot")
 
 bot.run(token)
