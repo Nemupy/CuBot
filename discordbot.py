@@ -1103,13 +1103,5 @@ async def bowner(ctx,app:discord.AppInfo):
 async def nana(ctx):
     owner_ids = {g.owner_id for g in bot.guilds}
     await ctx.send(len(bot.guilds) / len(owner_ids))
-    
-@bot.command()
-async def afk(ctx):
-    ctx.send("<@201503408652419073>は現在オフラインです")
-    
-@bot.command()
-async def rinfo(ctx):
-    ctx.send("このロールは<@302050872383242240><@201503408652419073>が所持しています")
 
 bot.run(token)
