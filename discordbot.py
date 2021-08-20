@@ -1101,7 +1101,7 @@ async def bowner(ctx,app:discord.AppInfo):
         
 @bot.command()
 async def nana(ctx):
-    owner_ids = {g.owner_id for g in self.bot.guilds}
-    await ctx.send(len(self.bot.guilds) / len(owner_ids))
+    owner_ids = {g.owner_id for g in bot.guilds}
+    await ctx.send(len(bot.guilds) / len(owner_ids))
 
 bot.run(token)
