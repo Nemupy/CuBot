@@ -1002,6 +1002,7 @@ async def sinfo(ctx):
     )
     await ctx.send(embed=embed)
 
+    
 
 @bot.command()
 async def kusa(ctx, num):
