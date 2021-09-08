@@ -37,6 +37,12 @@ async def on_ready():
         activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3)
     )
 
+@bot.event
+async def on_guild_join(guild):
+    member_count = guild.member_count
+    embed = discord.Embed(title = "導入してくれてありがとう！", description = f"<@826228756657078272>が導入されました。\n<@826228756657078272>は{member_count}人目のユーザーです。", color = 0x3498DB)
+    await guild.system_channel.send(embed=embed)
+    
 
 @bot.event
 async def on_command_error(ctx, error):
