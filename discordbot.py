@@ -34,7 +34,7 @@ async def on_ready():
     for guild in bot.guilds:
         members += guild.member_count - 1
     await bot.change_presence(
-        activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3
+        activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3)
     )
 
 
