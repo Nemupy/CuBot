@@ -38,8 +38,6 @@ async def on_ready():
     )
 
 
-        
-
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
