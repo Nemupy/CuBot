@@ -1019,7 +1019,7 @@ async def kusa(ctx, num):
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
         
-@bot.slash_command()
+@bot.slash_command(description="OwO")
 async def hello(ctx):
     await ctx.send(f"Hello {ctx.author}!")
 
