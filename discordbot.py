@@ -1015,6 +1015,8 @@ async def kusa(ctx, num):
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
         
+#-----«コマンド-スラッシュコマンド»-------------------------
+        
 @bot.slash_command(description="OwO")
 async def hello(ctx):
     await ctx.send(f"Hello {ctx.author}!")
@@ -1027,5 +1029,22 @@ async def suzu(ctx):
 @bot.slash_command(description="OwO")
 async def OwO(ctx):
     await ctx.send("OwO")
+    
+@bot.slash_command(description="困ったときはを表示します。")
+async def help_command(ctx):
+    async with ctx.typing():
+        await asyncio.sleep(0)
+    embed = discord.Embed(title="困ったときは", description="お困りですか？BOTの使い方など全力でサポートいたします！", color=0x3498DB)
+    embed.add_field(name="🤖》コマンド", value="`コマンドリスト`：Cu!list\n`各コマンドの詳細`：Cu!detail [コマンド名]", inline=False)
+    embed.add_field(
+        name="✅》公式アカウント",
+        value="`公式サーバー`：[ClickHere](https://discord.gg/RFPQmRnv2j)\n"
+        "`開発者`：<@798439010594717737>\n"
+        "`招待リンク`：[ClickHere]("
+        "https://discord.com/api/oauth2/authorize?client_id=826228756657078272&permissions=8&scope=bot)",
+        inline=False,
+    )
+    embed.set_footer(text="その他不具合があれば公式サーバーまでご気軽にお声掛けください♪")
+    await ctx.send(embed=embed, mention_author=False)
 
 bot.run(token)
