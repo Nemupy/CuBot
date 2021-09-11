@@ -1022,6 +1022,11 @@ async def kusa(ctx, num):
 @bot.slash_command()
 async def hello(ctx):
     await ctx.send(f"Hello {ctx.author}!")
+
+   
+@bot.slash_command()
+async def suzu(ctx):
+    await ctx.send(f"ねうすーず")
     
 
 bot.run(token)
