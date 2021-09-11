@@ -1027,6 +1027,9 @@ async def hello(ctx):
 @bot.slash_command()
 async def suzu(ctx):
     await ctx.send(f"ねうすーず")
-    
+  
+@bot.slash_command(description="OwO")
+async def OwO(ctx):
+    await ctx.send("OwO")
 
 bot.run(token)
