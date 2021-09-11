@@ -5,11 +5,7 @@ import datetime
 import asyncio
 import traceback
 import sys
-
-# from discord.ext import tasks
 from mcstatus import MinecraftServer
-
-# import dispander
 import os
 
 intents = discord.Intents.all()
