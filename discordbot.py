@@ -106,7 +106,7 @@ async def mcserver(ctx, ip):
 
 
 @bot.command("help")
-async def help_command(ctx):
+async def help(ctx):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed = discord.Embed(title="困ったときは", description="お困りですか？BOTの使い方など全力でサポートいたします！", color=0x3498DB)
@@ -124,7 +124,7 @@ async def help_command(ctx):
 
 
 @bot.command("list")
-async def command_list(ctx, type=None):
+async def list(ctx, type=None):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498DB)
@@ -1016,20 +1016,6 @@ async def kusa(ctx, num):
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
         
 #-----«コマンド-スラッシュコマンド»-------------------------
-        
-@bot.slash_command(description="OwO")
-async def hello(ctx):
-    await ctx.send(f"Hello {ctx.author}!")
-
-   
-@bot.slash_command()
-async def suzu(ctx):
-    await ctx.send(f"ねうすーず")
-  
-@bot.slash_command(description="OwO")
-async def OwO(ctx):
-    await ctx.send("OwO")
-    
 @bot.slash_command(description="困ったときはを表示します。")
 async def help_command(ctx):
     async with ctx.typing():
