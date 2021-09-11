@@ -7,6 +7,7 @@ import traceback
 import sys
 from mcstatus import MinecraftServer
 import os
+from discord.app import Option
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
@@ -106,7 +107,7 @@ async def mcserver(ctx, ip):
 
 
 @bot.command("help")
-async def help(ctx):
+async def help_command(ctx):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed = discord.Embed(title="困ったときは", description="お困りですか？BOTの使い方など全力でサポートいたします！", color=0x3498DB)
@@ -124,7 +125,7 @@ async def help(ctx):
 
 
 @bot.command("list")
-async def list(ctx, type=None):
+async def command_list(ctx, type=None):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498DB)
@@ -1017,7 +1018,7 @@ async def kusa(ctx, num):
         
 #-----«コマンド-スラッシュコマンド»-------------------------
 @bot.slash_command(description="困ったときはを表示します。")
-async def help_command(ctx):
+async def help(ctx):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed = discord.Embed(title="困ったときは", description="お困りですか？BOTの使い方など全力でサポートいたします！", color=0x3498DB)
@@ -1036,7 +1037,7 @@ async def help_command(ctx):
    
 
 @bot.slash_command(description="コマンドリストを表示します。")
-async def command_list(ctx, type=None):
+async def list(ctx, type=None):
     async with ctx.typing():
         await asyncio.sleep(0)
     embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498DB)
