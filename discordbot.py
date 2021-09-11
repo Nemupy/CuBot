@@ -1023,5 +1023,10 @@ async def kusa(ctx, num):
 async def hello(ctx):
     await ctx.send(f"Hello {ctx.author}!")
     
+@bot.slash_command(guild_ids=[...])  # create a slash command for the supplied guilds
+async def hello(ctx):
+    """Say hello to the bot"""  # the command description can be supplied as the docstring
+    await ctx.send(f"Hello {ctx.author}!")
+    
 
 bot.run(token)
