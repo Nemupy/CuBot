@@ -792,8 +792,7 @@ async def slist(ctx, a=None):
     if ctx.author.id == 798439010594717737:
         if a == "id":
             guild_list = "\n".join(f"{guild.name} {guild.id}" for guild in bot.guilds)
-            embed = discord.Embed(title="サーバーリスト", description=guild_list, color=0x3498DB)
-            await ctx.reply(embed=embed)
+            await ctx.reply(guild_list)
         else:
             guild_list = "\n".join(f"{guild.name}" for guild in bot.guilds)
             await ctx.reply(guild_list)
