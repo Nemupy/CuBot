@@ -1032,7 +1032,7 @@ async def help(ctx):
     embed.set_footer(text="その他不具合があれば公式サーバーまでご気軽にお声掛けください♪")
     await ctx.send(embed=embed, mention_author=False)
     
-   
+  
 
 @bot.slash_command(description="コマンドリストを表示します。")
 async def list(ctx, type=None):
