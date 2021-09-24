@@ -44,14 +44,28 @@ async def on_guild_join(guild):
 
 @bot.event
 async def on_command_error(ctx, error):
-    orig_error = getattr(error, "original", error)
-    error_msg = "".join(traceback.TracebackException.from_exception(orig_error).format())
-    embed = discord.Embed(
-        title="エラー",
-        description="予期せぬエラーが発生しました。\nこのエラーが多発する場合は公式サーバーまでお問い合わせください。\n```" + error_msg + "```",
+    if isinstance(error, commands.errors.MissingPermissions):
+        embed = discord.Embed(
+        title="エラー-不明なコマンド",
+        description="不明なコマンドです。`Cu!list`でコマンドを確認してください。\nこのエラーが多発する場合は[公式サーバー](https://discord.gg/RFPQmRnv2j)までお問い合わせください。\n```" + error_msg + "```",
         colour=0x3498DB,
-    )
-    await ctx.reply(embed=embed, mention_author=False)
+        )
+        await ctx.reply(embed=embed)
+    elif isinstance(error, commands.errors.MissingPermissions):
+        embed = discord.Embed(
+        title="エラー-権限不足",
+        description="権限が不足しています。権限設定をご確認ください。\nこのエラーが多発する場合は[公式サーバー](https://discord.gg/RFPQmRnv2j)までお問い合わせください。\n```" + error_msg + "```",
+        colour=0x3498DB,
+        )
+    else:
+        orig_error = getattr(error, "original", error)
+        error_msg = "".join(traceback.TracebackException.from_exception(orig_error).format())
+        embed = discord.Embed(
+            title="エラー",
+            description="予期せぬエラーが発生しました。\nこのエラーが多発する場合は[公式サーバー](https://discord.gg/RFPQmRnv2j)までお問い合わせください。\n```" + error_msg + "```",
+            colour=0x3498DB,
+        )
+        await ctx.reply(embed=embed, mention_author=False)
 
 
 @bot.event
