@@ -71,7 +71,7 @@ async def on_command_error(ctx, error):
 @bot.event
 async def on_member_join(member):
     if member.guild.system_channel:
-        CJRch = member.guild.channel
+        CJRch = member.channel
         if CJRch.topic in "CJR":
             guild = member.guild
             guild_name = member.guild.name
