@@ -70,7 +70,7 @@ async def on_command_error(ctx, error):
 
 @bot.event
 async def on_member_join(member):
-    if member.guild.system_channel:
+    if member.guild.channel.topic in "CJR":
         guild = member.guild
         guild_name = member.guild.name
         member_count = guild.member_count
@@ -80,7 +80,7 @@ async def on_member_join(member):
             color=0x3498DB,
         )
         embed.set_thumbnail(url=member.avatar.url)
-        await member.guild.system_channel.send(embed=embed)
+        await member.channel.send(embed=embed)
 
 
 @bot.event
