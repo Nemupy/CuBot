@@ -71,18 +71,16 @@ async def on_command_error(ctx, error):
 @bot.event
 async def on_member_join(member):
     if member.guild.system_channel:
-        CJRch = member.channel
-        if CJRch.topic in "CJR":
-            guild = member.guild
-            guild_name = member.guild.name
-            member_count = guild.member_count
-            embed = discord.Embed(
-                title=f"ようこそ！{guild_name}へ！",
-                description=f"{member.mention}さんが入室しました。 \nあなたは{str(member_count)}人目のユーザーです。",
-                color=0x3498DB,
-            )
-            embed.set_thumbnail(url=member.avatar.url)
-            await CJRch.send(embed=embed)
+        guild = member.guild
+        guild_name = member.guild.name
+        member_count = guild.member_count
+        embed = discord.Embed(
+            title=f"ようこそ！{guild_name}へ！",
+            description=f"{member.mention}さんが入室しました。 \nあなたは{str(member_count)}人目のユーザーです。",
+            color=0x3498DB,
+        )
+        embed.set_thumbnail(url=member.avatar.url)
+        await CJRch.send(embed=embed)
 
 
 @bot.event
