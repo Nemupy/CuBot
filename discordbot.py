@@ -1046,7 +1046,6 @@ async def help(ctx):
     await ctx.send(embed=embed, mention_author=False)
     
   
-
 @bot.slash_command(description="コマンドリストを表示します。")
 async def list(ctx, type=None):
     async with ctx.typing():
