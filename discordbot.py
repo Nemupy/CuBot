@@ -80,7 +80,7 @@ async def on_member_join(member):
             color=0x3498DB,
         )
         embed.set_thumbnail(url=member.avatar.url)
-        await CJRch.send(embed=embed)
+        await member.guild.system_channel.send(embed=embed)
 
 
 @bot.event
