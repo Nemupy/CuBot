@@ -7,7 +7,6 @@ import traceback
 import sys
 from mcstatus import MinecraftServer
 import os
-from discord.app import Option
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
