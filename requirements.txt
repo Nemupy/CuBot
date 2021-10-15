@@ -3,3 +3,4 @@ PyNaCl
 mcstatus
 googletrans
 dispander
+youtube_dl
