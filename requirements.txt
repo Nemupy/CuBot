@@ -3,4 +3,4 @@ mcstatus
 googletrans
 dispander
 youtube_dl
-pycord @ git+https://github.com/Pycord-Development/pycord
+
