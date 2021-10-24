@@ -94,8 +94,8 @@ async def on_member_remove(member):
 async def on_message(message):
     if message.author.bot:
         return
-    elif message.type == discord.MessageType.new_member:
-        await message.delete()
+    #elif message.type == discord.MessageType.new_member:
+        #await message.delete()
         return
     elif bot.user.id in message.raw_mentions:
         await message.reply("お呼びでしょうか！お困りの際は`Cu!help`と送信してみて下さいね♪", mention_author=False)
