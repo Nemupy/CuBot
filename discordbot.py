@@ -1026,5 +1026,10 @@ async def kusa(ctx, num):
     else:
         await ctx.reply("このコマンドを実行できるのは管理者のみです！")
         
+@bot.slash_command()
+async def hello(ctx, name: str = None):
+    name = name or ctx.author.name
+    await ctx.respond(f"Hello {name}!")
+        
 
 bot.run(token)
