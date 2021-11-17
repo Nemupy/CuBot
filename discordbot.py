@@ -1014,22 +1014,6 @@ async def sinfo(ctx):
         inline=False,
     )
     await ctx.send(embed=embed)
-
-    
-@bot.command()
-async def kusa(ctx, num):
-    if ctx.author.guild_permissions.administrator:
-        async for message in ctx.channel.history(limit=int(num) + 1):
-            if message.content == "草":
-                await message.delete(delay=1.2)
-        await ctx.send("草刈りぶううううううううううんｗ")
-    else:
-        await ctx.reply("このコマンドを実行できるのは管理者のみです！")
-        
-@bot.slash_command()
-async def hello(ctx, name: str = None):
-    name = name or ctx.author.name
-    await ctx.respond(f"Hello {name}!")
         
 
 bot.run(token)
