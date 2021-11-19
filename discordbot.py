@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import os
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
