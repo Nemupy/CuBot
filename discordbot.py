@@ -9,6 +9,7 @@ bot = commands.Bot(
     help_command=None,
     intents=intents,
     allowed_mentions=discord.AllowedMentions(replied_user=False, everyone=False),
+    case_insensitive=True
 )
 
 
