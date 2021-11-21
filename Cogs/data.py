@@ -28,7 +28,7 @@ class AppCmdData(commands.Cog):
             ittime = itnow.strftime("%m月%d日 %H:%M")
             catime = canow.strftime("%m月%d日 %H:%M")
             embed = discord.Embed(title="現在の時刻",
-                                  description=f"日本：{jptime}\nアメリカ：{ustime}\nイギリス：{uktime}\nドイツ：{detime}\nフランス：{frtime}\nイタリア：{ittime}\nカナダ：{catime}",
+                                  description=f"`日本`：{jptime}\n`アメリカ`：{ustime}\n`イギリス`：{uktime}\n`ドイツ`：{detime}\n`フランス`：{frtime}\n`イタリア`：{ittime}\n`カナダ`：{catime}",
                                   colour=0x3498DB)
             await ctx.send(embed=embed)
         else:
@@ -36,7 +36,7 @@ class AppCmdData(commands.Cog):
             time = now.strftime("%m月%d日 %H:%M")
             embed = discord.Embed(title="現在の時刻",description=f"{zone}：{time}",colour=0x3498DB)
             await ctx.send(embed=embed)
-
+            
     @commands.command()
     async def detail(self,ctx, command="コマンド名"):
         async with ctx.typing():
