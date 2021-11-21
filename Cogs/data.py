@@ -9,12 +9,33 @@ class AppCmdData(commands.Cog):
         self._last_member = None
 
     @commands.command()
-    async def time(self,ctx):
+    async def time(self,ctx,zone=None):
         async with ctx.typing():
             await asyncio.sleep(0)
-        now = datetime.datetime.now()
-        date_and_time = now.strftime("%m月%d日 %H:%M")
-        await ctx.reply(f"現在の時刻は{date_and_time}です！")
+        if zone == None:
+            jpnow = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+            usnow = datetime.datetime.now(pytz.timezone('America/New_York'))
+            uknow = datetime.datetime.now(pytz.timezone('Europe/London'))
+            denow = datetime.datetime.now(pytz.timezone('Europe/Berlin'))
+            frnow = datetime.datetime.now(pytz.timezone('Europe/Paris'))
+            itnow = datetime.datetime.now(pytz.timezone('Europe/Rome'))
+            canow = datetime.datetime.now(pytz.timezone('America/Toronto'))
+            jptime = jpnow.strftime("%m月%d日 %H:%M")
+            ustime = usnow.strftime("%m月%d日 %H:%M")
+            uktime = uknow.strftime("%m月%d日 %H:%M")
+            detime = denow.strftime("%m月%d日 %H:%M")
+            frtime = frnow.strftime("%m月%d日 %H:%M")
+            ittime = itnow.strftime("%m月%d日 %H:%M")
+            catime = canow.strftime("%m月%d日 %H:%M")
+            embed = discord.Embed(title="現在の時刻",
+                                  description=f"日本：{jptime}\nアメリカ：{ustime}\nイギリス：{uktime}\nドイツ：{detime}\nフランス：{frtime}\nイタリア：{ittime}\nカナダ：{catime}",
+                                  colour=0x3498DB)
+            await ctx.send(embed=embed)
+        else:
+            now = datetime.datetime.now(pytz.timezone(zone))
+            time = now.strftime("%m月%d日 %H:%M")
+            embed = discord.Embed(title="現在の時刻",description=f"{zone}：{time}",colour=0x3498DB)
+            await ctx.send(embed=embed)
 
     @commands.command()
     async def detail(self,ctx, command="コマンド名"):
