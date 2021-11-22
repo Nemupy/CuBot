@@ -11,5 +11,6 @@ class AppCmdAdmin(commands.Cog):
         if ctx.author.id == 798439010594717737:
             await ctx.reply("再起動を実行中です・・・")
             restart_self.bot()
+            
 def setup(bot):
     return bot.add_cog(AppCmdAdmin(bot))
