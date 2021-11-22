@@ -4,7 +4,7 @@
 
 日本生まれ日本育ちの純国産BOT！
 ----------------------------------------------------
-招待はこちらからどうぞ！》
+招待リンク》
 https://discord.com/api/oauth2/authorize?client_id=826228756657078272&permissions=8&scope=bot
 公式Discord》
 https://discord.gg/RFPQmRnv2j
