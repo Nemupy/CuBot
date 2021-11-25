@@ -8,61 +8,71 @@ class AppCmdTool(commands.Cog):
         self._last_member = None
 
     @commands.command()
-    async def kick(self,ctx, member: discord.Member, reason=None):
+    async def kick(self,ctx, member: discord.Member, reason_custom="kickコマンド"):
         async with ctx.typing():
             await asyncio.sleep(0)
         if ctx.author.guild_permissions.administrator:
-            kick = discord.Embed(
-                title="メンバーをキックしました。", description=f"{ctx.author.mention}さんが{member.mention}さんをキックしました。", color=0x3498DB
-            )
-            kick.set_thumbnail(url=member.avatar.url)
-            await ctx.reply(embed=kick)
+            reason = f"{reason_custom} 実行者：{ctx.author}"
+            embed = discord.Embed(title="ユーザーがキックされました。", description="", color=0x3498DB)
+            embed.add_field(name="対象者", value=f"{member.mention}", inline=True)
+            embed.add_field(name="実行者", value=f"{ctx.author.mention}", inline=True)
+            embed.add_field(name="理由", value=f"```{reason}```", inline=False)
+            embed.set_thumbnail(url=member.avatar.url)
+            await member.send(embed=embed)
+            await ctx.send(embed=embed)
             await member.kick(reason=reason)
         else:
             await ctx.reply("このコマンドを実行できるのは管理者のみです！")
 
     @commands.command()
-    async def ban(self,ctx, member: discord.Member, reason=None):
+    async def ban(self,ctx, member: discord.Member, reason_custom="banコマンド"):
         async with ctx.typing():
             await asyncio.sleep(0)
         if ctx.author.guild_permissions.administrator:
-            ban = discord.Embed(
-                title="メンバーをBANしました。", description=f"{ctx.author.mention}さんが{member.mention}さんをBANしました。", color=0x3498DB
-            )
-            ban.set_thumbnail(url=member.avatar.url)
-            await ctx.reply(embed=ban)
+            reason = f"{reason_custom} 実行者：{ctx.author}"
+            embed = discord.Embed(title="ユーザーがBANされました。", description="", color=0x3498DB)
+            embed.add_field(name="対象者", value=f"{member.mention}", inline=True)
+            embed.add_field(name="実行者", value=f"{ctx.author.mention}", inline=True)
+            embed.add_field(name="理由", value=f"```{reason}```", inline=False)
+            embed.set_thumbnail(url=member.avatar.url)
+            await member.send(embed=embed)
+            await ctx.send(embed=embed)
             await member.ban(reason=reason)
         else:
             await ctx.reply("このコマンドを実行できるのは管理者のみです！")
 
     @commands.command()
     async def unban(self,ctx, id: int):
+        async with ctx.typing():
+            await asyncio.sleep(0)
         if ctx.author.guild_permissions.administrator:
             user = await self.bot.fetch_user(id)
-            unban = discord.Embed(
-                title="メンバーのBANを解除しました", description=f"{ctx.author.mention}さんが{user.mention}さんのBANを解除しました。",
-                color=0x3498DB
-            )
-            unban.set_thumbnail(url=user.avatar.url)
-            await ctx.reply(embed=unban)
+            embed = discord.Embed(title="ユーザーのBANが解除されました。", description="", color=0x3498DB)
+            embed.add_field(name="対象者", value=f"{member.mention}", inline=True)
+            embed.add_field(name="実行者", value=f"{ctx.author.mention}", inline=True)
+            embed.set_thumbnail(url=user.avatar.url)
+            await user.send(embed=embed)
+            await ctx.reply(embed=embed)
             await ctx.guild.unban(user)
         else:
             await ctx.reply("このコマンドを実行できるのは管理者のみです！")
 
     @commands.command()
-    async def mute(self,ctx, member: discord.Member):
+    async def mute(self,ctx, member: discord.Member, reason_custom="muteコマンド"):
         async with ctx.typing():
             await asyncio.sleep(0)
         if ctx.author.guild_permissions.administrator:
-            mute = discord.Embed(
-                title="メンバーをミュートしました。", description=f"{ctx.author.mention}さんが{member.mention}さんをミュートしました。",
-                color=0x3498DB
-            )
-            mute.set_thumbnail(url=member.avatar.url)
-            await ctx.reply(embed=mute)
+            reason = f"{reason_custom} 実行者：{ctx.author}"
+            embed = discord.Embed(title="ユーザーがミュートされました。", description="", color=0x3498DB)
+            embed.add_field(name="対象者", value=f"{member.mention}", inline=True)
+            embed.add_field(name="実行者", value=f"{ctx.author.mention}", inline=True)
+            embed.add_field(name="理由", value=f"```{reason}```", inline=False)
+            embed.set_thumbnail(url=member.avatar.url)
+            await member.send(embed=embed)
+            await ctx.send(embed=embed)
             guild = ctx.guild
             for channel in guild.channels:
-                await channel.set_permissions(member, send_messages=False)
+                await channel.set_permissions(member, overwrite=None)
         else:
             await ctx.reply("このコマンドを実行できるのは管理者のみです！")
 
@@ -71,16 +81,15 @@ class AppCmdTool(commands.Cog):
         async with ctx.typing():
             await asyncio.sleep(0)
         if ctx.author.guild_permissions.administrator:
-            mute = discord.Embed(
-                title="メンバーのミュートを解除しました。",
-                description=f"{ctx.author.mention}さんが{member.mention}さんのミュートを解除しました。",
-                color=0x3498DB,
-            )
-            mute.set_thumbnail(url=member.avatar.url)
-            await ctx.reply(embed=mute)
+            embed = discord.Embed(title="ユーザーのミュートが解除されました。", description="", color=0x3498DB)
+            embed.add_field(name="対象者", value=f"{member.mention}", inline=True)
+            embed.add_field(name="実行者", value=f"{ctx.author.mention}", inline=True)
+            embed.set_thumbnail(url=member.avatar.url)
+            await member.send(embed=embed)
+            await ctx.send(embed=embed)
             guild = ctx.guild
             for channel in guild.channels:
-                await channel.set_permissions(member, overwrite=None)
+                await channel.set_permissions(member, send_messages=False)
         else:
             await ctx.reply("このコマンドを実行できるのは管理者のみです！")
 
