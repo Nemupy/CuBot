@@ -104,13 +104,6 @@ class AppCmdBot(commands.Cog):
                 url="https://media.discordapp.net/attachments/826804140398215218/829294591185256518/unknown.png"
             )
             await ctx.reply(embed=embed)
-        elif command == "detail":
-            embed = discord.Embed(title="DETAIL-detail", description="各コマンドの詳細を表示します。", colour=0x3498DB)
-            embed.add_field(name="使い方", value="Cu!detail [コマンド名]", inline=True)
-            embed.set_image(
-                url="https://media.discordapp.net/attachments/826804140398215218/829295373410631721/unknown.png"
-            )
-            await ctx.reply(embed=embed)
         elif command == "invite":
             embed = discord.Embed(title="DETAIL-invite", description="招待リンクの総使用数を算出します。", colour=0x3498DB)
             embed.add_field(name="使い方", value="Cu!invite [ユーザー名]", inline=True)
@@ -227,17 +220,16 @@ class AppCmdBot(commands.Cog):
             value="`kick` `ban` `unban` `mute` `unmute` `timer` `poll` `rect` `embed` `calcu`",
             inline=False,
         )
-        embed.add_field(name=":dividers: 》データ", value="`time` `detail` `invite`", inline=False)
+        embed.add_field(name=":dividers: 》データ", value="`time` `invite`", inline=False)
         embed.add_field(
             name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`",
             inline=False
         )
-        embed1 = discord.Embed(title="コマンドリスト-BOT", description="使用可能なコマンド一覧です♪", colour=0x3498DB)
+        embed1 = discord.Embed(title="コマンドリスト-BOT", description="使用可能なコマンド一覧です♪\n各コマンドの詳細は`Cu!help [コマンド名]`で確認できます♪", colour=0x3498DB)
         embed1.add_field(
             name=":robot: 》BOT",
             value="`help`：困ったときはを表示します。\n`list`：コマンドリストを表示します。\n`prof`：CuBOTのプロフィールを表示します。\n`ping`：CuBOTのping値を表示します。",
         )
-        embed1.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
         embed2 = discord.Embed(title="コマンドリスト-ツール", description="使用可能なコマンド一覧です♪\n各コマンドの詳細は`Cu!help [コマンド名]`で確認できます♪", colour=0x3498DB)
         embed2.add_field(
             name=":tools: 》ツール",
@@ -252,11 +244,10 @@ class AppCmdBot(commands.Cog):
                   "`embed`：Embedパネルを作成します。\n"
                   "`calcu`：計算をします。",
         )
-        embed3 = discord.Embed(title="コマンドリスト-データ", description="使用可能なコマンド一覧です♪", colour=0x3498DB)
+        embed3 = discord.Embed(title="コマンドリスト-データ", description="使用可能なコマンド一覧です♪\n各コマンドの詳細は`Cu!help [コマンド名]`で確認できます♪", colour=0x3498DB)
         embed3.add_field(
-            name=":dividers: 》データ", value="`time`：現在時刻を表示します。\n" "`detail`：各コマンドの詳細を表示します。\n`invite`：招待リンクの総使用数を算出します。"
+            name=":dividers: 》データ", value="`time`：現在時刻を表示します。\n`invite`：招待リンクの総使用数を算出します。"
         )
-        embed3.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
         embed4 = discord.Embed(title="コマンドリスト-バラエティ", description="使用可能なコマンド一覧です♪\n各コマンドの詳細は`Cu!help [コマンド名]`で確認できます♪", colour=0x3498DB)
         embed4.add_field(
             name=":video_game: 》バラエティ",
