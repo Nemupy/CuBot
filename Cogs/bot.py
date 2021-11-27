@@ -220,7 +220,7 @@ class AppCmdBot(commands.Cog):
     async def list(self,ctx, type=None):
         async with ctx.typing():
             await asyncio.sleep(0)
-        embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪", colour=0x3498DB)
+        embed = discord.Embed(title="コマンドリスト", description="使用可能なコマンド一覧です♪\n各コマンドの詳細は`Cu!help [コマンド名]`で確認できます♪", colour=0x3498DB)
         embed.add_field(name=":robot: 》BOT", value="`help` `list` `prof` `ping`", inline=False)
         embed.add_field(
             name=":tools: 》ツール",
@@ -232,14 +232,13 @@ class AppCmdBot(commands.Cog):
             name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`",
             inline=False
         )
-        embed.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
         embed1 = discord.Embed(title="コマンドリスト-BOT", description="使用可能なコマンド一覧です♪", colour=0x3498DB)
         embed1.add_field(
             name=":robot: 》BOT",
             value="`help`：困ったときはを表示します。\n`list`：コマンドリストを表示します。\n`prof`：CuBOTのプロフィールを表示します。\n`ping`：CuBOTのping値を表示します。",
         )
         embed1.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
-        embed2 = discord.Embed(title="コマンドリスト-ツール", description="使用可能なコマンド一覧です♪", colour=0x3498DB)
+        embed2 = discord.Embed(title="コマンドリスト-ツール", description="使用可能なコマンド一覧です♪\n各コマンドの詳細は`Cu!help [コマンド名]`で確認できます♪", colour=0x3498DB)
         embed2.add_field(
             name=":tools: 》ツール",
             value="`timer`：タイマーをセットします。\n"
@@ -253,13 +252,12 @@ class AppCmdBot(commands.Cog):
                   "`embed`：Embedパネルを作成します。\n"
                   "`calcu`：計算をします。",
         )
-        embed2.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
         embed3 = discord.Embed(title="コマンドリスト-データ", description="使用可能なコマンド一覧です♪", colour=0x3498DB)
         embed3.add_field(
             name=":dividers: 》データ", value="`time`：現在時刻を表示します。\n" "`detail`：各コマンドの詳細を表示します。\n`invite`：招待リンクの総使用数を算出します。"
         )
         embed3.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
-        embed4 = discord.Embed(title="コマンドリスト-バラエティ", description="使用可能なコマンド一覧です♪", colour=0x3498DB)
+        embed4 = discord.Embed(title="コマンドリスト-バラエティ", description="使用可能なコマンド一覧です♪\n各コマンドの詳細は`Cu!help [コマンド名]`で確認できます♪", colour=0x3498DB)
         embed4.add_field(
             name=":video_game: 》バラエティ",
             value="`fortune`：おみくじが引けます。\n"
@@ -271,7 +269,6 @@ class AppCmdBot(commands.Cog):
                   "`slot`：スロットができます。\n"
                   "`totusi`：突然の死AAを作成します。",
         )
-        embed4.set_footer(text="各コマンドの詳細は`Cu!detail [コマンド名]`で確認できます♪")
         pages = [embed, embed1, embed2, embed3, embed4]
         page = 0
         message = await ctx.reply(embed=pages[page], mention_author=False)
