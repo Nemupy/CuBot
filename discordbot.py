@@ -17,6 +17,8 @@ token = os.environ["token"]
 def restart_bot():
   os.execv(sys.executable, ['python'] + sys.argv)
 
+bot.load_extension('jishaku')
+
 bot.load_extension("Cogs.event")
 bot.load_extension("Cogs.bot")
 bot.load_extension("Cogs.tool")
