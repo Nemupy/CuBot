@@ -184,7 +184,7 @@ class AppCmdBot(commands.Cog):
                              value="使用しているサーバーのクラッシュが原因です。8割オーナーのミスで落ちているのはナイショ。", inline=False)
             pages = [embed, embed1, embed2, embed3]
             page = 0
-            message = await ctx.reply(embed=pages[page], mention_author=False)
+            message = await ctx.reply(content="お困りですか？BOTの使い方など全力でサポートいたします！",embed=pages[page])
             await message.add_reaction("◀️")
             await message.add_reaction("▶️")
 
