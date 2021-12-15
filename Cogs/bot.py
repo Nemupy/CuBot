@@ -184,22 +184,37 @@ class AppCmdBot(commands.Cog):
                              value="使用しているサーバーのクラッシュが原因です。8割オーナーのミスで落ちているのはナイショ。", inline=False)
             pages = [embed, embed1, embed2, embed3]
             page = 0
-            message = await ctx.reply(content="お困りですか？BOTの使い方など全力でサポートいたします！",embed=pages[page])
+            message = await ctx.reply(embed=pages[page], mention_author=False)
+            await message.add_reaction("⏮")
             await message.add_reaction("◀️")
+            await message.add_reaction("⏹")
             await message.add_reaction("▶️")
+            await message.add_reaction("⏭")
 
             def check(reaction, user):
-                return user == ctx.author and str(reaction.emoji) in ["◀️", "▶️"]
+                return user == ctx.author and str(reaction.emoji) in ["⏮", "◀️","⏹", "▶️", "⏭"]
 
             while True:
                 try:
                     reaction, user = await self.bot.wait_for("reaction_add", timeout=60, check=check)
-                    if str(reaction.emoji) == "▶️" and page != 3:
+                    if str(reaction.emoji) == "⏮" and page != 0:
+                        page = 0
+                        await message.edit(embed=pages[page])
+                        await message.remove_reaction(reaction, user)
+                    elif str(reaction.emoji) == "◀️" and page != 0:
+                        page -= 1
+                        await message.edit(embed=pages[page])
+                        await message.remove_reaction(reaction, user)
+                    elif str(reaction.emoji) == "⏹":
+                        await message.edit(embed=embed)
+                        await message.clear_reactions()
+                        break
+                    elif str(reaction.emoji) == "▶️" and page != 3:
                         page += 1
                         await message.edit(embed=pages[page])
                         await message.remove_reaction(reaction, user)
-                    elif str(reaction.emoji) == "◀️" and page > 0:
-                        page -= 1
+                    elif str(reaction.emoji) == "⏭" and page != 3:
+                        page = 3
                         await message.edit(embed=pages[page])
                         await message.remove_reaction(reaction, user)
                     else:
@@ -263,21 +278,36 @@ class AppCmdBot(commands.Cog):
         pages = [embed, embed1, embed2, embed3, embed4]
         page = 0
         message = await ctx.reply(embed=pages[page], mention_author=False)
+        await message.add_reaction("⏮")
         await message.add_reaction("◀️")
+        await message.add_reaction("⏹")
         await message.add_reaction("▶️")
+        await message.add_reaction("⏭")
 
         def check(reaction, user):
-            return user == ctx.author and str(reaction.emoji) in ["◀️", "▶️"]
+            return user == ctx.author and str(reaction.emoji) in ["⏮", "◀️","⏹", "▶️", "⏭"]
 
         while True:
             try:
                 reaction, user = await self.bot.wait_for("reaction_add", timeout=60, check=check)
-                if str(reaction.emoji) == "▶️" and page != 4:
+                if str(reaction.emoji) == "⏮" and page != 0:
+                    page = 0
+                    await message.edit(embed=pages[page])
+                    await message.remove_reaction(reaction, user)
+                elif str(reaction.emoji) == "◀️" and page != 0:
+                    page -= 1
+                    await message.edit(embed=pages[page])
+                    await message.remove_reaction(reaction, user)
+                elif str(reaction.emoji) == "⏹":
+                    await message.edit(embed=embed)
+                    await message.clear_reactions()
+                    break
+                elif str(reaction.emoji) == "▶️" and page != 4:
                     page += 1
                     await message.edit(embed=pages[page])
                     await message.remove_reaction(reaction, user)
-                elif str(reaction.emoji) == "◀️" and page > 0:
-                    page -= 1
+                elif str(reaction.emoji) == "⏭" and page != 4:
+                    page = 4
                     await message.edit(embed=pages[page])
                     await message.remove_reaction(reaction, user)
                 else:
