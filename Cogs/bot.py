@@ -165,11 +165,12 @@ class AppCmdBot(commands.Cog):
                 value="`kick` `ban` `unban` `mute` `unmute` `timer` `poll` `rect` `embed` `calcu`",
                 inline=False,
             )
-            embed1.add_field(name=":dividers: 》データ", value="`time` `detail` `invite`", inline=False)
+            embed1.add_field(name=":dividers: 》データ", value="`time` `invite`", inline=False)
             embed1.add_field(
                 name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`",
                 inline=False
             )
+            embed1.add_field(name=":game_die: 》アクティビティ", value="`youtube` `invite` `betrayal` `fishington`", inline=False)
             embed2 = discord.Embed(title="ヘルプ-BOTの招待方法",
                                    description="①[招待リンク](https://discord.com/api/oauth2/authorize?client_id=826228756657078272&permissions=8&scope=bot)を開きます。\n②追加したいサーバーを選びます。\n③付与したい権限を選びます。\n　※権限が足りないとエラーを吐きます。\n　　管理者権限付与がオススメ！\n④必要に応じて認証を済ませます。\n⑤招待完了！",
                                    colour=0x3498DB)
@@ -240,6 +241,7 @@ class AppCmdBot(commands.Cog):
             name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`",
             inline=False
         )
+        embed.add_field(name=":game_die: 》アクティビティ", value="`youtube` `invite` `betrayal` `fishington`", inline=False)
         embed1 = discord.Embed(title="コマンドリスト-BOT", description="使用可能なコマンド一覧です♪\n各コマンドの詳細は`Cu!help [コマンド名]`で確認できます♪", colour=0x3498DB)
         embed1.add_field(
             name=":robot: 》BOT",
@@ -275,7 +277,14 @@ class AppCmdBot(commands.Cog):
                   "`slot`：スロットができます。\n"
                   "`totusi`：突然の死AAを作成します。",
         )
-        pages = [embed, embed1, embed2, embed3, embed4]
+        embed5 = discord.Embed(title="コマンドリスト-アクティビティ", description="使用可能なコマンド一覧です♪\n各コマンドの詳細は`Cu!help [コマンド名]`で確認できます♪", colour=0x3498DB)
+        embed5.add_field(
+            name=":game_die: 》アクティビティ",
+            value="`youtube`：YouTubeTogetherを開始します。\n"
+                  "`betrayal`：Betrayal.ioを開始します。\n"
+                  "`fishington`：Fishington.ioを開始します。",
+        )
+        pages = [embed, embed1, embed2, embed3, embed4, embed5]
         page = 0
         message = await ctx.reply(embed=pages[page], mention_author=False)
         await message.add_reaction("⏮")
@@ -302,12 +311,12 @@ class AppCmdBot(commands.Cog):
                     await message.edit(embed=embed)
                     await message.clear_reactions()
                     break
-                elif str(reaction.emoji) == "▶️" and page != 4:
+                elif str(reaction.emoji) == "▶️" and page != 5:
                     page += 1
                     await message.edit(embed=pages[page])
                     await message.remove_reaction(reaction, user)
-                elif str(reaction.emoji) == "⏭" and page != 4:
-                    page = 4
+                elif str(reaction.emoji) == "⏭" and page != 5:
+                    page = 5
                     await message.edit(embed=pages[page])
                     await message.remove_reaction(reaction, user)
                 else:
