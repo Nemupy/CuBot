@@ -167,7 +167,7 @@ class AppCmdBot(commands.Cog):
             )
             embed1.add_field(name=":dividers: 》データ", value="`time` `invite`", inline=False)
             embed1.add_field(
-                name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`",
+                name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi` `5000` `neko`",
                 inline=False
             )
             embed1.add_field(name=":game_die: 》アクティビティ", value="`youtube` `betrayal` `fishington`", inline=False)
@@ -238,7 +238,7 @@ class AppCmdBot(commands.Cog):
         )
         embed.add_field(name=":dividers: 》データ", value="`time` `invite`", inline=False)
         embed.add_field(
-            name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi`",
+            name=":video_game: 》バラエティ", value="`fortune` `rps` `dice` `pun` `cquiz` `coin` `slot` `totusi` `5000` `neko`",
             inline=False
         )
         embed.add_field(name=":game_die: 》アクティビティ", value="`youtube` `betrayal` `fishington`", inline=False)
