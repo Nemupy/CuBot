@@ -181,7 +181,7 @@ class AppCmdVariety(commands.Cog):
     
     @commands.command(name="5000")
     async def _5000(self, ctx, top="5000兆円", bottom="欲しい！"):
-        embed = discord.Embed(title="5000兆円ジェネレーター",description=f"{top}{bottom}", color=0xffa500)
+        embed = discord.Embed(title="5000兆円ジェネレーター",description=f"{top}{bottom}", color=0x3498DB)
         embed.set_image(url="https://gsapi.cyberrex.jp/image?"f"top={urllib.parse.quote(top)}&bottom={urllib.parse.quote(bottom)}")
         await ctx.reply(embed=embed)
     
@@ -192,7 +192,7 @@ class AppCmdVariety(commands.Cog):
                 "https://nekobot.xyz/api/image?type="+type
             ) as response:
                 res = await response.json()
-                embed = discord.Embed(color=0xffa500)
+                embed = discord.Embed(color=0x3498DB)
                 embed.set_image(url=res["message"])
                 await ctx.reply(embed=embed)
 
