@@ -58,5 +58,39 @@ class AppCmdGeneral(commands.Cog):
             return await ctx.send('I Need the `Create Invite` permission.')
         await ctx.send(embed=discord.Embed(description=f'[Click here!](https://discord.gg/{code})', color=0x2F3136))
         
+    @commands.command()
+    async def poker(self,ctx):
+        voice = ctx.author.voice
+        if not voice:
+            return await ctx.send('You have to be in a voice channel to use this command.')
+        r = Route('POST', '/channels/{channel_id}/invites', channel_id=voice.channel.id)
+        payload = {
+            'max_age': 0,
+            'target_type': 2,
+                'target_application_id': 755827207812677713
+        }
+        try:
+            code = (await self.bot.http.request(r, json=payload))['code']
+        except discord.Forbidden:
+            return await ctx.send('I Need the `Create Invite` permission.')
+        await ctx.send(embed=discord.Embed(description=f'[Click here!](https://discord.gg/{code})', color=0x2F3136))
+        
+    @commands.command()
+    async def chess(self,ctx):
+        voice = ctx.author.voice
+        if not voice:
+            return await ctx.send('You have to be in a voice channel to use this command.')
+        r = Route('POST', '/channels/{channel_id}/invites', channel_id=voice.channel.id)
+        payload = {
+            'max_age': 0,
+            'target_type': 2,
+                'target_application_id': 832012774040141894
+        }
+        try:
+            code = (await self.bot.http.request(r, json=payload))['code']
+        except discord.Forbidden:
+            return await ctx.send('I Need the `Create Invite` permission.')
+        await ctx.send(embed=discord.Embed(description=f'[Click here!](https://discord.gg/{code})', color=0x2F3136))
+        
 def setup(bot):
     return bot.add_cog(AppCmdGeneral(bot))
