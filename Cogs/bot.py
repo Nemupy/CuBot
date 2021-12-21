@@ -275,7 +275,9 @@ class AppCmdBot(commands.Cog):
                   "`cquiz`：暗算クイズができます。\n"
                   "`coin`：コイントスができます。\n"
                   "`slot`：スロットができます。\n"
-                  "`totusi`：突然の死AAを作成します。",
+                  "`totusi`：突然の死AAを作成します。\n"
+                  "`5000`：5000兆円を生成します。\n"
+                  "`neko`：猫耳のイラストを生成します。",
         )
         embed5 = discord.Embed(title="コマンドリスト-アクティビティ", description="使用可能なコマンド一覧です♪\n各コマンドの詳細は`Cu!help [コマンド名]`で確認できます♪", colour=0x3498DB)
         embed5.add_field(
