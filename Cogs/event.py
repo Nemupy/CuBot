@@ -29,6 +29,10 @@ class AppCmdEvent(commands.Cog):
             url="https://images-ext-1.discordapp.net/external/bi88_iGaiR-z5Oc6L0OBqkgDkY1UMe7sIPX94aZu8RE/%3Fformat%3Djpg%26name%3Dlarge/https/pbs.twimg.com/media/EfWoupuUYAAwuTv?width=473&height=473")
         await guild.system_channel.send(embed=embed)
         os.execv(sys.executable, ['python'] + sys.argv)
+        
+    @commands.Cog.listener()
+    async def on_guild_remove(self,guild):
+        os.execv(sys.executable, ['python'] + sys.argv)
 
     @commands.Cog.listener()
     async def on_command_error(self,ctx, error):
