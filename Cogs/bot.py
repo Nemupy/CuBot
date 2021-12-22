@@ -185,7 +185,7 @@ class AppCmdBot(commands.Cog):
                              value="使用しているサーバーのクラッシュが原因です。8割オーナーのミスで落ちているのはナイショ。", inline=False)
             pages = [embed, embed1, embed2, embed3]
             page = 0
-            message = await ctx.reply(embed=pages[page], mention_author=False)
+            message = await ctx.reply(embed=pages[page])
             await message.add_reaction("⏮")
             await message.add_reaction("◀️")
             await message.add_reaction("⏹")
@@ -290,7 +290,7 @@ class AppCmdBot(commands.Cog):
         )
         pages = [embed, embed1, embed2, embed3, embed4, embed5]
         page = 0
-        message = await ctx.reply(embed=pages[page], mention_author=False)
+        message = await ctx.reply(embed=pages[page])
         await message.add_reaction("⏮")
         await message.add_reaction("◀️")
         await message.add_reaction("⏹")
@@ -349,15 +349,15 @@ class AppCmdBot(commands.Cog):
             inline=False,
         )
         embed.set_footer(text="CuBOT豆知識：" + mame)
-        await ctx.reply(embed=embed, mention_author=False)
+        await ctx.reply(embed=embed)
 
     @commands.command()
     async def ping(self,ctx):
         async with ctx.typing():
             await asyncio.sleep(0)
-        embed = discord.Embed(title="PING", description=f"ただいまのping値は**{round(self.bot.latency * 1000)}**msです！",
+        embed = discord.Embed(title="PING", description=f"`PING`：**{round(self.bot.latency * 1000)}**ms",
                               color=0x3498DB)
-        await ctx.reply(embed=embed, mention_author=False)
+        await ctx.reply(embed=embed)
 
 def setup(bot):
     return bot.add_cog(AppCmdBot(bot))
