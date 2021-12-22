@@ -1,8 +1,6 @@
 import discord
 from discord.ext import commands
 import traceback
-import os
-import sys
 
 class AppCmdEvent(commands.Cog):
     def __init__(self, bot):
@@ -28,11 +26,23 @@ class AppCmdEvent(commands.Cog):
         embed.set_thumbnail(
             url="https://images-ext-1.discordapp.net/external/bi88_iGaiR-z5Oc6L0OBqkgDkY1UMe7sIPX94aZu8RE/%3Fformat%3Djpg%26name%3Dlarge/https/pbs.twimg.com/media/EfWoupuUYAAwuTv?width=473&height=473")
         await guild.system_channel.send(embed=embed)
-        os.execv(sys.executable, ['python'] + sys.argv)
+        servers = len(self.bot.guilds)
+        members = 0
+        for guild in self.bot.guilds:
+            members += guild.member_count - 1
+        await self.bot.change_presence(
+            activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3)
+        )
         
     @commands.Cog.listener()
     async def on_guild_remove(self,guild):
-        os.execv(sys.executable, ['python'] + sys.argv)
+        servers = len(self.bot.guilds)
+        members = 0
+        for guild in self.bot.guilds:
+            members += guild.member_count - 1
+        await self.bot.change_presence(
+            activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3)
+        )
 
     @commands.Cog.listener()
     async def on_command_error(self,ctx, error):
