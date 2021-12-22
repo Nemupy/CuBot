@@ -355,7 +355,7 @@ class AppCmdBot(commands.Cog):
     async def ping(self,ctx):
         async with ctx.typing():
             await asyncio.sleep(0)
-        embed = discord.Embed(title="PING", description=f"`PING`：**{round(self.bot.latency * 1000)}**ms",
+        embed = discord.Embed(title="PING", description=f"`PING`：{round(self.bot.latency * 1000)}ms",
                               color=0x3498DB)
         await ctx.reply(embed=embed)
 
