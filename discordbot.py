@@ -9,7 +9,7 @@ bot = commands.Bot(
     command_prefix=["Cu!", "cu!"],
     help_command=None,
     intents=intents,
-    allowed_mentions=discord.AllowedMentions(replied_user=False, everyone=False),
+    allowed_mentions=discord.AllowedMentions(replied_user=False, everyone=False, roles=False),
     case_insensitive=True
 )
 
