@@ -11,7 +11,6 @@ bot = commands.Bot(
     intents=intents,
     allowed_mentions=discord.AllowedMentions(replied_user=False, everyone=False, roles=False),
     case_insensitive=True
-    embed_colour=discord.Embed(colour=0x3498DB)
 )
 
 token = os.environ["token"]
