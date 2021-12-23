@@ -177,7 +177,8 @@ class AppCmdVariety(commands.Cog):
             await asyncio.sleep(0)
         ue = "人" * len(arg)
         sita = "^Y" * len(arg)
-        await ctx.reply("＿人" + ue + "人＿\n＞　" + arg + "　＜\n￣^Y" + sita + "^Y￣")
+        embed = discord.Embed(title="突然の死ジェネレーター",description="＿人" + ue + "人＿\n＞　" + arg + "　＜\n￣^Y" + sita + "^Y￣")
+        await ctx.reply(embed=embed)
     
     @commands.command(name="5000")
     async def _5000(self, ctx, top="5000兆円", bottom="欲しい！"):
