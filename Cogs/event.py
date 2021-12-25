@@ -18,33 +18,6 @@ class AppCmdEvent(commands.Cog):
         )
 
     @commands.Cog.listener()
-    async def on_guild_join(self,guild):
-        servers = len(self.bot.guilds)
-        members = 0
-        for guild in self.bot.guilds:
-            members += guild.member_count - 1
-        await self.bot.change_presence(
-            activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3)
-        )
-        member_count = guild.member_count
-        embed = discord.Embed(title="導入してくれてありがとう！",
-                              description=f"<@826228756657078272>が導入されました。\nCuは{member_count}人目のユーザーです。",
-                              color=0x3498DB)
-        embed.set_thumbnail(
-            url="https://images-ext-1.discordapp.net/external/bi88_iGaiR-z5Oc6L0OBqkgDkY1UMe7sIPX94aZu8RE/%3Fformat%3Djpg%26name%3Dlarge/https/pbs.twimg.com/media/EfWoupuUYAAwuTv?width=473&height=473")
-        await guild.system_channel.send(embed=embed)
-        
-    @commands.Cog.listener()
-    async def on_guild_remove(self,guild):
-        servers = len(self.bot.guilds)
-        members = 0
-        for guild in self.bot.guilds:
-            members += guild.member_count - 1
-        await self.bot.change_presence(
-            activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3)
-        )
-
-    @commands.Cog.listener()
     async def on_command_error(self,ctx, error):
         orig_error = getattr(error, "original", error)
         error_msg = "".join(traceback.TracebackException.from_exception(orig_error).format())
@@ -78,6 +51,33 @@ class AppCmdEvent(commands.Cog):
                         colour=0x3498DB,
                     )
                     await ctx.send(embed=embed)
+                    
+    @commands.Cog.listener()
+    async def on_guild_join(self,guild):
+        servers = len(self.bot.guilds)
+        members = 0
+        for guild in self.bot.guilds:
+            members += guild.member_count - 1
+        await self.bot.change_presence(
+            activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3)
+        )
+        member_count = guild.member_count
+        embed = discord.Embed(title="導入してくれてありがとう！",
+                              description=f"<@826228756657078272>が導入されました。\nCuは{member_count}人目のユーザーです。",
+                              color=0x3498DB)
+        embed.set_thumbnail(
+            url="https://images-ext-1.discordapp.net/external/bi88_iGaiR-z5Oc6L0OBqkgDkY1UMe7sIPX94aZu8RE/%3Fformat%3Djpg%26name%3Dlarge/https/pbs.twimg.com/media/EfWoupuUYAAwuTv?width=473&height=473")
+        await guild.system_channel.send(embed=embed)
+        
+    @commands.Cog.listener()
+    async def on_guild_remove(self,guild):
+        servers = len(self.bot.guilds)
+        members = 0
+        for guild in self.bot.guilds:
+            members += guild.member_count - 1
+        await self.bot.change_presence(
+            activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3)
+        )
 
     @commands.Cog.listener()
     async def on_member_join(self,member):
