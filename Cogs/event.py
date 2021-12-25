@@ -81,13 +81,6 @@ class AppCmdEvent(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self,member):
-        servers = len(self.bot.guilds)
-        members = 0
-        for guild in self.bot.guilds:
-            members += guild.member_count - 1
-        await self.bot.change_presence(
-            activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3)
-        )
         if member.guild.system_channel:
             guild = member.guild
             guild_name = member.guild.name
@@ -102,13 +95,6 @@ class AppCmdEvent(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self,member):
-        servers = len(self.bot.guilds)
-        members = 0
-        for guild in self.bot.guilds:
-            members += guild.member_count - 1
-        await self.bot.change_presence(
-            activity=discord.Activity(name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3)
-        )
         if member.guild.system_channel:
             embed = discord.Embed(title="また来てね！", description=f"{member.mention}さんが退室しました。", colour=0x3498DB)
             embed.set_thumbnail(url=member.avatar.url)
