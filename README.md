@@ -8,13 +8,13 @@
 Discordの純国産BOT、Cuのソースコードです。    
 
 # Requirement
-・Heroku
-・Python
+・Heroku    
+・Python    
 ・discord.py    
 
 # Author
-Discordを拠点に活動してる学生です。
-Twitter：[Click Here](https://twitter.com/home)
+Discordを拠点に活動してる学生です。    
+Twitter：[Click Here](https://twitter.com/home)    
 Discord：[Click Here](https://discord.gg/5fHDJwVhWb)    
 
 # Licence
