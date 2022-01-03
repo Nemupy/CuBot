@@ -5,7 +5,7 @@
 サポートサーバー：[Click Here](https://discord.gg/RFPQmRnv2j)    
 
 # Overview
-Discordの純国産BOT、Cuのソースコードです。    
+Discordの多機能BOT、Cuのソースコードです。    
 
 # Requirement
 ・Heroku    
