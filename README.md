@@ -12,11 +12,6 @@ Discordの純国産BOT、Cuのソースコードです。
 ・Python    
 ・discord.py    
 
-# Author
-Discordを拠点に活動してる学生です。    
-Twitter：[Click Here](https://twitter.com/home)    
-Discord：[Click Here](https://discord.gg/5fHDJwVhWb)    
-
 # Licence
 MITライセンスで公開しています。詳しくはLICENCEファイルを確認してください。    
 
