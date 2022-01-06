@@ -10,6 +10,4 @@ Discordの多機能BOT、Cuのソースコードです。
 ・discord.py    
 
 # Licence
-MITライセンスで公開しています。詳しくはLICENCEファイルを確認してください。    
-
-
+MITライセンスで公開しています。詳しくはLICENCEファイルを確認してください。
