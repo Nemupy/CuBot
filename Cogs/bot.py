@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import asyncio
 import random
+import psutil
 
 class AppCmdBot(commands.Cog):
     def __init__(self, bot):
@@ -359,7 +360,10 @@ class AppCmdBot(commands.Cog):
                               color=0x3498DB)
         await ctx.reply(embed=embed)
         
-    
+    @commands.command()
+    async def status(self,ctx):
+        embed = discord.Embed(title="サーバーの使用状況", description=f"`CPU使用率`：{psutil.cpu_percent()}%\n`メモリ使用率`：{psutil.virtual_memory().percent}%")
+        await ctx.send(embed=embed)
 
 def setup(bot):
     return bot.add_cog(AppCmdBot(bot))
