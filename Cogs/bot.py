@@ -358,6 +358,11 @@ class AppCmdBot(commands.Cog):
         embed = discord.Embed(title="PING", description=f"`PING`：{round(self.bot.latency * 1000)}ms",
                               color=0x3498DB)
         await ctx.reply(embed=embed)
+        
+    @commands.command()
+    async def status(self,ctx):
+        embed = discord.Embed(title="サーバーの使用状況", description=f"`CPU使用率`：{psutil.cpu_percent()}%\n`メモリ使用率`：{psutil.virtual_memory().percent}%")
+        await ctx.send(embed=embed)
 
 def setup(bot):
     return bot.add_cog(AppCmdBot(bot))
