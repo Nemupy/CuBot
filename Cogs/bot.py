@@ -362,7 +362,7 @@ class AppCmdBot(commands.Cog):
         
     @commands.command()
     async def status(self,ctx):
-        embed = discord.Embed(title="サーバーの使用状況", description=f"`CPU使用率`：{psutil.cpu_percent()}%\n`メモリ使用率`：{psutil.virtual_memory().percent}%")
+        embed = discord.Embed(title="サーバーの使用状況", description=f"`CPU使用率`：{psutil.cpu_percent()}%\n`メモリ使用率`：{psutil.virtual_memory().percent}%", colour=0x3498DB)
         await ctx.send(embed=embed)
 
 def setup(bot):
