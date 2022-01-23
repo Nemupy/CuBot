@@ -52,7 +52,7 @@ class AppCmdLevel(commands.Cog):
             r[i[1]] = user.name
         rag = [i for i in r]
         rank = sorted(rag, reverse=True)
-        embed = discord.Embed(title=トップ３, description="\n".join(f"{r[f]}" for f in rank))
+        embed = discord.Embed(title="トップ３", description="\n".join(f"{r[f]}" for f in rank))
         await ctx.send(embed=embed)
         
 def setup(bot):
