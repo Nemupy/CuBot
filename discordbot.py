@@ -26,5 +26,6 @@ bot.load_extension("Cogs.tool")
 bot.load_extension("Cogs.data")
 bot.load_extension("Cogs.variety")
 bot.load_extension("Cogs.activity")
+bot.load_extension("Cogs.level")
 
 bot.run(token)
