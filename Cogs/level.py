@@ -39,9 +39,10 @@ class AppCmdLevel(commands.Cog):
         data = cur.fetchone()
         if data is None:
             await ctx.send("ユーザーが登録されていません")
-        embed = discord.Embed(title="レベル", description=f"`Level`：{data[1]}\n`Exp`：{data[2]}", color=0x3498DB)
-        embed.set_thumbnail(url=user.avatar.url)
-        await ctx.reply(embed=embed)
+        else:
+            embed = discord.Embed(title="レベル", description=f"`Level`：{data[1]}\n`Exp`：{data[2]}", color=0x3498DB)
+            embed.set_thumbnail(url=user.avatar.url)
+            await ctx.reply(embed=embed)
 
     @commands.command()
     async def top(self,ctx):
