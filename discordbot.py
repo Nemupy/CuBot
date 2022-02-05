@@ -9,14 +9,17 @@ bot = commands.Bot(
     command_prefix=["Cu!", "cu!"],
     help_command=None,
     intents=intents,
-    allowed_mentions=discord.AllowedMentions(replied_user=False, everyone=False, roles=False),
+    allowed_mentions=discord.AllowedMentions(
+        replied_user=False, everyone=False, roles=False),
     case_insensitive=True
 )
 
 token = os.environ["token"]
 
+
 def restart_bot():
-  os.execv(sys.executable, ['python'] + sys.argv)
+    os.execv(sys.executable, ['python'] + sys.argv)
+
 
 bot.load_extension('jishaku')
 

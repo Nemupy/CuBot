@@ -6,19 +6,22 @@ import urllib.error
 import urllib.parse
 import aiohttp
 
+
 class AppCmdVariety(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
 
     @commands.command()
-    async def fortune(self,ctx):
+    async def fortune(self, ctx):
         async with ctx.typing():
             await asyncio.sleep(0)
-        taiki = discord.Embed(title="おみくじ", description="チケットをクリックしておみくじを引きましょう！", color=0x3498DB)
+        taiki = discord.Embed(
+            title="おみくじ", description="チケットをクリックしておみくじを引きましょう！", color=0x3498DB)
         taiki.set_thumbnail(url=ctx.author.avatar.url)
         unsei = random.choice(("大吉", "中吉", "小吉", "吉", "凶", "大凶"))
-        luckycmd = random.choice(("fortune", "rps", "dice", "pun", "cquiz", "coin", "slot", "totusi"))
+        luckycmd = random.choice(
+            ("fortune", "rps", "dice", "pun", "cquiz", "coin", "slot", "totusi"))
         akekka = discord.Embed(
             title="おみくじ",
             description=f"{ctx.author.mention}さんの今日の運勢は！\n`運勢`：{unsei}\n`ラッキーコマンド`：Cu!{luckycmd}",
@@ -42,7 +45,7 @@ class AppCmdVariety(commands.Cog):
                 break
 
     @commands.command()
-    async def rps(self,ctx):
+    async def rps(self, ctx):
         async with ctx.typing():
             await asyncio.sleep(0)
         global result, judge
@@ -78,11 +81,12 @@ class AppCmdVariety(commands.Cog):
         await ctx.reply(judge)
 
     @commands.command()
-    async def dice(self,ctx):
+    async def dice(self, ctx):
         async with ctx.typing():
             await asyncio.sleep(0)
         dice = random.randint(1, 6)
-        embed = discord.Embed(title="サイコロ", description="[出目] " + str(dice), colour=0x3498DB)
+        embed = discord.Embed(
+            title="サイコロ", description="[出目] " + str(dice), colour=0x3498DB)
         embed.set_thumbnail(
             url="https://smilescience.up.seesaa.net/image/E382B5E382A4E382B3E383ADE381AEE79BAEE5B08F_"
                 + str(dice)
@@ -91,7 +95,7 @@ class AppCmdVariety(commands.Cog):
         await ctx.reply(embed=embed)
 
     @commands.command()
-    async def pun(self,ctx):
+    async def pun(self, ctx):
         async with ctx.typing():
             await asyncio.sleep(0)
         pun = random.choice(
@@ -119,7 +123,7 @@ class AppCmdVariety(commands.Cog):
         await ctx.reply(pun + "！なんつって～笑")
 
     @commands.command()
-    async def cquiz(self,ctx):
+    async def cquiz(self, ctx):
         async with ctx.typing():
             await asyncio.sleep(0)
         n1 = random.randint(0, 300)
@@ -141,51 +145,57 @@ class AppCmdVariety(commands.Cog):
                 await ctx.reply("不正解！正解は" + str(answer) + "でした！")
 
     @commands.command()
-    async def coin(self,ctx):
+    async def coin(self, ctx):
         async with ctx.typing():
             await asyncio.sleep(0)
         surface = random.choice(("表", "裏"))
         if surface == "表":
-            embed = discord.Embed(title="コイントス", description="**表**が出ました！", color=0x3498DB)
+            embed = discord.Embed(
+                title="コイントス", description="**表**が出ました！", color=0x3498DB)
             embed.set_thumbnail(
                 url="https://media.discordapp.net/attachments/830673701564317727/830771939831971860/"
                     "FavgDW3fhU7oNzgJY98FDvBsv4f8DMemdePw7rqgAAAAASUVORK5CYII.png"
             )
             await ctx.reply(embed=embed)
         else:
-            embed = discord.Embed(title="コイントス", description="**裏**が出ました！", color=0x3498DB)
+            embed = discord.Embed(
+                title="コイントス", description="**裏**が出ました！", color=0x3498DB)
             embed.set_thumbnail(
                 url="https://media.discordapp.net/attachments/830673701564317727/830763529005957130/toAAAAASUVORK5CYII.png"
             )
             await ctx.reply(embed=embed)
 
     @commands.command()
-    async def slot(self,ctx):
+    async def slot(self, ctx):
         async with ctx.typing():
             await asyncio.sleep(0)
         A = random.choice((":one:", ":two:", ":three:"))
         B = random.choice((":one:", ":two:", ":three:"))
         C = random.choice((":one:", ":two:", ":three:"))
-        embed = discord.Embed(title="スロット", description="| " + A + " | " + B + " | " + C + " |", color=0x3498DB)
+        embed = discord.Embed(title="スロット", description="| " +
+                              A + " | " + B + " | " + C + " |", color=0x3498DB)
         await ctx.reply(embed=embed)
         if A == B == C:
             await ctx.reply("当選おめでとう！")
 
     @commands.command()
-    async def totusi(self,ctx, *, arg="突然の死"):
+    async def totusi(self, ctx, *, arg="突然の死"):
         async with ctx.typing():
             await asyncio.sleep(0)
         ue = "人" * len(arg)
         sita = "^Y" * len(arg)
-        embed = discord.Embed(title="突然の死ジェネレーター",description="＿人" + ue + "人＿\n＞　" + arg + "　＜\n￣^Y" + sita + "^Y￣")
+        embed = discord.Embed(title="突然の死ジェネレーター", description="＿人" +
+                              ue + "人＿\n＞　" + arg + "　＜\n￣^Y" + sita + "^Y￣")
         await ctx.reply(embed=embed)
-    
+
     @commands.command(name="5000")
     async def _5000(self, ctx, top="5000兆円", bottom="欲しい！"):
-        embed = discord.Embed(title="5000兆円ジェネレーター",description=f"{top}{bottom}", color=0x3498DB)
-        embed.set_image(url="https://gsapi.cyberrex.jp/image?"f"top={urllib.parse.quote(top)}&bottom={urllib.parse.quote(bottom)}")
+        embed = discord.Embed(title="5000兆円ジェネレーター",
+                              description=f"{top}{bottom}", color=0x3498DB)
+        embed.set_image(
+            url="https://gsapi.cyberrex.jp/image?"f"top={urllib.parse.quote(top)}&bottom={urllib.parse.quote(bottom)}")
         await ctx.reply(embed=embed)
-    
+
     @commands.command()
     async def neko(self, ctx, type="neko"):
         async with aiohttp.ClientSession() as session:
@@ -196,6 +206,7 @@ class AppCmdVariety(commands.Cog):
                 embed = discord.Embed(color=0x3498DB)
                 embed.set_image(url=res["message"])
                 await ctx.reply(embed=embed)
+
 
 def setup(bot):
     return bot.add_cog(AppCmdVariety(bot))
