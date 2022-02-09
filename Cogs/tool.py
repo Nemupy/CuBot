@@ -54,7 +54,7 @@ class AppCmdTool(commands.Cog):
             user = await self.bot.fetch_user(id)
             embed = discord.Embed(title="ユーザーのBANが解除されました。",
                                   description="", color=0x3498DB)
-            embed.add_field(name="対象者", value=f"{member.mention}", inline=True)
+            embed.add_field(name="対象者", value=f"{user.mention}", inline=True)
             embed.add_field(
                 name="実行者", value=f"{ctx.author.mention}", inline=True)
             embed.set_thumbnail(url=user.avatar.url)
