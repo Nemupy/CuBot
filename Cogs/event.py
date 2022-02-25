@@ -32,32 +32,30 @@ class AppCmdEvent(commands.Cog):
                 colour=0x3498DB,
             )
             await ctx.reply(embed=embed)
+        elif isinstance(error, commands.errors.CommandNotFound):
+            embed = discord.Embed(
+                title="エラー-不明なコマンド",
+                description="不明なコマンドです。`Cu!list`でコマンドを確認してください。\nこのエラーが多発する場合は[公式サーバー](https://discord.gg/RFPQmRnv2j)までお問い合わせください。\n```" +
+                error_msg + "```",
+                colour=0x3498DB,
+            )
+            await ctx.reply(embed=embed)
+        elif isinstance(error, commands.errors.MissingRequiredArgument):
+            embed = discord.Embed(
+                title="エラー-引数不足",
+                description="引数が不足しています。`Cu!help [コマンド名]`でコマンドを確認してください。\nこのエラーが多発する場合は[公式サーバー](https://discord.gg/RFPQmRnv2j)までお問い合わせください。\n```" +
+                error_msg + "```",
+                colour=0x3498DB,
+            )
+            await ctx.reply(embed=embed)
         else:
-            if isinstance(error, commands.errors.CommandNotFound):
-                embed = discord.Embed(
-                    title="エラー-不明なコマンド",
-                    description="不明なコマンドです。`Cu!list`でコマンドを確認してください。\nこのエラーが多発する場合は[公式サーバー](https://discord.gg/RFPQmRnv2j)までお問い合わせください。\n```" +
-                    error_msg + "```",
-                    colour=0x3498DB,
-                )
-                await ctx.reply(embed=embed)
-            else:
-                if isinstance(error, commands.errors.MissingRequiredArgument):
-                    embed = discord.Embed(
-                        title="エラー-引数不足",
-                        description="引数が不足しています。`Cu!help [コマンド名]`でコマンドを確認してください。\nこのエラーが多発する場合は[公式サーバー](https://discord.gg/RFPQmRnv2j)までお問い合わせください。\n```" +
-                        error_msg + "```",
-                        colour=0x3498DB,
-                    )
-                    await ctx.reply(embed=embed)
-                else:
-                    embed = discord.Embed(
-                        title="エラー",
-                        description="予期せぬエラーが発生しました。\nこのエラーが多発する場合は[公式サーバー](https://discord.gg/RFPQmRnv2j)までお問い合わせください。\n```" +
-                        error_msg + "```",
-                        colour=0x3498DB,
-                    )
-                    await ctx.send(embed=embed)
+            embed = discord.Embed(
+                title="エラー",
+                description="予期せぬエラーが発生しました。\nこのエラーが多発する場合は[公式サーバー](https://discord.gg/RFPQmRnv2j)までお問い合わせください。\n```" +
+                error_msg + "```",    
+                colour=0x3498DB,
+            )
+            await ctx.send(embed=embed)
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
