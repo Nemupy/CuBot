@@ -1,0 +1,1 @@
+cubot: python cubot.py
