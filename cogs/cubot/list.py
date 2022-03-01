@@ -7,7 +7,7 @@ class PageTest(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @slash_command()
     async def list(self, ctx, type=None):
         embed = discord.Embed(
             title="コマンドリスト", description="使用可能なコマンド一覧です♪\n各コマンドの詳細は`Cu!help [コマンド名]`で確認できます♪", colour=0x3498DB)
