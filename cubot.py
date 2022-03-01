@@ -11,6 +11,7 @@ bot = commands.Bot(
     case_insensitive=True
 )
 
+token = os.environ["token"]
 
 @bot.event
 async def on_ready():
@@ -42,5 +43,4 @@ bot.load_extension("cogs.level")
 bot.load_extension("cogs.tool")
 bot.load_extension("cogs.variety")
 
-token = os.environ["token"]
 bot.run(token)
