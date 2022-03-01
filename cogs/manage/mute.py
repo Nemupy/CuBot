@@ -7,7 +7,7 @@ class AppCmdManageMute(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command()
+    @slash_command(guild_ids=[825371357402759238], description="ユーザーをミュートします。")
     @commands.has_permissions(manage_messages=True)
     async def mute(self, ctx, member: discord.Member, reason_custom="muteコマンド"):
         reason = f"{reason_custom} 実行者：{ctx.author}"

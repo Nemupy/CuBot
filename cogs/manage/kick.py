@@ -7,8 +7,8 @@ class AppCmdManageKick(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(guild_ids=[825371357402759238])
-    @commands.slash_command.has_guild_permissions(kick_members=True)
+    @slash_command(guild_ids=[825371357402759238], description="ユーザーをキックします。")
+    @commands.has_guild_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, reason_custom="kickコマンド"):
         reason = f"{reason_custom} 実行者：{ctx.author}"
         embed = discord.Embed(title="ユーザーがキックされました。",

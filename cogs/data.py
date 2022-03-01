@@ -1,21 +1,56 @@
 import discord
-from discord.ext import commands, pages
-from discord.commands import slash_command
+from discord.ext import commands
+import asyncio
+import datetime
+import pytz
 
 
-class AppCmdCubotHelp(commands.Cog):
+class AppCmdData(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self._last_member = None
 
-    @slash_command(guild_ids=[825371357402759238], description="ヘルプを表示します。")
-    async def help(self, ctx: discord.ApplicationContext, command=None):
+    @commands.command()
+    async def time(self, ctx, zone=None):
+        async with ctx.typing():
+            await asyncio.sleep(0)
+        if zone == None:
+            jpnow = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+            usnow = datetime.datetime.now(pytz.timezone('America/New_York'))
+            uknow = datetime.datetime.now(pytz.timezone('Europe/London'))
+            denow = datetime.datetime.now(pytz.timezone('Europe/Berlin'))
+            frnow = datetime.datetime.now(pytz.timezone('Europe/Paris'))
+            itnow = datetime.datetime.now(pytz.timezone('Europe/Rome'))
+            canow = datetime.datetime.now(pytz.timezone('America/Toronto'))
+            jptime = jpnow.strftime("%m月%d日 %H:%M")
+            ustime = usnow.strftime("%m月%d日 %H:%M")
+            uktime = uknow.strftime("%m月%d日 %H:%M")
+            detime = denow.strftime("%m月%d日 %H:%M")
+            frtime = frnow.strftime("%m月%d日 %H:%M")
+            ittime = itnow.strftime("%m月%d日 %H:%M")
+            catime = canow.strftime("%m月%d日 %H:%M")
+            embed = discord.Embed(title="現在の時刻",
+                                  description=f"`日本`：{jptime}\n`アメリカ`：{ustime}\n`イギリス`：{uktime}\n`ドイツ`：{detime}\n`フランス`：{frtime}\n`イタリア`：{ittime}\n`カナダ`：{catime}",
+                                  colour=0x3498DB)
+            await ctx.send(embed=embed)
+        else:
+            now = datetime.datetime.now(pytz.timezone(zone))
+            time = now.strftime("%m月%d日 %H:%M")
+            embed = discord.Embed(
+                title="現在の時刻", description=f"{zone}：{time}", colour=0x3498DB)
+            await ctx.send(embed=embed)
+
+    @commands.command()
+    async def detail(self, ctx, command="コマンド名"):
+        async with ctx.typing():
+            await asyncio.sleep(0)
         if command == "help":
             embed = discord.Embed(title="DETAIL-help",
                                   description="困ったときはを表示します。", colour=0x3498DB)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/859408401419599882/859409365140635688/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "list":
             embed = discord.Embed(
                 title="DETAIL-list", description="コマンドリストを表示します。", colour=0x3498DB)
@@ -23,21 +58,21 @@ class AppCmdCubotHelp(commands.Cog):
             embed.set_image(
                 url="https://media.discordapp.net/attachments/859408401419599882/859409537252327434/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "prof":
             embed = discord.Embed(
                 title="DETAIL-prof", description="CuBOTのプロフィールを表示します。", colour=0x3498DB)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829292378241105950/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "ping":
             embed = discord.Embed(
                 title="DETAIL-ping", description="CuBOTのping値を表示します。", colour=0x3498DB)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829292685457621032/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "kick":
             embed = discord.Embed(title="DETAIL-kick",
                                   description="ユーザーをキックします。", colour=0x3498DB)
@@ -46,7 +81,7 @@ class AppCmdCubotHelp(commands.Cog):
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829293398682763284/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "ban":
             embed = discord.Embed(title="DETAIL-ban",
                                   description="ユーザーをBANします。", colour=0x3498DB)
@@ -56,7 +91,7 @@ class AppCmdCubotHelp(commands.Cog):
                 url="https://images-ext-2.discordapp.net/external/9S1B_5tzfHj-E7W1P92sT9uoMJgLyCIPoKUEWM2J338/"
                     "https/media.discordapp.net/attachments/826804140398215218/829293782284894258/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "unban":
             embed = discord.Embed(
                 title="DETAIL-unban", description="ユーザーのBANを解除します。", colour=0x3498DB)
@@ -65,7 +100,7 @@ class AppCmdCubotHelp(commands.Cog):
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826803343669854229/859407084339986452/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "timer":
             embed = discord.Embed(title="DETAIL-timer",
                                   description="タイマーをセットします。", colour=0x3498DB)
@@ -73,7 +108,7 @@ class AppCmdCubotHelp(commands.Cog):
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829292950793879552/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "poll":
             embed = discord.Embed(title="DETAIL-poll",
                                   description="投票パネルを作成します。", colour=0x3498DB)
@@ -83,7 +118,7 @@ class AppCmdCubotHelp(commands.Cog):
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829293852077588500/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "rect":
             embed = discord.Embed(title="DETAIL-rect",
                                   description="募集パネルを作成します。", colour=0x3498DB)
@@ -92,7 +127,7 @@ class AppCmdCubotHelp(commands.Cog):
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829293919971967016/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "embed":
             embed = discord.Embed(
                 title="DETAIL-embed", description="Embedパネルを作成します。", colour=0x3498DB)
@@ -101,7 +136,7 @@ class AppCmdCubotHelp(commands.Cog):
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829294113576452096/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "calcu":
             embed = discord.Embed(title="DETAIL-calcu",
                                   description="計算をします。", colour=0x3498DB)
@@ -110,14 +145,22 @@ class AppCmdCubotHelp(commands.Cog):
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/844209477657559060/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "time":
             embed = discord.Embed(title="DETAIL-time",
                                   description="現在時刻を表示します。", colour=0x3498DB)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829294591185256518/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
+        elif command == "detail":
+            embed = discord.Embed(
+                title="DETAIL-detail", description="各コマンドの詳細を表示します。", colour=0x3498DB)
+            embed.add_field(name="使い方", value="Cu!detail [コマンド名]", inline=True)
+            embed.set_image(
+                url="https://media.discordapp.net/attachments/826804140398215218/829295373410631721/unknown.png"
+            )
+            await ctx.reply(embed=embed)
         elif command == "invite":
             embed = discord.Embed(
                 title="DETAIL-invite", description="招待リンクの総使用数を算出します。", colour=0x3498DB)
@@ -125,119 +168,74 @@ class AppCmdCubotHelp(commands.Cog):
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/844209266934939680/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "fortune":
             embed = discord.Embed(title="DETAIL-fortune",
                                   description="おみくじが引けます。", colour=0x3498DB)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829296454110674954/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "rps":
             embed = discord.Embed(title="DETAIL-rps",
                                   description="じゃんけんができます。", colour=0x3498DB)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829296691290308618/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "dice":
             embed = discord.Embed(title="DETAIL-dice",
                                   description="サイコロを振れます。", colour=0x3498DB)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829296842063347742/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "pun":
             embed = discord.Embed(title="DETAIL-pun",
                                   description="ダジャレが聞けます。", colour=0x3498DB)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829297151213043722/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "cquiz":
             embed = discord.Embed(title="DETAIL-cquiz",
                                   description="暗算クイズができます。", colour=0x3498DB)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/829297392356556820/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "coin":
             embed = discord.Embed(title="DETAIL-coin",
                                   description="コイントスができます。", colour=0x3498DB)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/830784293148033042/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
         elif command == "slot":
             embed = discord.Embed(title="DETAIL-slot",
                                   description="スロットができます。", colour=0x3498DB)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/826804140398215218/832000993205682206/unknown.png"
             )
-            await ctx.respond(embed=embed)
+            await ctx.reply(embed=embed)
+
+    @commands.command()
+    async def invite(self, ctx, member: discord.Member = None):
+        async with ctx.typing():
+            await asyncio.sleep(0)
+        if member is None:
+            user = ctx.author
         else:
-            embed = discord.Embed(
-                title="ヘルプ", description="こんにちはー！\n日本生まれ日本育ちの純国産BOT！Cuです！", colour=0x3498DB)
-            embed.add_field(name=":dividers:》目次",
-                            value="１．`コマンドリスト`\n２．`CuBotとは`\n３．`よくある質問`")
-            embed.set_image(
-                url="https://media.discordapp.net/attachments/826812760435195904/913384084003258418/4.gif")
-            embed1 = discord.Embed(
-                title="ヘルプ-コマンドリスト",
-                description="使用可能なコマンド一覧です♪\n"
-                            "各コマンドの詳細は`/help [コマンド名]`で確認できます♪",
-                colour=0x3498DB
-            )
-            embed1.add_field(
-                name=":robot: 》CuBot",
-                value="`help` `list` `ping`",
-                inline=False
-            )
-            embed1.add_field(
-                name=":tools: 》Manage",
-                value="`kick` `ban` `unban` `mute` `unmute`",
-                inline=False,
-            )
-            embed1.add_field(
-                name=":video_game: 》Playing",
-                value="`choyen` `coin` `dice` `neko` `slot`",
-                inline=False
-            )
-            embed2 = discord.Embed(title="CuBotとは",
-                                   description="CuBotの紹介ページです♪", color=0x3498DB)
-            embed2.set_thumbnail(
-                url="https://pbs.twimg.com/media/EfWoupuUYAAwuTv?format=jpg&name=large")
-            embed2.add_field(
-                name="🤔》CuBotとは", value="日本生まれ日本育ちのDiscordBotです！\n日々勉強に励み成長中！", inline=False)
-            embed2.add_field(name="🔧》開発者", value="<@798439010594717737> [Twitter](https://twitter.com/Nemu627)",
-                             inline=False)
-            embed2.add_field(
-                name="🖼》アイコン", value="Shano様 [Twitter](https://twitter.com/ShanoPirika)", inline=False)
-            embed2.add_field(
-                name="✅》公式",
-                value="`公式サーバー`：[ClickHere](https://discord.gg/RFPQmRnv2j)\n"
-                      "`公式ツイッター`：[ClickHere](https://twitter.com/CubotOfficial)",
-                inline=False,
-            )
-            embed3 = discord.Embed(title="ヘルプ-BOTの招待方法",
-                                   description="①[招待リンク](https://discord.com/api/oauth2/authorize?client_id=826228756657078272&permissions=8&scope=bot%20applications.commands)を開きます。\n②追加したいサーバーを選びます。\n③付与したい権限を選びます。\n　※権限が足りないとエラーを吐きます。\n　　管理者権限付与がオススメ！\n④必要に応じて認証を済ませます。\n⑤招待完了！",
-                                   colour=0x3498DB)
-            embed3.add_field(name=":link:》招待リンク",
-                             value="`管理者権限付きで招待`：[ClickHere](https://discord.com/api/oauth2/authorize?client_id=826228756657078272&permissions=8&scope=bot%20applications.commands)\n`権限を選択して招待`：[ClickHere](https://discord.com/api/oauth2/authorize?client_id=826228756657078272&permissions=1644972474359&scope=bot%20applications.commands)\n`権限なしで招待`：[ClickHere](https://discord.com/api/oauth2/authorize?client_id=826228756657078272&permissions=0&scope=bot%20applications.commands)")
-            page = [embed, embed1, embed2, embed3]
-            paginator = pages.Paginator(pages=page)
-            paginator.add_button(pages.PaginatorButton(
-                "first", label="<<", style=discord.ButtonStyle.primary))
-            paginator.add_button(pages.PaginatorButton(
-                "prev", label="<", style=discord.ButtonStyle.primary))
-            paginator.add_button(pages.PaginatorButton(
-                "page_indicator", style=discord.ButtonStyle.primary))
-            paginator.add_button(pages.PaginatorButton(
-                "next", label=">", style=discord.ButtonStyle.primary))
-            paginator.add_button(pages.PaginatorButton(
-                "last", label=">>", style=discord.ButtonStyle.primary))
-            await paginator.respond(ctx.interaction, ephemeral=False)
+            user = member
+        total_invites = 0
+        for i in await ctx.guild.invites():
+            if i.inviter == user:
+                total_invites += i.uses
+        embed = discord.Embed(
+            title="招待リンクの使用数", description=f"{user.mention}さんは**{total_invites}人**のメンバーを招待しました！", color=0x3498DB
+        )
+        await ctx.reply(embed=embed)
 
 
 def setup(bot):
-    return bot.add_cog(AppCmdCubotHelp(bot))
+    return bot.add_cog(AppCmdData(bot))

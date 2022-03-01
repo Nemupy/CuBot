@@ -7,7 +7,7 @@ class AppCmdManageUnmute(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command()
+    @slash_command(guild_ids=[825371357402759238], description="ユーザーのミュートを解除します。")
     @commands.has_permissions(manage_messages=True)
     async def unmute(self, ctx, member: discord.Member):
         embed = discord.Embed(title="ユーザーのミュートが解除されました。",
