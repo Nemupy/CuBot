@@ -43,4 +43,4 @@ bot.load_extension("cogs.level")
 bot.load_extension("cogs.tool")
 bot.load_extension("cogs.variety")
 
-bot.run("ODQ3ODE1ODM2MDYzNjI5MzIy.YLDkBg.rEVlazLEwgOQ8J7o2_fjtZ1AMZI")
+bot.run("token")
