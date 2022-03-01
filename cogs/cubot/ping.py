@@ -7,7 +7,7 @@ class AppCmdCubotPing(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(guild_ids=[825371357402759238])
+    @slash_command(guild_ids=[825371357402759238], description="CuBotのPing値を表示します。")
     async def ping(self, ctx):
         embed = discord.Embed(title="PING", description=f"`PING`：{round(self.bot.latency * 1000)}ms",
                               color=0x3498DB)

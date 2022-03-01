@@ -8,7 +8,7 @@ class AppCmdPlayingNeko(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(guild_ids=[825371357402759238])
+    @slash_command(guild_ids=[825371357402759238], description="猫耳のイラストを生成します。")
     async def neko(self, ctx, type="neko"):
         async with aiohttp.ClientSession() as session:
             async with session.get(

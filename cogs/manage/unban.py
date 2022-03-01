@@ -7,7 +7,7 @@ class AppCmdManageUnban(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command()
+    @slash_command(guild_ids=[825371357402759238], description="ユーザーのBANを解除します。")
     @commands.has_guild_permissions(ban_members=True)
     async def unban(self, ctx, id: int):
         member = await self.bot.fetch_user(id)

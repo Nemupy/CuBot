@@ -8,7 +8,7 @@ class AppCmdPlayingSlot(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(guild_ids=[825371357402759238])
+    @slash_command(guild_ids=[825371357402759238], description="スロットを回します。")
     async def slot(self, ctx):
         A = random.choice((":one:", ":two:", ":three:"))
         B = random.choice((":one:", ":two:", ":three:"))

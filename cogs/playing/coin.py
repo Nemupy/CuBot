@@ -8,7 +8,7 @@ class AppCmdPlayingCoin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(name="", guild_ids=[825371357402759238])
+    @slash_command(guild_ids=[825371357402759238], description="コイントスをします。" )
     async def coin(self, ctx):
         surface = random.choice(("表", "裏"))
         if surface == "表":

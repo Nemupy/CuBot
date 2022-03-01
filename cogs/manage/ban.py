@@ -7,7 +7,7 @@ class AppCmdManageBan(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(guild_ids=[825371357402759238])
+    @slash_command(guild_ids=[825371357402759238], description="ユーザーをBANします。")
     @commands.has_guild_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, reason_custom="banコマンド"):
         reason = f"{reason_custom} 実行者：{ctx.author}"
