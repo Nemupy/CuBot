@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands, pages
 import os
-import sys
 
 bot = commands.Bot(
     command_prefix=["Cu!", "cu!"],
@@ -43,4 +42,5 @@ bot.load_extension("cogs.level")
 bot.load_extension("cogs.tool")
 bot.load_extension("cogs.variety")
 
-bot.run("token")
+token = os.environ["token"]
+bot.run(token)
