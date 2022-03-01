@@ -16,7 +16,7 @@ bot = commands.Bot(
 
 @bot.event
 async def on_ready():
-  print("hi")
+  print("on")
 
 @bot.command(name= 'restart')
 async def restart(ctx):
@@ -30,4 +30,4 @@ bot.load_extension("cogs.cubot.ping")
 bot.load_extension("cogs.manage.ban")
 bot.load_extension("cogs.playing.omikuji")
 
-bot.run("ODQ3ODE1ODM2MDYzNjI5MzIy.YLDkBg.FkYznaghSa3EfzlXFwDqPkfT5rk")
+bot.run(token)
