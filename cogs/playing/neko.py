@@ -9,10 +9,10 @@ class AppCmdPlayingNeko(commands.Cog):
         self.bot = bot
 
     @slash_command(guild_ids=[825371357402759238], description="猫耳のイラストを生成します。")
-    async def neko(self, ctx, type="neko"):
+    async def neko(self, ctx):
         async with aiohttp.ClientSession() as session:
             async with session.get(
-                "https://nekobot.xyz/api/image?type="+type
+                "https://nekobot.xyz/api/image?type=neko"
             ) as response:
                 res = await response.json()
                 embed = discord.Embed(color=0x3498DB)
