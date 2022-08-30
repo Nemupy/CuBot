@@ -16,7 +16,7 @@ class AppCmdEvent(commands.Cog):
             members += guild.member_count - 1
         await self.bot.change_presence(
             activity=discord.Activity(
-                name=f"Cu!help | {str(servers)}servers | {str(members)}users", type=3)
+                name=f"help | {str(servers)}servers | {str(members)}users", type=3)
         )
 
     @commands.Cog.listener()
