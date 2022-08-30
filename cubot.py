@@ -3,7 +3,7 @@ from discord.ext import commands, pages
 import os
 
 bot = commands.Bot(
-    command_prefix=["Cu!", "cu!"],
+    command_prefix=["Cu!", "cu!", "<@826228756657078272> ", "?!"],
     help_command=None,
     intents=discord.Intents.all(),
     allowed_mentions=discord.AllowedMentions(
